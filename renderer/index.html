@@ -32,6 +32,10 @@
           <input id="profile-new-name" type="text" placeholder="New character…" spellcheck="false" />
           <button id="btn-add-profile" type="button">Add</button>
         </div>
+        <div class="profile-menu-actions">
+          <button id="btn-export-profile" type="button">Export</button>
+          <button id="btn-import-profile" type="button">Import</button>
+        </div>
       </div>
     </header>
 
@@ -48,6 +52,7 @@
 
     <section id="settings-panel" class="hidden">
       <label>OCR confidence <input id="set-ocr-conf" type="range" min="40" max="95" value="60" /></label>
+      <label>Map match <input id="set-ocr-match" type="range" min="50" max="95" value="75" /> <span id="set-ocr-match-val">75%</span></label>
       <label><input id="set-ocr-fast" type="checkbox" /> Fast OCR (2s tick)</label>
       <label>Monitor <select id="set-display" class="ui-select"></select></label>
       <label><input id="set-hide-skipped" type="checkbox" /> Collapse skipped steps</label>

@@ -4,8 +4,8 @@ const {
   setGuidesIndex, resolveGrindLine
 } = window.MaplebotDb;
 const { openDbPanel } = window.MaplebotDbPanel;
-const { ocrView, runOcrMatch, applyOcrHighlight, getClosestMapHint } = window.MaplebotOcr;
-const { normalizeState, activeProfile, switchProfile, syncProfile, addProfile } = window.MaplebotProfiles;
+const { ocrView, runOcrMatch, applyOcrHighlight, getClosestMapHints, resolveOcrToMapId, mapDisplayName } = window.MaplebotOcr;
+const { normalizeState, activeProfile, switchProfile, syncProfile, addProfile, renameProfile, removeProfile, importProfile } = window.MaplebotProfiles;
 
 const state = {
   guides: [],
@@ -24,7 +24,8 @@ const state = {
     ocrFastTick: false,
     ocrDisplayId: null,
     hideSkipped: false,
-    alwaysOnTopLevel: 'screen-saver'
+    alwaysOnTopLevel: 'screen-saver',
+    ocrMatchThreshold: 75
   }
 };
 
@@ -124,6 +125,8 @@ function profileInitial(name) {
   return (n[0] || 'A').toUpperCase();
 }
 
+let renameProfileId = null;
+
 function renderProfileBar() {
   const p = activeProfile(state);
   if (!p) return;
@@ -132,6 +135,7 @@ function renderProfileBar() {
   $('#profile-level').textContent = `Lv ${p.level}`;
   $('#profile-trigger').classList.toggle('open', !$('#profile-menu').classList.contains('hidden'));
 
+  const canDelete = state.profiles.length > 1;
   const list = $('#profile-list');
   list.innerHTML = state.profiles.map((prof) => `
     <button type="button" class="profile-option ${prof.id === state.activeProfileId ? 'active' : ''}" data-id="${prof.id}">
@@ -140,8 +144,35 @@ function renderProfileBar() {
         <span class="profile-option-name">${prof.name}</span>
         <span class="profile-option-lv">Level ${prof.level}</span>
       </span>
+      <span class="profile-option-actions">
+        <button type="button" class="profile-rename" data-id="${prof.id}" title="Rename">✎</button>
+        ${canDelete ? `<button type="button" class="profile-delete" data-id="${prof.id}" title="Remove">×</button>` : ''}
+      </span>
       ${prof.id === state.activeProfileId ? '<span class="profile-option-check">✓</span>' : ''}
     </button>`).join('');
+
+  list.querySelectorAll('.profile-rename').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      renameProfileId = btn.dataset.id;
+      const target = state.profiles.find((x) => x.id === renameProfileId);
+      $('#profile-new-name').value = target ? target.name : '';
+      $('#profile-new-name').focus();
+      $('#btn-add-profile').textContent = 'Save';
+    });
+  });
+  list.querySelectorAll('.profile-delete').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      syncProfile(state);
+      if (removeProfile(state, btn.dataset.id)) {
+        renameProfileId = null;
+        $('#btn-add-profile').textContent = 'Add';
+        save();
+        render();
+      }
+    });
+  });
 }
 
 function openProfileMenu() {
@@ -357,6 +388,8 @@ async function loadSettingsUI() {
     `<option value="${d.id}" ${d.id === state.settings.ocrDisplayId ? 'selected' : ''}>${d.label}${d.primary ? ' ★' : ''}</option>`
   ).join('');
   $('#set-ocr-conf').value = state.settings.ocrMinConfidence;
+  $('#set-ocr-match').value = state.settings.ocrMatchThreshold ?? 75;
+  $('#set-ocr-match-val').textContent = `${state.settings.ocrMatchThreshold ?? 75}%`;
   $('#set-ocr-fast').checked = state.settings.ocrFastTick;
   $('#set-hide-skipped').checked = state.settings.hideSkipped;
   $('#set-on-top').value = state.settings.alwaysOnTopLevel;
@@ -390,21 +423,35 @@ function onOcrResult(r) {
     return;
   }
   name.classList.remove('unknown');
-  name.textContent = detected;
+  const resolvedId = resolveOcrToMapId(detected);
+  const canonical = resolvedId ? mapDisplayName(resolvedId) : null;
+  name.textContent = canonical && canonical.toLowerCase() !== detected.toLowerCase()
+    ? `${detected} → ${canonical}`
+    : detected;
   if (detected !== ocrView.mapName || ocrView.matchedGuideId !== state.activeGuideId) {
     ocrView.mapName = detected;
     runOcrMatch(activeGuide());
     if (state.view === 'steps') applyOcrHighlight($('#steps'), ocrStatus, activeGuide());
   }
   const hasMatch = !!ocrView.matchedStepId;
-  match.textContent = hasMatch ? '🟢 Map Match' : '🔴 Wrong Map';
+  match.textContent = hasMatch ? '🟢 Guide step' : '🔴 Wrong map';
   match.className = hasMatch ? 'match' : 'wrong';
   if (!hasMatch) {
-    const closest = getClosestMapHint(detected);
-    hint.textContent = closest
-      ? `Closest: ${closest.name} (${Math.round(closest.score * 100)}%)`
+    const hints = getClosestMapHints(detected, 2);
+    hint.innerHTML = hints.length
+      ? hints.map((h) =>
+          `<span class="ocr-hint-link db-link" data-ref="${h.ref}">${h.name} (${Math.round(h.score * 100)}%)</span>`
+        ).join(' · ')
       : '';
-  } else hint.textContent = '';
+    hint.querySelectorAll('.ocr-hint-link').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openDbPanel(el.dataset.ref);
+      });
+    });
+  } else {
+    hint.textContent = canonical ? `Matched: ${canonical}` : '';
+  }
 }
 
 function bindControls() {
@@ -416,7 +463,7 @@ function bindControls() {
   $('#profile-menu').addEventListener('click', (e) => {
     e.stopPropagation();
     const opt = e.target.closest('.profile-option');
-    if (!opt) return;
+    if (!opt || e.target.closest('.profile-rename, .profile-delete')) return;
     syncProfile(state);
     switchProfile(state, opt.dataset.id);
     save();
@@ -426,8 +473,28 @@ function bindControls() {
   $('#btn-add-profile').addEventListener('click', () => {
     const name = $('#profile-new-name').value.trim();
     if (!name) return;
-    addProfile(state, name);
+    syncProfile(state);
+    if (renameProfileId) {
+      renameProfile(state, renameProfileId, name);
+      renameProfileId = null;
+      $('#btn-add-profile').textContent = 'Add';
+    } else {
+      addProfile(state, name);
+    }
     $('#profile-new-name').value = '';
+    save();
+    closeProfileMenu();
+    render();
+  });
+  $('#btn-export-profile').addEventListener('click', async () => {
+    syncProfile(state);
+    await window.maplebot.exportProfile(activeProfile(state));
+  });
+  $('#btn-import-profile').addEventListener('click', async () => {
+    const res = await window.maplebot.importProfile();
+    if (!res.ok || !res.profile) return;
+    syncProfile(state);
+    importProfile(state, res.profile);
     save();
     closeProfileMenu();
     render();
@@ -442,6 +509,16 @@ function bindControls() {
     state.settings.ocrMinConfidence = parseInt(e.target.value, 10);
     save();
     applyOcrSettings();
+  });
+  $('#set-ocr-match').addEventListener('input', (e) => {
+    state.settings.ocrMatchThreshold = parseInt(e.target.value, 10);
+    $('#set-ocr-match-val').textContent = `${state.settings.ocrMatchThreshold}%`;
+    save();
+    if (ocrView.mapName) {
+      runOcrMatch(activeGuide());
+      if (state.view === 'steps') applyOcrHighlight($('#steps'), ocrStatus, activeGuide());
+      onOcrResult({ ok: true, normalized: ocrView.mapName, confidence: null, lastValid: { name: ocrView.mapName } });
+    }
   });
   $('#set-ocr-fast').addEventListener('change', (e) => {
     state.settings.ocrFastTick = e.target.checked;

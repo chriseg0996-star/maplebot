@@ -37,9 +37,11 @@
         ocrFastTick: false,
         ocrDisplayId: null,
         hideSkipped: false,
-        alwaysOnTopLevel: 'screen-saver'
+        alwaysOnTopLevel: 'screen-saver',
+        ocrMatchThreshold: 75
       };
     }
+    if (state.settings.ocrMatchThreshold == null) state.settings.ocrMatchThreshold = 75;
     return state;
   }
 
@@ -75,7 +77,40 @@
     return p;
   }
 
+  function renameProfile(state, id, name) {
+    const trimmed = (name || '').trim();
+    if (!trimmed) return false;
+    const p = state.profiles.find((x) => x.id === id);
+    if (!p) return false;
+    p.name = trimmed;
+    return true;
+  }
+
+  function removeProfile(state, id) {
+    if (state.profiles.length <= 1) return false;
+    const idx = state.profiles.findIndex((x) => x.id === id);
+    if (idx === -1) return false;
+    state.profiles.splice(idx, 1);
+    if (state.activeProfileId === id) switchProfile(state, state.profiles[0].id);
+    return true;
+  }
+
+  function importProfile(state, data) {
+    if (!data || typeof data !== 'object') return null;
+    const p = defaultProfile(data.name || 'Imported');
+    p.level = data.level || p.level;
+    p.job = data.job || p.job;
+    p.activeGuideId = data.activeGuideId || null;
+    p.done = data.done || {};
+    p.favorites = data.favorites || {};
+    p.recent = data.recent || [];
+    state.profiles.push(p);
+    switchProfile(state, p.id);
+    return p;
+  }
+
   global.MaplebotProfiles = {
-    defaultProfile, normalizeState, activeProfile, switchProfile, syncProfile, addProfile
+    defaultProfile, normalizeState, activeProfile, switchProfile, syncProfile,
+    addProfile, renameProfile, removeProfile, importProfile
   };
 })(window);

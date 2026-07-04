@@ -2,6 +2,19 @@
 
 All notable changes to Maplebot are documented in this file.
 
+## [2.2.0] - 2026-07-04
+
+### Added
+- OCR text repair pipeline (common bitmap-font misreads)
+- `npm run audit-ocr` — auto-generates fuzzy map aliases in the DB
+- Map match threshold slider in settings (⚙)
+- Wrong-map hints show top matches; click to open DB panel
+- Profile rename, delete, export, and import
+
+### Changed
+- OCR resolves raw text to canonical map names when matched
+- Expanded map alias coverage for better in-game OCR accuracy
+
 ## [2.1.0] - 2026-07-04
 
 ### Added

@@ -1,6 +1,6 @@
 {
   "name": "maplebot",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Quest helper overlay (display-only) for MapleRoyals v83",
   "main": "main.js",
   "author": "Maplebot",
@@ -16,6 +16,7 @@
   "scripts": {
     "start": "electron .",
     "validate": "node scripts/validate-content.js",
+    "audit-ocr": "node scripts/audit-ocr-aliases.js",
     "postinstall": "node scripts/download-tesseract-lang.js",
     "predist": "node scripts/validate-content.js && node scripts/download-tesseract-lang.js",
     "dist": "electron-builder --win --publish never",

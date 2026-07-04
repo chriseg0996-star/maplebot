@@ -838,9 +838,48 @@ body.collapsed #statusbar { display: none; }
   font-weight: 600;
   cursor: pointer;
 }
-.profile-menu-footer button:hover {
-  background: rgba(143, 167, 196, 0.2);
+.profile-option-actions {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
 }
+.profile-rename,
+.profile-delete {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 11px;
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  cursor: pointer;
+  line-height: 1;
+}
+.profile-rename:hover { color: var(--brand-primary); background: var(--surface-glass); }
+.profile-delete:hover { color: var(--accent-pathology); background: var(--surface-glass); }
+.profile-menu-actions {
+  display: flex;
+  gap: 6px;
+  padding: 0 6px 6px;
+  background: var(--bg-secondary);
+}
+.profile-menu-actions button {
+  flex: 1;
+  padding: 4px 0;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+.profile-menu-actions button:hover {
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+.ocr-hint-link { margin-right: 4px; }
 
 .ui-select,
 #guide-select,
