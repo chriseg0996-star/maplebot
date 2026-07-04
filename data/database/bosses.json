@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "server": "MapleRoyals",
+  "gameVersion": "v83",
+  "_schema": "entities.<id> = { name, map: 'map:<id>', requirements: { level }, recommendedLevel, prequests: ['quest:<id>'], partySize: [min, max] | null, entries: { perDay: number | null, consumes: 'item:<id>' | null }, drops: ['item:<id>'] }",
+  "_todo": [],
+  "entities": {
+    "zakum": {
+      "name": "Zakum",
+      "map": "map:zakums_altar",
+      "requirements": { "level": 50 },
+      "recommendedLevel": 70,
+      "prequests": ["quest:zakum_prequest"],
+      "partySize": [6, 30],
+      "entries": { "perDay": null, "consumes": "item:eye_of_fire" },
+      "drops": []
+    },
+    "horntail": {
+      "name": "Horntail",
+      "map": "map:horntails_cave",
+      "requirements": { "level": 80 },
+      "recommendedLevel": 120,
+      "prequests": ["quest:horntail_prequest"],
+      "partySize": [6, 12],
+      "entries": { "perDay": null, "consumes": "item:horntail_cave_pass" },
+      "drops": []
+    }
+  }
+}

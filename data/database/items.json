@@ -1,0 +1,123 @@
+{
+  "schema": 1,
+  "server": "MapleRoyals",
+  "gameVersion": "v83",
+  "_schema": "entities.<id> = { name, type: 'quest'|'equip'|'use'|'etc'|'setup', use: string, soldBy: ['npc:<id>'] }",
+  "_todo": [],
+  "entities": {
+    "dark_marble": {
+      "name": "Dark Marble",
+      "type": "quest",
+      "use": "30 requeridos en el test del 2nd job de thief ([[quest:assassin_second_job]], [[quest:bandit_second_job]]).",
+      "soldBy": []
+    },
+    "black_crystal": {
+      "name": "Black Crystal",
+      "type": "quest",
+      "use": "30 requeridos en el test del 2nd job de warrior/pirate ([[quest:fighter_second_job]], [[quest:brawler_second_job]]).",
+      "soldBy": []
+    },
+    "black_charm": {
+      "name": "Black Charm",
+      "type": "quest",
+      "use": "30 requeridos en el test del 2nd job de mage ([[quest:fp_mage_second_job]]). También usado en 3rd job Holy Stone quiz.",
+      "soldBy": []
+    },
+    "black_gem": {
+      "name": "Black Gem",
+      "type": "quest",
+      "use": "30 requeridos en el test del 2nd job de bowman ([[quest:hunter_second_job]]).",
+      "soldBy": []
+    },
+    "fire_ore": {
+      "name": "Fire Ore",
+      "type": "etc",
+      "use": "30 requeridos en Stage 1 de [[quest:zakum_prequest]] — drops en [[map:dead_mine]].",
+      "soldBy": []
+    },
+    "breath_of_fire": {
+      "name": "Breath of Fire",
+      "type": "quest",
+      "use": "Se recoge al final del jump quest de [[map:dead_mine_jq]] (Stage 1 de [[quest:zakum_prequest]]).",
+      "soldBy": []
+    },
+    "breath_of_lava": {
+      "name": "Breath of Lava",
+      "type": "quest",
+      "use": "Recompensa del Stage 2 de [[quest:zakum_prequest]] (30 Gold Teeth de [[mob:miner_zombie]]).",
+      "soldBy": []
+    },
+    "paper_of_fire": {
+      "name": "Paper of Fire",
+      "type": "quest",
+      "use": "Prueba de Stage 1 completado en [[quest:zakum_prequest]].",
+      "soldBy": []
+    },
+    "eye_of_fire": {
+      "name": "Eye of Fire",
+      "type": "quest",
+      "use": "Ticket de entrada al [[map:zakums_altar]] — en Royals cada entrada consume uno.",
+      "soldBy": []
+    },
+    "zombies_lost_gold_tooth": {
+      "name": "Zombie's Lost Gold Tooth",
+      "type": "etc",
+      "use": "Hand in 30 during Stage 2 of [[quest:zakum_prequest]] together with the [[item:paper_of_fire]]. Dropped by [[mob:miner_zombie]].",
+      "soldBy": []
+    },
+    "heroic_star": {
+      "name": "Heroic Star",
+      "type": "quest",
+      "use": "Requerido para el 4th job. Drop de [[mob:manon]]; tradeable en Royals.",
+      "soldBy": []
+    },
+    "heroic_pentagon": {
+      "name": "Heroic Pentagon",
+      "type": "quest",
+      "use": "Requerido para el 4th job. Drop de [[mob:griffey]]; tradeable en Royals.",
+      "soldBy": []
+    },
+    "dragon_moss": {
+      "name": "Dragon Moss",
+      "type": "etc",
+      "use": "20 requeridos en [[quest:horntail_prequest]] — drop de [[mob:mossy_snail]] en [[map:minar_forest]]. Tradeable en Royals.",
+      "soldBy": []
+    },
+    "dragon_wood": {
+      "name": "Dragon Wood",
+      "type": "etc",
+      "use": "20 requeridos en [[quest:horntail_prequest]] — drop de [[mob:dual_birk]] en [[map:minar_forest]]. Tradeable en Royals.",
+      "soldBy": []
+    },
+    "secret_document": {
+      "name": "Secret Document",
+      "type": "quest",
+      "use": "Obtenido en [[map:temple_of_time]] de [[npc:temple_priest]] ([[quest:horntail_prequest]]).",
+      "soldBy": []
+    },
+    "red_key": {
+      "name": "Red Key",
+      "type": "quest",
+      "use": "9 requeridos en [[map:dragon_nest]] ([[quest:horntail_prequest]]). Consumidos al usar.",
+      "soldBy": []
+    },
+    "blue_key": {
+      "name": "Blue Key",
+      "type": "quest",
+      "use": "9 requeridos en [[map:dragon_nest]] ([[quest:horntail_prequest]]). Consumidos al usar.",
+      "soldBy": []
+    },
+    "nine_spirits_egg": {
+      "name": "Nine Spirit's Egg",
+      "type": "quest",
+      "use": "Obtenido desbloqueando salas en [[map:temple_of_time]] ([[quest:horntail_prequest]]).",
+      "soldBy": []
+    },
+    "horntail_cave_pass": {
+      "name": "Horntail Cave Pass",
+      "type": "quest",
+      "use": "Ticket de entrada a [[map:horntails_cave]] — recompensa de [[quest:horntail_prequest]].",
+      "soldBy": []
+    }
+  }
+}

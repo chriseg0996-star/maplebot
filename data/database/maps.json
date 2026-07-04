@@ -1,0 +1,369 @@
+{
+  "schema": 1,
+  "server": "MapleRoyals",
+  "gameVersion": "v83",
+  "_schema": "entities.<id> = { name, aliases: [string], region, connections: ['map:<id>'], recommendedLevel: [min, max] | null, notes }",
+  "_todo": [],
+  "entities": {
+    "kerning_city": {
+      "name": "Kerning City",
+      "aliases": ["KC", "Kerning"],
+      "region": "victoria_island",
+      "connections": ["map:construction_site", "map:swamp_region", "map:subway_b1"],
+      "recommendedLevel": null,
+      "notes": "Hub de thieves — [[npc:dark_lord]] en el Jazz Bar (entrada oculta)."
+    },
+    "construction_site": {
+      "name": "Kerning City Construction Site",
+      "aliases": ["Kerning Construction Site", "Construction Site", "KCS"],
+      "region": "victoria_island",
+      "connections": ["map:kerning_city"],
+      "recommendedLevel": [10, 30],
+      "notes": "Spot 1st→2nd job ([[mob:octopus]])."
+    },
+    "subway_b1": {
+      "name": "Subway B1",
+      "aliases": ["Subway Line 1 Area 2", "Subway B1", "Kerning Subway B1"],
+      "region": "victoria_island",
+      "connections": ["map:kerning_city"],
+      "recommendedLevel": [10, 25],
+      "notes": "Stirge grind — quest JCd. [[mob:stirge]]."
+    },
+    "swamp_region": {
+      "name": "Swamp Region",
+      "aliases": ["Swampy Land", "Swamp Region", "Victoria Road Swamp"],
+      "region": "victoria_island",
+      "connections": ["map:kerning_city", "map:ant_tunnel"],
+      "recommendedLevel": [30, 35],
+      "notes": "Portal al Inner Door del test de 2nd job thief ([[quest:assassin_second_job]], [[quest:bandit_second_job]])."
+    },
+    "ant_tunnel": {
+      "name": "Ant Tunnel",
+      "aliases": ["AT", "Ant Tunnel II", "Ant Tunnel 2"],
+      "region": "victoria_island",
+      "connections": ["map:swamp_region", "map:kerning_city"],
+      "recommendedLevel": [25, 40],
+      "notes": "Door of Dimension del 3rd job thief ([[quest:hermit_third_job]], [[quest:chief_bandit_third_job]])."
+    },
+    "ant_tunnel_1": {
+      "name": "Ant Tunnel I",
+      "aliases": ["Ant Tunnel 1", "Ant Tunnel I", "AT1"],
+      "region": "victoria_island",
+      "connections": ["map:ant_tunnel", "map:ellinia"],
+      "recommendedLevel": [20, 35],
+      "notes": "Jr. Sentinel grind para magos funded ([[mob:jr_sentinel]])."
+    },
+    "perion": {
+      "name": "Perion",
+      "aliases": ["Perion Town", "Perion"],
+      "region": "victoria_island",
+      "connections": ["map:underground_pass", "map:perion_warning_street", "map:perion_dungeon"],
+      "recommendedLevel": null,
+      "notes": "Warriors' Sanctuary — [[npc:dances_with_balrog]] ([[quest:fighter_first_job]])."
+    },
+    "underground_pass": {
+      "name": "Underground Pass",
+      "aliases": ["Underground Pass", "Perion Underground Pass"],
+      "region": "victoria_island",
+      "connections": ["map:perion"],
+      "recommendedLevel": [30, 35],
+      "notes": "Test de 2nd job warrior — junta [[item:black_crystal]] ([[quest:fighter_second_job]])."
+    },
+    "perion_warning_street": {
+      "name": "Perion Warning Street",
+      "aliases": ["Warning Street", "Perion Warning Street"],
+      "region": "victoria_island",
+      "connections": ["map:perion"],
+      "recommendedLevel": [10, 20],
+      "notes": "Slimes y Stumps para warriors 10-20."
+    },
+    "perion_dungeon": {
+      "name": "Perion Dungeon",
+      "aliases": ["Perion Dungeon", "Perion Excavation Site"],
+      "region": "victoria_island",
+      "connections": ["map:perion"],
+      "recommendedLevel": [15, 30],
+      "notes": "Evil Eyes y Dark Stumps."
+    },
+    "ellinia": {
+      "name": "Ellinia",
+      "aliases": ["Ellinia Town", "Ellinia"],
+      "region": "victoria_island",
+      "connections": ["map:golem_temple", "map:ellinia_southern_forest", "map:ellinia_forest_iii", "map:ant_tunnel_1"],
+      "recommendedLevel": null,
+      "notes": "Magic Library — [[npc:gwin]] ([[quest:magician_first_job]])."
+    },
+    "golem_temple": {
+      "name": "Golem Temple",
+      "aliases": ["Golem Temple", "Victoria Road Golem Temple"],
+      "region": "victoria_island",
+      "connections": ["map:ellinia"],
+      "recommendedLevel": [30, 35],
+      "notes": "Test de 2nd job mage — [[item:black_charm]] de [[mob:stone_golem]] ([[quest:fp_mage_second_job]])."
+    },
+    "ellinia_southern_forest": {
+      "name": "Ellinia Southern Forest",
+      "aliases": ["Southern Forest", "Ellinia Southern Forest", "Ellinia Forest I"],
+      "region": "victoria_island",
+      "connections": ["map:ellinia"],
+      "recommendedLevel": [10, 20],
+      "notes": "Slimes y Pigs para magos 10-20."
+    },
+    "ellinia_forest_iii": {
+      "name": "Ellinia Forest III",
+      "aliases": ["Ellinia Forest 3", "Ellinia Forest III", "Forest III"],
+      "region": "victoria_island",
+      "connections": ["map:ellinia"],
+      "recommendedLevel": [15, 30],
+      "notes": "Evil Eyes grind."
+    },
+    "henesys": {
+      "name": "Henesys",
+      "aliases": ["Henesys Town", "Henesys"],
+      "region": "victoria_island",
+      "connections": ["map:henesys_dungeon", "map:henesys_hunting_ground_1", "map:henesys_hunting_ground_2"],
+      "recommendedLevel": null,
+      "notes": "Bowman Instructional School — [[npc:athena_pierce]] ([[quest:bowman_first_job]])."
+    },
+    "henesys_dungeon": {
+      "name": "Henesys Dungeon",
+      "aliases": ["Henesys Dungeon", "Henesys Party Quest Dungeon"],
+      "region": "victoria_island",
+      "connections": ["map:henesys"],
+      "recommendedLevel": [30, 35],
+      "notes": "Test de 2nd job bowman — [[item:black_gem]] de [[mob:horny_mushroom]] ([[quest:hunter_second_job]])."
+    },
+    "henesys_hunting_ground_1": {
+      "name": "Henesys Hunting Ground I",
+      "aliases": ["Henesys Hunting Ground 1", "Henesys Hunting Ground I", "HHG1"],
+      "region": "victoria_island",
+      "connections": ["map:henesys"],
+      "recommendedLevel": [10, 20],
+      "notes": "Orange Mushrooms y Pigs."
+    },
+    "henesys_hunting_ground_2": {
+      "name": "Henesys Hunting Ground II",
+      "aliases": ["Henesys Hunting Ground 2", "Henesys Hunting Ground II", "HHG2"],
+      "region": "victoria_island",
+      "connections": ["map:henesys"],
+      "recommendedLevel": [15, 25],
+      "notes": "Green Mushrooms."
+    },
+    "nautilus_harbor": {
+      "name": "Nautilus Harbor",
+      "aliases": ["Nautilus", "Nautilus Harbor", "Nautilus Port"],
+      "region": "victoria_island",
+      "connections": ["map:keru_island", "map:florina_beach", "map:nautilus_training_room"],
+      "recommendedLevel": null,
+      "notes": "Nautilus HQ — [[npc:kyrin]] ([[quest:pirate_first_job]])."
+    },
+    "keru_island": {
+      "name": "Keru Island",
+      "aliases": ["Keru Island", "Keru"],
+      "region": "victoria_island",
+      "connections": ["map:nautilus_harbor"],
+      "recommendedLevel": [30, 35],
+      "notes": "Test de 2nd job pirate — [[item:black_crystal]] ([[quest:brawler_second_job]])."
+    },
+    "florina_beach": {
+      "name": "Florina Beach",
+      "aliases": ["Florina Beach", "Florina"],
+      "region": "victoria_island",
+      "connections": ["map:nautilus_harbor"],
+      "recommendedLevel": [10, 25],
+      "notes": "Crab y Krip grind para pirates."
+    },
+    "nautilus_training_room": {
+      "name": "Nautilus Training Room",
+      "aliases": ["Training Room", "Nautilus Training Room"],
+      "region": "victoria_island",
+      "connections": ["map:nautilus_harbor"],
+      "recommendedLevel": [10, 20],
+      "notes": "Jr. Cellion grind."
+    },
+    "kerning_pq": {
+      "name": "Kerning City Party Quest",
+      "aliases": ["Kerning PQ", "KPQ", "Kerning Party Quest"],
+      "region": "victoria_island",
+      "connections": ["map:kerning_city"],
+      "recommendedLevel": [21, 30],
+      "notes": "Party quest 21-30."
+    },
+    "ludi_pq": {
+      "name": "Ludibrium Party Quest",
+      "aliases": ["Ludi PQ", "Ludibrium PQ", "LPQ"],
+      "region": "ludus_lake",
+      "connections": ["map:mysterious_path_3"],
+      "recommendedLevel": [35, 50],
+      "notes": "Party quest 35-50 en Ludibrium."
+    },
+    "mysterious_path_3": {
+      "name": "Mysterious Path 3",
+      "aliases": ["Mysterious Path 3", "MP3", "Mysterious Path III"],
+      "region": "ludus_lake",
+      "connections": ["map:ludi_pq", "map:wild_kargo"],
+      "recommendedLevel": [55, 70],
+      "notes": "Grind clásico 55-70."
+    },
+    "wild_kargo": {
+      "name": "Wild Kargo Area",
+      "aliases": ["Wild Kargo", "Truckers", "Mysterious Path 2", "MP2"],
+      "region": "ludus_lake",
+      "connections": ["map:mysterious_path_3"],
+      "recommendedLevel": [55, 70],
+      "notes": "Alternativa a MP3 — [[mob:wild_kargo]], Truckers."
+    },
+    "el_nath": {
+      "name": "El Nath",
+      "aliases": ["El Nath Town", "El Nath"],
+      "region": "el_nath_mts",
+      "connections": ["map:dead_mine", "map:drakes_cave", "map:mushroom_castle", "map:pirates_door", "map:cave_of_life"],
+      "recommendedLevel": null,
+      "notes": "Chief's Residence: [[npc:adobis]], [[npc:arec]], [[npc:tylus]], [[npc:robeira]], [[npc:rene]], [[npc:pedro]]."
+    },
+    "dead_mine": {
+      "name": "The Dead Mine",
+      "aliases": ["Dead Mine", "The Dead Mine"],
+      "region": "el_nath_mts",
+      "connections": ["map:el_nath", "map:dead_mine_jq", "map:zakums_altar"],
+      "recommendedLevel": [50, 70],
+      "notes": "Zona de la prequest de [[boss:zakum]] — [[mob:miner_zombie]]."
+    },
+    "dead_mine_jq": {
+      "name": "Dead Mine JQ",
+      "aliases": ["Dead Mine Jump Quest", "Dead Mine JQ"],
+      "region": "el_nath_mts",
+      "connections": ["map:dead_mine"],
+      "recommendedLevel": null,
+      "notes": "Jump quest del Stage 1 — [[item:breath_of_fire]] en la salida."
+    },
+    "zakums_altar": {
+      "name": "Zakum's Altar",
+      "aliases": ["Zakum Altar", "Zakum's Altar"],
+      "region": "el_nath_mts",
+      "connections": ["map:dead_mine"],
+      "recommendedLevel": [70, 120],
+      "notes": "Arena de [[boss:zakum]]. Cada entrada consume un [[item:eye_of_fire]]."
+    },
+    "drakes_cave": {
+      "name": "Drake's Cave",
+      "aliases": ["Drake's Cave", "Drakes Cave", "Door of Dimension Drake"],
+      "region": "el_nath_mts",
+      "connections": ["map:el_nath"],
+      "recommendedLevel": [70, 75],
+      "notes": "Door of Dimension del 3rd job mage ([[quest:fp_arch_mage_third_job]])."
+    },
+    "mushroom_castle": {
+      "name": "Mushroom Castle",
+      "aliases": ["Mushroom Castle", "Door of Dimension Mushroom"],
+      "region": "el_nath_mts",
+      "connections": ["map:el_nath"],
+      "recommendedLevel": [70, 75],
+      "notes": "Door of Dimension del 3rd job bowman ([[quest:ranger_third_job]])."
+    },
+    "pirates_door": {
+      "name": "Pirate's Door",
+      "aliases": ["Pirate's Door", "Pirates Door", "Door of Dimension Pirate"],
+      "region": "el_nath_mts",
+      "connections": ["map:el_nath"],
+      "recommendedLevel": [70, 75],
+      "notes": "Door of Dimension del 3rd job pirate ([[quest:marauder_third_job]])."
+    },
+    "cave_of_life": {
+      "name": "Cave of Life",
+      "aliases": ["Cave of Life", "Cave of Life Entrance", "Leafre Cave of Life"],
+      "region": "minar_forest",
+      "connections": ["map:leafre", "map:minar_forest", "map:horntails_cave", "map:el_nath"],
+      "recommendedLevel": [80, 120],
+      "notes": "Entrance HT — [[npc:high_priest]]. Door of Dimension warrior ([[quest:crusader_third_job]])."
+    },
+    "leafre": {
+      "name": "Leafre",
+      "aliases": ["Leafre Town", "Leafre", "Leafre Town Square"],
+      "region": "minar_forest",
+      "connections": ["map:valley_of_the_antelope", "map:minar_forest", "map:cave_of_life"],
+      "recommendedLevel": null,
+      "notes": "[[npc:nameless_cat]] (HT prequest), [[npc:hellin]] en [[map:valley_of_the_antelope]]."
+    },
+    "valley_of_the_antelope": {
+      "name": "Valley of the Antelope",
+      "aliases": ["Valley of Antelope", "Valley of the Antelope"],
+      "region": "minar_forest",
+      "connections": ["map:leafre", "map:manons_forest"],
+      "recommendedLevel": [120, 130],
+      "notes": "[[npc:hellin]] — 4th job de todas las clases."
+    },
+    "minar_forest": {
+      "name": "Minar Forest",
+      "aliases": ["Minar Forest", "Dragon Forest", "Leafre Minar Forest"],
+      "region": "minar_forest",
+      "connections": ["map:leafre", "map:cave_of_life", "map:dragon_nest", "map:temple_of_time", "map:dragon_canyon"],
+      "recommendedLevel": [80, 110],
+      "notes": "[[item:dragon_moss]] y [[item:dragon_wood]] ([[quest:horntail_prequest]])."
+    },
+    "dragon_canyon": {
+      "name": "Dragon Canyon",
+      "aliases": ["Dragon Canyon", "Wyvern Canyon"],
+      "region": "minar_forest",
+      "connections": ["map:minar_forest"],
+      "recommendedLevel": [100, 120],
+      "notes": "Wyverns — Tough Dragon Skin (HT alt content)."
+    },
+    "manons_forest": {
+      "name": "Manon's Forest",
+      "aliases": ["Manon's Forest", "Manon Forest"],
+      "region": "minar_forest",
+      "connections": ["map:valley_of_the_antelope"],
+      "recommendedLevel": [110, 130],
+      "notes": "[[mob:manon]] — drop de [[item:heroic_star]]."
+    },
+    "temple_of_time": {
+      "name": "Temple of Time",
+      "aliases": ["Temple of Time", "ToT"],
+      "region": "minar_forest",
+      "connections": ["map:minar_forest", "map:dragon_nest"],
+      "recommendedLevel": [80, 120],
+      "notes": "[[npc:temple_priest]], [[item:secret_document]] ([[quest:horntail_prequest]])."
+    },
+    "dragon_nest": {
+      "name": "Dragon Nest",
+      "aliases": ["Dragon Nest", "Dragon's Nest"],
+      "region": "minar_forest",
+      "connections": ["map:temple_of_time", "map:minar_forest"],
+      "recommendedLevel": [80, 120],
+      "notes": "Temple Priests — [[item:red_key]] y [[item:blue_key]] ([[quest:horntail_prequest]])."
+    },
+    "horntails_cave": {
+      "name": "Horntail's Cave",
+      "aliases": ["Horntail's Cave", "Horntails Cave", "Cave of Life Horntail"],
+      "region": "minar_forest",
+      "connections": ["map:cave_of_life"],
+      "recommendedLevel": [120, 200],
+      "notes": "Arena de [[boss:horntail]]. Requiere [[item:horntail_cave_pass]]."
+    },
+    "silent_swamp": {
+      "name": "Silent Swamp",
+      "aliases": ["Silent Swamp", "Wolf Spider Map"],
+      "region": "orbis",
+      "connections": [],
+      "recommendedLevel": [80, 100],
+      "notes": "Wolf Spiders — [[mob:wolf_spider]]."
+    },
+    "mushroom_shrine": {
+      "name": "Mushroom Shrine",
+      "aliases": ["Mushroom Shrine", "Zipangu", "Himes"],
+      "region": "zipangu",
+      "connections": [],
+      "recommendedLevel": [90, 120],
+      "notes": "Himes / Dreamy Ghosts — HS mule ideal."
+    },
+    "gallos_map": {
+      "name": "Gallos",
+      "aliases": ["Gallos", "Gallopera"],
+      "region": "leafre_area",
+      "connections": ["map:leafre"],
+      "recommendedLevel": [100, 120],
+      "notes": "Alternativa 100-120 — [[mob:gallo]]."
+    }
+  }
+}

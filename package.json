@@ -1,0 +1,62 @@
+{
+  "name": "maplebot",
+  "version": "1.0.0",
+  "description": "Quest helper overlay (display-only) for MapleRoyals v83",
+  "main": "main.js",
+  "author": "Maplebot",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "postinstall": "node scripts/download-tesseract-lang.js",
+    "predist": "node scripts/download-tesseract-lang.js",
+    "dist": "electron-builder --win",
+    "dist:portable": "electron-builder --win portable"
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "dependencies": {
+    "tesseract.js": "^7.0.0"
+  },
+  "build": {
+    "appId": "com.maplebot.overlay",
+    "productName": "Maplebot",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "ocr.js",
+      "paths.js",
+      "renderer/**/*",
+      "data/**/*",
+      "node_modules/**/*"
+    ],
+    "asarUnpack": [
+      "data/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "resources/tesseract",
+        "to": "tesseract",
+        "filter": ["**/*"]
+      }
+    ],
+    "win": {
+      "target": [
+        { "target": "nsis", "arch": ["x64"] },
+        { "target": "portable", "arch": ["x64"] }
+      ],
+      "icon": "build/icon.png",
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true
+    }
+  }
+}

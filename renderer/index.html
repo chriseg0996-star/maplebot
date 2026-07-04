@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Maplebot</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="overlay">
+    <header id="titlebar">
+      <span class="logo">MAPLEBOT</span>
+      <div class="controls">
+        <button id="btn-opacity" title="Opacity">◐</button>
+        <button id="btn-lock" title="Click-through (F8)">🔓</button>
+        <button id="btn-collapse" title="Collapse">—</button>
+        <button id="btn-quit" title="Quit">✕</button>
+      </div>
+    </header>
+
+    <section id="setup">
+      <select id="guide-select"></select>
+      <button id="btn-library" title="Guide Library">📖</button>
+      <div class="level-row">
+        <label for="level-input">Level</label>
+        <input id="level-input" type="number" min="1" max="200" value="10" />
+      </div>
+    </section>
+
+    <section id="settings">
+      <button id="ocr-toggle" title="Read-only map name OCR">
+        <span>OCR</span><span id="ocr-toggle-state">OFF</span>
+      </button>
+      <button id="ocr-calibrate" title="Calibrate the map name region">CAL</button>
+      <button id="btn-edit-guide" title="Edit current guide">EDIT</button>
+      <button id="btn-new-guide" title="New guide">+</button>
+    </section>
+
+    <section id="dashboard">
+      <button id="btn-prev" title="Previous Guide">‹</button>
+      <div class="dash-main">
+        <div class="dash-top">
+          <span id="dash-title"></span>
+          <button id="dash-fav" title="Favorite">☆</button>
+        </div>
+        <div class="dash-meta">
+          <span id="dash-job" class="lib-badge"></span>
+          <span id="dash-cat"></span>
+          <span id="dash-count"></span>
+        </div>
+        <div class="dash-bar"><div id="dash-fill"></div></div>
+      </div>
+      <button id="btn-next" title="Next Guide">›</button>
+    </section>
+
+    <section id="ocr-map">
+      <span class="ocr-map-pin">📍</span>
+      <div class="ocr-map-body">
+        <div class="ocr-map-label">Current Map</div>
+        <div id="ocr-map-name">—</div>
+      </div>
+      <div class="ocr-map-right">
+        <span id="ocr-map-match"></span>
+        <span id="ocr-map-conf"></span>
+      </div>
+    </section>
+
+    <main id="steps"></main>
+
+    <footer id="statusbar">
+      <span id="progress-label"></span>
+      <span id="ocr-status">OCR OFF</span>
+      <span id="lock-label"></span>
+    </footer>
+  </div>
+
+  <div id="db-panel-backdrop" class="modal-backdrop"></div>
+  <aside id="db-panel" class="slide-panel">
+    <header class="panel-header">
+      <span id="db-panel-type" class="panel-type"></span>
+      <h2 id="db-panel-title"></h2>
+      <button id="db-panel-close" type="button" title="Close">✕</button>
+    </header>
+    <div id="db-panel-body" class="panel-body"></div>
+  </aside>
+
+  <div id="editor-backdrop" class="modal-backdrop"></div>
+  <div id="editor-modal" class="editor-modal">
+    <header class="panel-header">
+      <h2>Guide Editor</h2>
+      <button id="editor-close" type="button" title="Close">✕</button>
+    </header>
+    <div id="editor-body" class="panel-body editor-scroll"></div>
+  </div>
+
+  <script src="db.js"></script>
+  <script src="ocr-match.js"></script>
+  <script src="db-panel.js"></script>
+  <script src="editor.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

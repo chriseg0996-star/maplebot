@@ -1,0 +1,137 @@
+{
+  "schema": 1,
+  "server": "MapleRoyals",
+  "gameVersion": "v83",
+  "_schema": "entities.<id> = { name, level, hp, exp, maps: ['map:<id>'], drops: [{ item: 'item:<id>', questOnly?: true, rate?: string }] }",
+  "_todo": [],
+  "entities": {
+    "octopus": {
+      "name": "Octopus",
+      "level": 23,
+      "hp": 400,
+      "exp": 35,
+      "maps": ["map:construction_site"],
+      "drops": [{ "item": "item:dark_marble", "questOnly": true }]
+    },
+    "stirge": {
+      "name": "Stirge",
+      "level": 20,
+      "hp": 300,
+      "exp": 28,
+      "maps": ["map:subway_b1"],
+      "drops": []
+    },
+    "stone_golem": {
+      "name": "Stone Golem",
+      "level": 35,
+      "hp": 2000,
+      "exp": 80,
+      "maps": ["map:golem_temple"],
+      "drops": [{ "item": "item:black_charm", "questOnly": true }]
+    },
+    "horny_mushroom": {
+      "name": "Horny Mushroom",
+      "level": 32,
+      "hp": 800,
+      "exp": 55,
+      "maps": ["map:henesys_dungeon"],
+      "drops": [{ "item": "item:black_gem", "questOnly": true }]
+    },
+    "dark_axe_stump": {
+      "name": "Dark Axe Stump",
+      "level": 33,
+      "hp": 900,
+      "exp": 60,
+      "maps": ["map:underground_pass", "map:keru_island"],
+      "drops": [{ "item": "item:black_crystal", "questOnly": true }]
+    },
+    "miner_zombie": {
+      "name": "Miner Zombie",
+      "level": 52,
+      "hp": 4200,
+      "exp": 180,
+      "maps": ["map:dead_mine"],
+      "drops": [{ "item": "item:zombies_lost_gold_tooth" }, { "item": "item:fire_ore" }]
+    },
+    "manon": {
+      "name": "Manon",
+      "level": 115,
+      "hp": 4500000,
+      "exp": 45000,
+      "maps": ["map:manons_forest"],
+      "drops": [{ "item": "item:heroic_star" }]
+    },
+    "griffey": {
+      "name": "Griffey",
+      "level": 118,
+      "hp": 5200000,
+      "exp": 48000,
+      "maps": ["map:valley_of_the_antelope"],
+      "drops": [{ "item": "item:heroic_pentagon" }]
+    },
+    "mossy_snail": {
+      "name": "Mossy Snail",
+      "level": 85,
+      "hp": 12000,
+      "exp": 650,
+      "maps": ["map:minar_forest"],
+      "drops": [{ "item": "item:dragon_moss" }]
+    },
+    "dual_birk": {
+      "name": "Dual Birk",
+      "level": 88,
+      "hp": 14000,
+      "exp": 720,
+      "maps": ["map:minar_forest"],
+      "drops": [{ "item": "item:dragon_wood" }]
+    },
+    "wild_kargo": {
+      "name": "Wild Kargo",
+      "level": 58,
+      "hp": 5500,
+      "exp": 220,
+      "maps": ["map:wild_kargo", "map:mysterious_path_3"],
+      "drops": []
+    },
+    "wolf_spider": {
+      "name": "Wolf Spider",
+      "level": 82,
+      "hp": 9500,
+      "exp": 580,
+      "maps": ["map:silent_swamp"],
+      "drops": []
+    },
+    "hime": {
+      "name": "Hime",
+      "level": 95,
+      "hp": 18000,
+      "exp": 1100,
+      "maps": ["map:mushroom_shrine"],
+      "drops": []
+    },
+    "dreamy_ghost": {
+      "name": "Dreamy Ghost",
+      "level": 98,
+      "hp": 20000,
+      "exp": 1200,
+      "maps": ["map:mushroom_shrine"],
+      "drops": []
+    },
+    "gallo": {
+      "name": "Gallo",
+      "level": 105,
+      "hp": 28000,
+      "exp": 1500,
+      "maps": ["map:gallos_map"],
+      "drops": []
+    },
+    "jr_sentinel": {
+      "name": "Jr. Sentinel",
+      "level": 28,
+      "hp": 650,
+      "exp": 45,
+      "maps": ["map:ant_tunnel_1"],
+      "drops": []
+    }
+  }
+}

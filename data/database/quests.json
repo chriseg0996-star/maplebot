@@ -1,0 +1,410 @@
+{
+  "schema": 1,
+  "server": "MapleRoyals",
+  "gameVersion": "v83",
+  "_schema": "entities.<id> = { name, requirements: { level, job, quests: ['quest:<id>'] }, startNpc: 'npc:<id>', endNpc: 'npc:<id>', steps: [string con [[refs]]], maps: ['map:<id>'], items: [{ item: 'item:<id>', qty }], rewards: { exp, mesos, items: ['item:<id>'], other: string } }",
+  "_todo": [],
+  "entities": {
+    "rogue_first_job": {
+      "name": "1st Job — Rogue",
+      "requirements": { "level": 10, "job": "beginner", "quests": [] },
+      "startNpc": "npc:dark_lord",
+      "endNpc": "npc:dark_lord",
+      "steps": [
+        "Ve a [[map:kerning_city]] (Jazz Bar, entrada oculta).",
+        "Habla con [[npc:dark_lord]] — requiere nivel 10 y DEX 25."
+      ],
+      "maps": ["map:kerning_city"],
+      "items": [],
+      "rewards": { "exp": null, "mesos": null, "items": [], "other": "Job: Rogue" }
+    },
+    "assassin_second_job": {
+      "name": "2nd Job — Assassin",
+      "requirements": { "level": 30, "job": "rogue", "quests": ["quest:rogue_first_job"] },
+      "startNpc": "npc:dark_lord",
+      "endNpc": "npc:dark_lord",
+      "steps": [
+        "Habla con [[npc:dark_lord]] en [[map:kerning_city]] y recibe la Dark Marble quest.",
+        "Entra al Inner Door — portal en [[map:swamp_region]].",
+        "Junta 30 [[item:dark_marble|Dark Marbles]] matando los snails/octis del test.",
+        "Regresa con [[npc:dark_lord]] y elige Assassin. Sube Claw Mastery y Critical Throw primero."
+      ],
+      "maps": ["map:kerning_city", "map:swamp_region"],
+      "items": [{ "item": "item:dark_marble", "qty": 30 }],
+      "rewards": { "exp": null, "mesos": null, "items": [], "other": "Job: Assassin" }
+    },
+    "bandit_second_job": {
+      "name": "2nd Job — Bandit",
+      "requirements": { "level": 30, "job": "rogue", "quests": ["quest:rogue_first_job"] },
+      "startNpc": "npc:dark_lord",
+      "endNpc": "npc:dark_lord",
+      "steps": [
+        "Habla con [[npc:dark_lord]] en [[map:kerning_city]] y recibe la Dark Marble quest.",
+        "Entra al Inner Door — portal en [[map:swamp_region]].",
+        "Junta 30 [[item:dark_marble|Dark Marbles]] matando los snails/octis del test.",
+        "Regresa con [[npc:dark_lord]] y elige Bandit. Sube Dagger Mastery y Steal primero."
+      ],
+      "maps": ["map:kerning_city", "map:swamp_region"],
+      "items": [{ "item": "item:dark_marble", "qty": 30 }],
+      "rewards": { "exp": null, "mesos": null, "items": [], "other": "Job: Bandit" }
+    },
+    "hermit_third_job": {
+      "name": "3rd Job — Hermit",
+      "requirements": { "level": 70, "job": "assassin", "quests": ["quest:assassin_second_job"] },
+      "startNpc": "npc:dark_lord",
+      "endNpc": "npc:arec",
+      "steps": [
+        "Habla con [[npc:dark_lord]] en [[map:kerning_city]], luego con [[npc:arec]] en [[map:el_nath]].",
+        "Door of Dimension en [[map:ant_tunnel]] — derrota al clon de Dark Lord y obtén el Black Charm.",
+        "Holy Stone quiz: 5 preguntas — ten mesos para respuestas falladas.",
+        "Entrega a [[npc:arec]] → Hermit. Prioriza Shadow Partner y Avenger según build."
+      ],
+      "maps": ["map:kerning_city", "map:el_nath", "map:ant_tunnel"],
+      "items": [],
+      "rewards": { "exp": null, "mesos": null, "items": [], "other": "Job: Hermit" }
+    },
+    "chief_bandit_third_job": {
+      "name": "3rd Job — Chief Bandit",
+      "requirements": { "level": 70, "job": "bandit", "quests": ["quest:bandit_second_job"] },
+      "startNpc": "npc:dark_lord",
+      "endNpc": "npc:arec",
+      "steps": [
+        "Habla con [[npc:dark_lord]] en [[map:kerning_city]], luego con [[npc:arec]] en [[map:el_nath]].",
+        "Door of Dimension en [[map:ant_tunnel]] — derrota al clon de Dark Lord y obtén el Black Charm.",
+        "Holy Stone quiz: 5 preguntas — ten mesos para respuestas falladas.",
+        "Entrega a [[npc:arec]] → Chief Bandit. Prioriza Meso Explosion y Band of Thieves."
+      ],
+      "maps": ["map:kerning_city", "map:el_nath", "map:ant_tunnel"],
+      "items": [],
+      "rewards": { "exp": null, "mesos": null, "items": [], "other": "Job: Chief Bandit" }
+    },
+    "night_lord_fourth_job": {
+      "name": "4th Job — Night Lord",
+      "requirements": { "level": 120, "job": "hermit", "quests": ["quest:hermit_third_job"] },
+      "startNpc": "npc:hellin",
+      "endNpc": "npc:hellin",
+      "steps": [
+        "Habla con [[npc:hellin]] en [[map:valley_of_the_antelope]] ([[map:leafre]]).",
+        "Consigue [[item:heroic_star]] (drop de [[mob:manon]]) y [[item:heroic_pentagon]] (drop de [[mob:griffey]]) — en Royals son tradeables.",
+        "Entrega a [[npc:hellin]] → Night Lord."
+      ],
+      "maps": ["map:leafre", "map:valley_of_the_antelope"],
+      "items": [
+        { "item": "item:heroic_star", "qty": 1 },
+        { "item": "item:heroic_pentagon", "qty": 1 }
+      ],
+      "rewards": { "exp": null, "mesos": null, "items": [], "other": "Job: Night Lord" }
+    },
+    "shadower_fourth_job": {
+      "name": "4th Job — Shadower",
+      "requirements": { "level": 120, "job": "chief_bandit", "quests": ["quest:chief_bandit_third_job"] },
+      "startNpc": "npc:hellin",
+      "endNpc": "npc:hellin",
+      "steps": [
+        "Habla con [[npc:hellin]] en [[map:valley_of_the_antelope]] ([[map:leafre]]).",
+        "Consigue [[item:heroic_star]] (drop de [[mob:manon]]) y [[item:heroic_pentagon]] (drop de [[mob:griffey]]) — en Royals son tradeables.",
+        "Entrega a [[npc:hellin]] → Shadower."
+      ],
+      "maps": ["map:leafre", "map:valley_of_the_antelope"],
+      "items": [
+        { "item": "item:heroic_star", "qty": 1 },
+        { "item": "item:heroic_pentagon", "qty": 1 }
+      ],
+      "rewards": { "exp": null, "mesos": null, "items": [], "other": "Job: Shadower" }
+    },
+    "fighter_first_job": {
+      "name": "1st Job — Warrior",
+      "requirements": { "level": 10, "job": "beginner", "quests": [] },
+      "startNpc": "npc:dances_with_balrog",
+      "endNpc": "npc:dances_with_balrog",
+      "steps": [
+        "Ve a [[map:perion]] (Warriors' Sanctuary).",
+        "Habla con [[npc:dances_with_balrog]] — requiere nivel 10 y STR 35."
+      ],
+      "maps": ["map:perion"],
+      "items": [],
+      "rewards": { "exp": null, "mesos": null, "items": [], "other": "Job: Warrior" }
+    },
+    "fighter_second_job": {
+      "name": "2nd Job — Fighter",
+      "requirements": { "level": 30, "job": "warrior", "quests": ["quest:fighter_first_job"] },
+      "startNpc": "npc:dances_with_balrog",
+      "endNpc": "npc:dances_with_balrog",
+      "steps": [
+        "Habla con [[npc:dances_with_balrog]] en [[map:perion]] y recibe la test quest.",
+        "Entra a [[map:underground_pass]] — portal en Perion.",
+        "Junta 30 [[item:black_crystal|Black Crystals]] de los monstruos del test.",
+        "Regresa con [[npc:dances_with_balrog]] y elige Fighter."
+      ],
+      "maps": ["map:perion", "map:underground_pass"],
+      "items": [{ "item": "item:black_crystal", "qty": 30 }],
+      "rewards": { "exp": null, "mesos": null, "items": [], "other": "Job: Fighter" }
+    },
+    "crusader_third_job": {
+      "name": "3rd Job — Crusader",
+      "requirements": { "level": 70, "job": "fighter", "quests": ["quest:fighter_second_job"] },
+      "startNpc": "npc:dances_with_balrog",
+      "endNpc": "npc:tylus",
+      "steps": [
+        "Habla con [[npc:dances_with_balrog]] en [[map:perion]], luego con [[npc:tylus]] en [[map:el_nath]].",
+        "Door of Dimension en [[map:cave_of_life]] — derrota al clon y obtén el Black Charm.",
+        "Holy Stone quiz: 5 preguntas — ten mesos para respuestas falladas.",
+        "Entrega a [[npc:tylus]] → Crusader."
+      ],
+      "maps": ["map:perion", "map:el_nath", "map:cave_of_life"],
+      "items": [],
+      "rewards": { "exp": null, "mesos": null, "items": [], "other": "Job: Crusader" }
+    },
+    "hero_fourth_job": {
+      "name": "4th Job — Hero",
+      "requirements": { "level": 120, "job": "crusader", "quests": ["quest:crusader_third_job"] },
+      "startNpc": "npc:hellin",
+      "endNpc": "npc:hellin",
+      "steps": [
+        "Habla con [[npc:hellin]] en [[map:valley_of_the_antelope]] ([[map:leafre]]).",
+        "Consigue [[item:heroic_star]] y [[item:heroic_pentagon]] — tradeables en Royals.",
+        "Entrega a [[npc:hellin]] → Hero."
+      ],
+      "maps": ["map:leafre", "map:valley_of_the_antelope"],
+      "items": [
+        { "item": "item:heroic_star", "qty": 1 },
+        { "item": "item:heroic_pentagon", "qty": 1 }
+      ],
+      "rewards": { "exp": null, "mesos": null, "items": [], "other": "Job: Hero" }
+    },
+    "magician_first_job": {
+      "name": "1st Job — Magician",
+      "requirements": { "level": 10, "job": "beginner", "quests": [] },
+      "startNpc": "npc:gwin",
+      "endNpc": "npc:gwin",
+      "steps": [
+        "Ve a [[map:ellinia]] (Magic Library).",
+        "Habla con [[npc:gwin]] — requiere nivel 10 e INT 20."
+      ],
+      "maps": ["map:ellinia"],
+      "items": [],
+      "rewards": { "exp": null, "mesos": null, "items": [], "other": "Job: Magician" }
+    },
+    "fp_mage_second_job": {
+      "name": "2nd Job — Fire/Poison Wizard",
+      "requirements": { "level": 30, "job": "magician", "quests": ["quest:magician_first_job"] },
+      "startNpc": "npc:gwin",
+      "endNpc": "npc:gwin",
+      "steps": [
+        "Habla con [[npc:gwin]] en [[map:ellinia]] y recibe la test quest.",
+        "Entra a [[map:golem_temple]] — Victoria Road.",
+        "Junta 30 [[item:black_charm|Black Charms]] de [[mob:stone_golem]].",
+        "Regresa con [[npc:gwin]] y elige FP Mage."
+      ],
+      "maps": ["map:ellinia", "map:golem_temple"],
+      "items": [{ "item": "item:black_charm", "qty": 30 }],
+      "rewards": { "exp": null, "mesos": null, "items": [], "other": "Job: Fire/Poison Wizard" }
+    },
+    "fp_arch_mage_third_job": {
+      "name": "3rd Job — FP Arch Mage",
+      "requirements": { "level": 70, "job": "fp_wizard", "quests": ["quest:fp_mage_second_job"] },
+      "startNpc": "npc:gwin",
+      "endNpc": "npc:robeira",
+      "steps": [
+        "Habla con [[npc:gwin]] en [[map:ellinia]], luego con [[npc:robeira]] en [[map:el_nath]].",
+        "Door of Dimension en [[map:drakes_cave]] — derrota al clon y obtén el Black Charm.",
+        "Holy Stone quiz: 5 preguntas — ten mesos para respuestas falladas.",
+        "Entrega a [[npc:robeira]] → FP Arch Mage."
+      ],
+      "maps": ["map:ellinia", "map:el_nath", "map:drakes_cave"],
+      "items": [],
+      "rewards": { "exp": null, "mesos": null, "items": [], "other": "Job: Fire/Poison Arch Mage" }
+    },
+    "fp_arch_mage_fourth_job": {
+      "name": "4th Job — Fire/Poison Arch Mage",
+      "requirements": { "level": 120, "job": "fp_arch_mage", "quests": ["quest:fp_arch_mage_third_job"] },
+      "startNpc": "npc:hellin",
+      "endNpc": "npc:hellin",
+      "steps": [
+        "Habla con [[npc:hellin]] en [[map:valley_of_the_antelope]] ([[map:leafre]]).",
+        "Consigue [[item:heroic_star]] y [[item:heroic_pentagon]] — tradeables en Royals.",
+        "Entrega a [[npc:hellin]] → FP Arch Mage."
+      ],
+      "maps": ["map:leafre", "map:valley_of_the_antelope"],
+      "items": [
+        { "item": "item:heroic_star", "qty": 1 },
+        { "item": "item:heroic_pentagon", "qty": 1 }
+      ],
+      "rewards": { "exp": null, "mesos": null, "items": [], "other": "Job: Fire/Poison Arch Mage" }
+    },
+    "bowman_first_job": {
+      "name": "1st Job — Bowman",
+      "requirements": { "level": 10, "job": "beginner", "quests": [] },
+      "startNpc": "npc:athena_pierce",
+      "endNpc": "npc:athena_pierce",
+      "steps": [
+        "Ve a [[map:henesys]] (Bowman Instructional School).",
+        "Habla con [[npc:athena_pierce]] — requiere nivel 10 y DEX 25."
+      ],
+      "maps": ["map:henesys"],
+      "items": [],
+      "rewards": { "exp": null, "mesos": null, "items": [], "other": "Job: Bowman" }
+    },
+    "hunter_second_job": {
+      "name": "2nd Job — Hunter",
+      "requirements": { "level": 30, "job": "bowman", "quests": ["quest:bowman_first_job"] },
+      "startNpc": "npc:athena_pierce",
+      "endNpc": "npc:athena_pierce",
+      "steps": [
+        "Habla con [[npc:athena_pierce]] en [[map:henesys]] y recibe la test quest.",
+        "Entra a [[map:henesys_dungeon]] — portal en Henesys.",
+        "Junta 30 [[item:black_gem|Black Gems]] de [[mob:horny_mushroom]].",
+        "Regresa con [[npc:athena_pierce]] y elige Hunter."
+      ],
+      "maps": ["map:henesys", "map:henesys_dungeon"],
+      "items": [{ "item": "item:black_gem", "qty": 30 }],
+      "rewards": { "exp": null, "mesos": null, "items": [], "other": "Job: Hunter" }
+    },
+    "ranger_third_job": {
+      "name": "3rd Job — Ranger",
+      "requirements": { "level": 70, "job": "hunter", "quests": ["quest:hunter_second_job"] },
+      "startNpc": "npc:athena_pierce",
+      "endNpc": "npc:rene",
+      "steps": [
+        "Habla con [[npc:athena_pierce]] en [[map:henesys]], luego con [[npc:rene]] en [[map:el_nath]].",
+        "Door of Dimension en [[map:mushroom_castle]] — derrota al clon y obtén el Black Charm.",
+        "Holy Stone quiz: 5 preguntas — ten mesos para respuestas falladas.",
+        "Entrega a [[npc:rene]] → Ranger."
+      ],
+      "maps": ["map:henesys", "map:el_nath", "map:mushroom_castle"],
+      "items": [],
+      "rewards": { "exp": null, "mesos": null, "items": [], "other": "Job: Ranger" }
+    },
+    "bowmaster_fourth_job": {
+      "name": "4th Job — Bowmaster",
+      "requirements": { "level": 120, "job": "ranger", "quests": ["quest:ranger_third_job"] },
+      "startNpc": "npc:hellin",
+      "endNpc": "npc:hellin",
+      "steps": [
+        "Habla con [[npc:hellin]] en [[map:valley_of_the_antelope]] ([[map:leafre]]).",
+        "Consigue [[item:heroic_star]] y [[item:heroic_pentagon]] — tradeables en Royals.",
+        "Entrega a [[npc:hellin]] → Bowmaster."
+      ],
+      "maps": ["map:leafre", "map:valley_of_the_antelope"],
+      "items": [
+        { "item": "item:heroic_star", "qty": 1 },
+        { "item": "item:heroic_pentagon", "qty": 1 }
+      ],
+      "rewards": { "exp": null, "mesos": null, "items": [], "other": "Job: Bowmaster" }
+    },
+    "pirate_first_job": {
+      "name": "1st Job — Pirate",
+      "requirements": { "level": 10, "job": "beginner", "quests": [] },
+      "startNpc": "npc:kyrin",
+      "endNpc": "npc:kyrin",
+      "steps": [
+        "Ve a [[map:nautilus_harbor]] (Nautilus HQ).",
+        "Habla con [[npc:kyrin]] — requiere nivel 10, STR 20 y DEX 20."
+      ],
+      "maps": ["map:nautilus_harbor"],
+      "items": [],
+      "rewards": { "exp": null, "mesos": null, "items": [], "other": "Job: Pirate" }
+    },
+    "brawler_second_job": {
+      "name": "2nd Job — Brawler",
+      "requirements": { "level": 30, "job": "pirate", "quests": ["quest:pirate_first_job"] },
+      "startNpc": "npc:kyrin",
+      "endNpc": "npc:kyrin",
+      "steps": [
+        "Habla con [[npc:kyrin]] en [[map:nautilus_harbor]] y recibe la test quest.",
+        "Entra a [[map:keru_island]] — portal desde Nautilus.",
+        "Junta 30 [[item:black_crystal|Black Crystals]] de los monstruos del test.",
+        "Regresa con [[npc:kyrin]] y elige Brawler."
+      ],
+      "maps": ["map:nautilus_harbor", "map:keru_island"],
+      "items": [{ "item": "item:black_crystal", "qty": 30 }],
+      "rewards": { "exp": null, "mesos": null, "items": [], "other": "Job: Brawler" }
+    },
+    "marauder_third_job": {
+      "name": "3rd Job — Marauder",
+      "requirements": { "level": 70, "job": "brawler", "quests": ["quest:brawler_second_job"] },
+      "startNpc": "npc:kyrin",
+      "endNpc": "npc:pedro",
+      "steps": [
+        "Habla con [[npc:kyrin]] en [[map:nautilus_harbor]], luego con [[npc:pedro]] en [[map:el_nath]].",
+        "Door of Dimension en [[map:pirates_door]] — derrota al clon y obtén el Black Charm.",
+        "Holy Stone quiz: 5 preguntas — ten mesos para respuestas falladas.",
+        "Entrega a [[npc:pedro]] → Marauder."
+      ],
+      "maps": ["map:nautilus_harbor", "map:el_nath", "map:pirates_door"],
+      "items": [],
+      "rewards": { "exp": null, "mesos": null, "items": [], "other": "Job: Marauder" }
+    },
+    "buccaneer_fourth_job": {
+      "name": "4th Job — Buccaneer",
+      "requirements": { "level": 120, "job": "marauder", "quests": ["quest:marauder_third_job"] },
+      "startNpc": "npc:hellin",
+      "endNpc": "npc:hellin",
+      "steps": [
+        "Habla con [[npc:hellin]] en [[map:valley_of_the_antelope]] ([[map:leafre]]).",
+        "Consigue [[item:heroic_star]] y [[item:heroic_pentagon]] — tradeables en Royals.",
+        "Entrega a [[npc:hellin]] → Buccaneer."
+      ],
+      "maps": ["map:leafre", "map:valley_of_the_antelope"],
+      "items": [
+        { "item": "item:heroic_star", "qty": 1 },
+        { "item": "item:heroic_pentagon", "qty": 1 }
+      ],
+      "rewards": { "exp": null, "mesos": null, "items": [], "other": "Job: Buccaneer" }
+    },
+    "zakum_prequest": {
+      "name": "Zakum Dungeon Quest (prequest completa)",
+      "requirements": { "level": 50, "job": "any", "quests": [] },
+      "startNpc": "npc:adobis",
+      "endNpc": "npc:adobis",
+      "steps": [
+        "Acepta 'Zakum Dungeon Quest' con [[npc:adobis]] en [[map:el_nath]] (Chief's Residence).",
+        "Stage 1: consigue Fire Ore x30 en [[map:dead_mine]] y completa el jump quest de [[map:dead_mine_jq]] — recoge el [[item:breath_of_fire]] en la salida.",
+        "Entrega a [[npc:adobis]] → recibe [[item:paper_of_fire]].",
+        "Stage 2: junta 30 [[item:zombies_lost_gold_tooth|Zombie's Lost Gold Tooth]] ([[mob:miner_zombie]]) y entrégalos con el papel → recibe [[item:breath_of_lava]].",
+        "Stage 3: lleva [[item:breath_of_fire]] + [[item:breath_of_lava]] a [[npc:adobis]] → recibe tu [[item:eye_of_fire]]."
+      ],
+      "maps": ["map:el_nath", "map:dead_mine", "map:dead_mine_jq"],
+      "items": [
+        { "item": "item:breath_of_fire", "qty": 1 },
+        { "item": "item:breath_of_lava", "qty": 1 }
+      ],
+      "rewards": {
+        "exp": null,
+        "mesos": null,
+        "items": ["item:eye_of_fire"],
+        "other": "Acceso a [[boss:zakum]] — cada entrada consume un Eye of Fire"
+      }
+    },
+    "horntail_prequest": {
+      "name": "Horntail Prequest (cadena completa)",
+      "requirements": { "level": 80, "job": "any", "quests": [] },
+      "startNpc": "npc:nameless_cat",
+      "endNpc": "npc:high_priest",
+      "steps": [
+        "Acepta la prequest con [[npc:nameless_cat]] en [[map:leafre]].",
+        "Recolecta [[item:dragon_moss]] x20 ([[mob:mossy_snail]]) y [[item:dragon_wood]] x20 ([[mob:dual_birk]]) en [[map:minar_forest]].",
+        "Entrega a [[npc:nameless_cat]] → recibe el primer key item.",
+        "Ve a [[map:cave_of_life]] y habla con [[npc:high_priest]].",
+        "Obtén el [[item:secret_document]] en [[map:temple_of_time]] de [[npc:temple_priest]].",
+        "Recolecta [[item:red_key]] x9 y [[item:blue_key]] x9 en [[map:dragon_nest]].",
+        "Desbloquea las salas en [[map:temple_of_time]] → obtén [[item:nine_spirits_egg]].",
+        "Entrega a [[npc:high_priest]] → recibe [[item:horntail_cave_pass]]."
+      ],
+      "maps": ["map:leafre", "map:minar_forest", "map:cave_of_life", "map:temple_of_time", "map:dragon_nest"],
+      "items": [
+        { "item": "item:dragon_moss", "qty": 20 },
+        { "item": "item:dragon_wood", "qty": 20 },
+        { "item": "item:red_key", "qty": 9 },
+        { "item": "item:blue_key", "qty": 9 },
+        { "item": "item:nine_spirits_egg", "qty": 1 }
+      ],
+      "rewards": {
+        "exp": null,
+        "mesos": null,
+        "items": ["item:horntail_cave_pass"],
+        "other": "Acceso a [[boss:horntail]] en [[map:horntails_cave]]"
+      }
+    }
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "schema": 1,
+  "server": "MapleRoyals",
+  "gameVersion": "v83",
+  "_schema": "entities.<id> = { name, map: 'map:<id>', position: string | null, shop: null | { sells: ['item:<id>'] }, roles: ['job_advancement'|'shop'|'transport'|'quest'|'storage'|...] }",
+  "_todo": [],
+  "entities": {
+    "dark_lord": {
+      "name": "Dark Lord",
+      "map": "map:kerning_city",
+      "position": "Jazz Bar (entrada oculta)",
+      "shop": null,
+      "roles": ["job_advancement"]
+    },
+    "dances_with_balrog": {
+      "name": "Dances with Balrog",
+      "map": "map:perion",
+      "position": "Warriors' Sanctuary",
+      "shop": null,
+      "roles": ["job_advancement"]
+    },
+    "gwin": {
+      "name": "Gwin",
+      "map": "map:ellinia",
+      "position": "Magic Library",
+      "shop": null,
+      "roles": ["job_advancement"]
+    },
+    "athena_pierce": {
+      "name": "Athena Pierce",
+      "map": "map:henesys",
+      "position": "Bowman Instructional School",
+      "shop": null,
+      "roles": ["job_advancement"]
+    },
+    "kyrin": {
+      "name": "Kyrin",
+      "map": "map:nautilus_harbor",
+      "position": "Nautilus HQ",
+      "shop": null,
+      "roles": ["job_advancement"]
+    },
+    "adobis": {
+      "name": "Adobis",
+      "map": "map:el_nath",
+      "position": "Chief's Residence (Door to Zakum)",
+      "shop": null,
+      "roles": ["quest"]
+    },
+    "arec": {
+      "name": "Arec",
+      "map": "map:el_nath",
+      "position": "Chief's Residence",
+      "shop": null,
+      "roles": ["job_advancement"]
+    },
+    "tylus": {
+      "name": "Tylus",
+      "map": "map:el_nath",
+      "position": "Chief's Residence",
+      "shop": null,
+      "roles": ["job_advancement"]
+    },
+    "robeira": {
+      "name": "Robeira",
+      "map": "map:el_nath",
+      "position": "Chief's Residence",
+      "shop": null,
+      "roles": ["job_advancement"]
+    },
+    "rene": {
+      "name": "Rene",
+      "map": "map:el_nath",
+      "position": "Chief's Residence",
+      "shop": null,
+      "roles": ["job_advancement"]
+    },
+    "pedro": {
+      "name": "Pedro",
+      "map": "map:el_nath",
+      "position": "Chief's Residence",
+      "shop": null,
+      "roles": ["job_advancement"]
+    },
+    "hellin": {
+      "name": "Hellin",
+      "map": "map:valley_of_the_antelope",
+      "position": "Valley of the Antelope",
+      "shop": null,
+      "roles": ["job_advancement"]
+    },
+    "nameless_cat": {
+      "name": "Nameless Cat",
+      "map": "map:leafre",
+      "position": "Town Square (near entrance)",
+      "shop": null,
+      "roles": ["quest"]
+    },
+    "high_priest": {
+      "name": "High Priest",
+      "map": "map:cave_of_life",
+      "position": "Cave of Life entrance",
+      "shop": null,
+      "roles": ["quest"]
+    },
+    "temple_priest": {
+      "name": "Temple Priest",
+      "map": "map:temple_of_time",
+      "position": "Dragon Nest area",
+      "shop": null,
+      "roles": ["quest"]
+    }
+  }
+}

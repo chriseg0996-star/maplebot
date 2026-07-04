@@ -1,0 +1,135 @@
+{
+  "schema": 1,
+  "server": "MapleRoyals",
+  "gameVersion": "v83",
+  "_schema": "entities.<id> = { levelRange: [min, max], maps: ['map:<id>'], monsters: ['mob:<id>'], jobs: ['any'|'thief'|...], notes: string con [[refs]] }",
+  "_todo": [],
+  "entities": {
+    "construction_site_octopus": {
+      "levelRange": [10, 30],
+      "maps": ["map:construction_site"],
+      "monsters": ["mob:octopus"],
+      "jobs": ["any"],
+      "notes": "Spot 1st→2nd job — [[map:construction_site]], [[mob:octopus]]."
+    },
+    "subway_b1_stirge": {
+      "levelRange": [10, 30],
+      "maps": ["map:subway_b1"],
+      "monsters": ["mob:stirge"],
+      "jobs": ["any"],
+      "notes": "Subway B1 (Stirge — quest JCd). [[map:subway_b1]], [[mob:stirge]]."
+    },
+    "perion_warning_street": {
+      "levelRange": [10, 20],
+      "maps": ["map:perion_warning_street"],
+      "monsters": [],
+      "jobs": ["warrior"],
+      "notes": "Perion Warning Street (Slimes, Stumps)."
+    },
+    "perion_dungeon": {
+      "levelRange": [15, 30],
+      "maps": ["map:perion_dungeon"],
+      "monsters": [],
+      "jobs": ["warrior"],
+      "notes": "Perion Dungeon (Evil Eyes, Dark Stumps)."
+    },
+    "ellinia_southern_forest": {
+      "levelRange": [10, 20],
+      "maps": ["map:ellinia_southern_forest"],
+      "monsters": [],
+      "jobs": ["magician"],
+      "notes": "Ellinia Southern Forest (Slimes, Pigs)."
+    },
+    "ellinia_forest_iii": {
+      "levelRange": [15, 30],
+      "maps": ["map:ellinia_forest_iii"],
+      "monsters": [],
+      "jobs": ["magician"],
+      "notes": "Ellinia Forest III (Evil Eyes)."
+    },
+    "ant_tunnel_1_jr_sentinel": {
+      "levelRange": [20, 35],
+      "maps": ["map:ant_tunnel_1"],
+      "monsters": ["mob:jr_sentinel"],
+      "jobs": ["magician"],
+      "notes": "Ant Tunnel 1 (Jr. Sentinels — if funded). [[mob:jr_sentinel]]."
+    },
+    "henesys_hg1": {
+      "levelRange": [10, 20],
+      "maps": ["map:henesys_hunting_ground_1"],
+      "monsters": [],
+      "jobs": ["bowman"],
+      "notes": "Henesys Hunting Ground I (Orange Mushrooms, Pigs)."
+    },
+    "henesys_hg2": {
+      "levelRange": [15, 25],
+      "maps": ["map:henesys_hunting_ground_2"],
+      "monsters": [],
+      "jobs": ["bowman"],
+      "notes": "Henesys Hunting Ground II (Green Mushrooms)."
+    },
+    "florina_beach": {
+      "levelRange": [10, 25],
+      "maps": ["map:florina_beach"],
+      "monsters": [],
+      "jobs": ["pirate"],
+      "notes": "Florina Beach (Crab, Krip)."
+    },
+    "nautilus_training_room": {
+      "levelRange": [10, 20],
+      "maps": ["map:nautilus_training_room"],
+      "monsters": [],
+      "jobs": ["pirate"],
+      "notes": "Nautilus Training Room (Jr. Cellion)."
+    },
+    "kerning_pq": {
+      "levelRange": [21, 30],
+      "maps": ["map:kerning_pq"],
+      "monsters": [],
+      "jobs": ["any"],
+      "notes": "Kerning PQ (21-30, in party). [[map:kerning_pq]]."
+    },
+    "ludi_pq": {
+      "levelRange": [35, 50],
+      "maps": ["map:ludi_pq"],
+      "monsters": [],
+      "jobs": ["any"],
+      "notes": "Ludi PQ (35-50). [[map:ludi_pq]]."
+    },
+    "mysterious_path_3": {
+      "levelRange": [55, 70],
+      "maps": ["map:mysterious_path_3"],
+      "monsters": [],
+      "jobs": ["any"],
+      "notes": "Mysterious Path 3 (55-70). [[map:mysterious_path_3]]."
+    },
+    "wild_kargo_truckers": {
+      "levelRange": [55, 70],
+      "maps": ["map:wild_kargo"],
+      "monsters": ["mob:wild_kargo"],
+      "jobs": ["any"],
+      "notes": "Wild Kargo / Truckers (55-70 alternative). [[mob:wild_kargo]]."
+    },
+    "wolf_spiders": {
+      "levelRange": [80, 100],
+      "maps": ["map:silent_swamp"],
+      "monsters": ["mob:wolf_spider"],
+      "jobs": ["any"],
+      "notes": "Wolf Spiders (80-100). [[map:silent_swamp]], [[mob:wolf_spider]]."
+    },
+    "himes": {
+      "levelRange": [90, 120],
+      "maps": ["map:mushroom_shrine"],
+      "monsters": ["mob:hime", "mob:dreamy_ghost"],
+      "jobs": ["any"],
+      "notes": "Himes / Dreamy Ghosts (90-120, HS mule ideal). [[map:mushroom_shrine]]."
+    },
+    "gallos": {
+      "levelRange": [100, 120],
+      "maps": ["map:gallos_map"],
+      "monsters": ["mob:gallo"],
+      "jobs": ["any"],
+      "notes": "Gallos (100-120 alternative). [[map:gallos_map]], [[mob:gallo]]."
+    }
+  }
+}
