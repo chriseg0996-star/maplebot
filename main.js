@@ -1,22 +1,32 @@
-const { app, BrowserWindow, ipcMain, globalShortcut, screen, dialog } = require('electron');
+const {
+  app, BrowserWindow, ipcMain, globalShortcut, screen, dialog, Tray, Menu, shell
+} = require('electron');
 const path = require('path');
 const fs = require('fs');
 const ocr = require('./ocr');
 const { tesseractLangPath } = require('./paths');
 
 let win = null;
+let tray = null;
 let clickThrough = false;
-let expandedHeight = null; // altura previa al collapse
+let expandedHeight = null;
+let isQuitting = false;
 
-const DEFAULT_BOUNDS = { width: 340, height: 520 };
+const DEFAULT_BOUNDS = { width: 340, height: 560 };
 const stateFile = () => path.join(app.getPath('userData'), 'window-state.json');
+const ocrConfigFile = () => path.join(app.getPath('userData'), 'ocr-config.json');
+const ocrSettingsFile = () => path.join(app.getPath('userData'), 'ocr-settings.json');
+const userGuidesFile = () => path.join(app.getPath('userData'), 'guides-user.json');
+const bundledGuidesPath = () => path.join(__dirname, 'data', 'guides.json');
 
-// ---------- Window state (posición/tamaño) ----------
+function loadJson(file, fallback) {
+  try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch (_) { return fallback; }
+}
+
 function loadWindowState() {
   try {
-    const saved = JSON.parse(fs.readFileSync(stateFile(), 'utf8'));
-    if (typeof saved.width !== 'number' || typeof saved.height !== 'number') return DEFAULT_BOUNDS;
-    // No restaurar fuera de pantalla (monitor desconectado, etc.)
+    const saved = loadJson(stateFile(), DEFAULT_BOUNDS);
+    if (typeof saved.width !== 'number') return DEFAULT_BOUNDS;
     const display = screen.getDisplayMatching(saved).workArea;
     const visible =
       saved.x >= display.x - saved.width + 40 &&
@@ -30,14 +40,12 @@ function loadWindowState() {
 }
 
 let saveTimer = null;
-let loadedBounds = null; // bounds aplicados al crear la ventana (anti size-creep)
+let loadedBounds = null;
+
 function saveWindowState() {
   if (!win || win.isDestroyed()) return;
-  // Guardar siempre la altura expandida, no la colapsada
   const bounds = win.getBounds();
   if (expandedHeight !== null) bounds.height = expandedHeight;
-  // Anti-creep: en Windows con DPI fraccional, getBounds() deriva ±1-2px por sesión
-  // en ventanas transparent/frameless. Deltas pequeños = ruido del OS, no intención del usuario.
   if (loadedBounds) {
     for (const k of ['x', 'y', 'width', 'height']) {
       if (typeof loadedBounds[k] === 'number' && Math.abs(bounds[k] - loadedBounds[k]) <= 8) {
@@ -47,12 +55,45 @@ function saveWindowState() {
   }
   try {
     fs.writeFileSync(stateFile(), JSON.stringify(bounds));
-    loadedBounds = bounds; // el nuevo baseline: futuros deltas pequeños se snapean a esto
-  } catch (_) { /* disco no disponible → se pierde la posición, no es fatal */ }
+    loadedBounds = bounds;
+  } catch (_) { /* ignore */ }
 }
+
 function saveWindowStateDebounced() {
   clearTimeout(saveTimer);
   saveTimer = setTimeout(saveWindowState, 500);
+}
+
+function loadOcrConfig() {
+  return loadJson(ocrConfigFile(), null);
+}
+
+function loadOcrSettings() {
+  const s = loadJson(ocrSettingsFile(), {});
+  ocr.setSettings(s);
+  return ocr.getSettings();
+}
+
+function mergeGuides() {
+  const bundled = loadJson(bundledGuidesPath(), { version: '1.0.0', guides: [] });
+  const user = loadJson(userGuidesFile(), { guides: [] });
+  const byId = new Map(bundled.guides.map((g) => [g.id, g]));
+  (user.guides || []).forEach((g) => byId.set(g.id, g));
+  return { ...bundled, guides: [...byId.values()] };
+}
+
+function createTray() {
+  const iconPath = path.join(__dirname, 'build', 'icon.png');
+  if (!fs.existsSync(iconPath)) return;
+  tray = new Tray(iconPath);
+  tray.setToolTip('Maplebot');
+  const menu = Menu.buildFromTemplate([
+    { label: 'Show Overlay', click: () => { if (win) { win.show(); win.focus(); } } },
+    { type: 'separator' },
+    { label: 'Quit', click: () => { isQuitting = true; app.quit(); } }
+  ]);
+  tray.setContextMenu(menu);
+  tray.on('click', () => { if (win) { win.show(); win.focus(); } });
 }
 
 function createWindow() {
@@ -71,50 +112,102 @@ function createWindow() {
     }
   });
 
-  // Nivel screen-saver: se mantiene sobre juegos en borderless windowed
   win.setAlwaysOnTop(true, 'screen-saver');
   win.loadFile(path.join(__dirname, 'renderer', 'index.html'));
 
   win.on('moved', saveWindowStateDebounced);
   win.on('resized', saveWindowStateDebounced);
-  win.on('close', () => {
+  win.on('close', (e) => {
+    if (!isQuitting) {
+      e.preventDefault();
+      win.hide();
+      return;
+    }
     clearTimeout(saveTimer);
     saveWindowState();
   });
 }
 
-app.whenReady().then(() => {
-  createWindow();
-
-  // Push de estado OCR hacia el overlay (off | starting | ready)
-  ocr.setStatusListener((s) => {
-    if (win && !win.isDestroyed()) win.webContents.send('ocr-status-changed', s);
-  });
-  // Push de cada resultado de reconocimiento (F4.2)
-  ocr.setResultListener((r) => {
-    if (win && !win.isDestroyed()) win.webContents.send('ocr-result', r);
-  });
-  // Overlay colapsado → cero capturas (expandedHeight solo es no-null durante collapse)
-  ocr.setPauseCheck(() => expandedHeight !== null);
-  // Calibración previa, si existe
-  ocr.setCalibration(loadOcrConfig());
-
-  // F8 global: toggle click-through aunque el juego tenga el foco
+function registerShortcuts() {
   globalShortcut.register('F8', () => {
     if (!win || win.isDestroyed()) return;
     clickThrough = !clickThrough;
     win.setIgnoreMouseEvents(clickThrough, { forward: true });
     win.webContents.send('lock-changed', clickThrough);
   });
+  globalShortcut.register('F9', () => {
+    if (win && !win.isDestroyed()) win.webContents.send('hotkey', 'cycle-guide');
+  });
+  globalShortcut.register('F10', () => {
+    if (win && !win.isDestroyed()) win.webContents.send('hotkey', 'toggle-library');
+  });
+}
+
+function setupAutoUpdater() {
+  if (!app.isPackaged) return;
+  try {
+    const { autoUpdater } = require('electron-updater');
+    autoUpdater.autoDownload = false;
+    autoUpdater.autoInstallOnAppQuit = true;
+
+    autoUpdater.on('update-available', (info) => {
+      if (win && !win.isDestroyed()) {
+        win.webContents.send('update-available', { version: info.version });
+      }
+    });
+    autoUpdater.on('download-progress', (p) => {
+      if (win && !win.isDestroyed()) {
+        win.webContents.send('update-progress', Math.round(p.percent));
+      }
+    });
+    autoUpdater.on('update-downloaded', (info) => {
+      if (win && !win.isDestroyed()) {
+        win.webContents.send('update-downloaded', { version: info.version });
+      }
+    });
+    autoUpdater.on('error', (err) => {
+      if (win && !win.isDestroyed()) {
+        win.webContents.send('update-error', err.message || 'Update check failed');
+      }
+    });
+
+    setTimeout(() => autoUpdater.checkForUpdates().catch(() => {}), 4000);
+  } catch (_) { /* optional */ }
+}
+
+let autoUpdaterRef = null;
+function getAutoUpdater() {
+  if (!app.isPackaged) return null;
+  if (!autoUpdaterRef) {
+    try { autoUpdaterRef = require('electron-updater').autoUpdater; } catch (_) { return null; }
+  }
+  return autoUpdaterRef;
+}
+
+app.whenReady().then(() => {
+  createWindow();
+  createTray();
+  loadOcrSettings();
+  ocr.setCalibration(loadOcrConfig());
+  ocr.setStatusListener((s) => {
+    if (win && !win.isDestroyed()) win.webContents.send('ocr-status-changed', s);
+  });
+  ocr.setResultListener((r) => {
+    if (win && !win.isDestroyed()) win.webContents.send('ocr-result', r);
+  });
+  ocr.setPauseCheck(() => expandedHeight !== null);
+  registerShortcuts();
+  setupAutoUpdater();
 });
 
-// ---------- IPC ----------
-ipcMain.handle('get-guides', () => {
-  const raw = fs.readFileSync(path.join(__dirname, 'data', 'guides.json'), 'utf8');
-  return JSON.parse(raw);
+// ---------- IPC: guides ----------
+ipcMain.handle('get-guides', () => mergeGuides());
+
+ipcMain.handle('save-user-guides', (_e, guides) => {
+  fs.writeFileSync(userGuidesFile(), JSON.stringify({ guides }, null, 2));
+  return { ok: true };
 });
 
-// Companion Database (F5) — un envelope por tipo; archivo faltante/corrupto → null (el renderer tolera parcial)
 const DB_FILES = ['maps', 'npcs', 'monsters', 'items', 'quests', 'bosses', 'training'];
 ipcMain.handle('get-database', () => {
   const out = {};
@@ -128,9 +221,22 @@ ipcMain.handle('get-database', () => {
   return out;
 });
 
+ipcMain.handle('get-displays', () =>
+  screen.getAllDisplays().map((d, i) => ({
+    id: d.id,
+    label: `Monitor ${i + 1} (${d.size.width}x${d.size.height})`,
+    primary: d.id === screen.getPrimaryDisplay().id
+  }))
+);
+
 ipcMain.on('set-opacity', (_e, value) => {
   if (!win || win.isDestroyed()) return;
   win.setOpacity(Math.min(1, Math.max(0.3, value)));
+});
+
+ipcMain.on('set-always-on-top-level', (_e, level) => {
+  if (!win || win.isDestroyed()) return;
+  win.setAlwaysOnTop(true, level === 'normal' ? 'normal' : 'screen-saver');
 });
 
 ipcMain.on('toggle-lock', () => {
@@ -145,7 +251,6 @@ ipcMain.on('set-collapsed', (_e, collapsed, collapsedHeight) => {
   const [width, height] = win.getSize();
   if (collapsed) {
     expandedHeight = height;
-    // setSize antes de setResizable(false): en Windows setSize es no-op sobre ventana no redimensionable
     win.setSize(width, Math.max(24, Math.round(collapsedHeight)));
     win.setResizable(false);
   } else {
@@ -155,17 +260,13 @@ ipcMain.on('set-collapsed', (_e, collapsed, collapsedHeight) => {
   }
 });
 
-// ---------- OCR (F4.2 — captura pasiva + reconocimiento) ----------
-const ocrConfigFile = () => path.join(app.getPath('userData'), 'ocr-config.json');
+ipcMain.on('minimize-to-tray', () => { if (win) win.hide(); });
 
-function loadOcrConfig() {
-  try {
-    return JSON.parse(fs.readFileSync(ocrConfigFile(), 'utf8'));
-  } catch (_) {
-    return null; // sin calibrar todavía
-  }
-}
+ipcMain.on('quit-app', () => { isQuitting = true; app.quit(); });
 
+ipcMain.on('open-external', (_e, url) => { if (typeof url === 'string') shell.openExternal(url); });
+
+// ---------- OCR ----------
 ipcMain.handle('ocr-start', () => ocr.start({
   cachePath: app.getPath('userData'),
   langPath: tesseractLangPath()
@@ -173,15 +274,21 @@ ipcMain.handle('ocr-start', () => ocr.start({
 ipcMain.handle('ocr-stop', () => ocr.stop());
 ipcMain.handle('ocr-status', () => ocr.getStatus());
 ipcMain.handle('ocr-get-config', () => loadOcrConfig());
+ipcMain.handle('ocr-get-settings', () => ocr.getSettings());
+ipcMain.handle('ocr-set-settings', (_e, s) => {
+  fs.writeFileSync(ocrSettingsFile(), JSON.stringify(s));
+  ocr.setSettings(s);
+  return ocr.getSettings();
+});
 
 ipcMain.handle('ocr-save-config', (_e, rect) => {
-  const valid = rect &&
-    [rect.x, rect.y, rect.width, rect.height].every(Number.isFinite) &&
+  const valid = rect && [rect.x, rect.y, rect.width, rect.height].every(Number.isFinite) &&
     rect.width >= 4 && rect.height >= 4;
-  if (!valid) throw new Error('rect de calibración inválido');
+  if (!valid) throw new Error('invalid calibration rect');
   const clean = {
     x: Math.round(rect.x), y: Math.round(rect.y),
-    width: Math.round(rect.width), height: Math.round(rect.height)
+    width: Math.round(rect.width), height: Math.round(rect.height),
+    displayId: rect.displayId ?? null
   };
   fs.writeFileSync(ocrConfigFile(), JSON.stringify(clean));
   ocr.setCalibration(clean);
@@ -191,9 +298,8 @@ ipcMain.handle('ocr-save-config', (_e, rect) => {
 
 ipcMain.on('ocr-calibrate-cancel', () => closeCalibrationWindow());
 
-// Ventana fullscreen transparente para dibujar el rect del nombre de mapa.
-// Página inline (data: URL) — usa el mismo preload para llegar a ocr-save-config.
 let calWin = null;
+let calDisplayId = null;
 
 function closeCalibrationWindow() {
   if (calWin && !calWin.isDestroyed()) calWin.close();
@@ -210,7 +316,7 @@ const CALIBRATE_HTML = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
   #hint b { color:#8FA7C4; }
   #rect { position:fixed; border:2px dashed #8FA7C4; background:rgba(143,167,196,0.12); display:none; }
 </style></head><body>
-  <div id="hint"><b>Calibración OCR</b> — arrastra un rectángulo sobre el nombre del mapa · <b>Esc</b> cancela</div>
+  <div id="hint"><b>OCR Calibration</b> — drag over map name · <b>Esc</b> cancel</div>
   <div id="rect"></div>
   <script>
     let sx = 0, sy = 0, dragging = false;
@@ -219,18 +325,19 @@ const CALIBRATE_HTML = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
     document.addEventListener('mousemove', (e) => {
       if (!dragging) return;
       const x = Math.min(sx, e.clientX), y = Math.min(sy, e.clientY);
-      const w = Math.abs(e.clientX - sx), h = Math.abs(e.clientY - sy);
       r.style.display = 'block';
       r.style.left = x + 'px'; r.style.top = y + 'px';
-      r.style.width = w + 'px'; r.style.height = h + 'px';
+      r.style.width = Math.abs(e.clientX - sx) + 'px';
+      r.style.height = Math.abs(e.clientY - sy) + 'px';
     });
     document.addEventListener('mouseup', (e) => {
       if (!dragging) return;
       dragging = false;
-      const dpr = window.devicePixelRatio; // rect en píxeles físicos de pantalla
+      const dpr = window.devicePixelRatio;
       const rect = {
         x: Math.min(sx, e.clientX) * dpr, y: Math.min(sy, e.clientY) * dpr,
-        width: Math.abs(e.clientX - sx) * dpr, height: Math.abs(e.clientY - sy) * dpr
+        width: Math.abs(e.clientX - sx) * dpr, height: Math.abs(e.clientY - sy) * dpr,
+        displayId: ${'DISPLAY_ID_PLACEHOLDER'}
       };
       if (rect.width < 4 || rect.height < 4) { r.style.display = 'none'; return; }
       window.maplebot.saveOCRCalibration(rect).catch(() => {});
@@ -239,11 +346,16 @@ const CALIBRATE_HTML = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
   <\/script>
 </body></html>`;
 
-ipcMain.on('ocr-calibrate', () => {
+ipcMain.on('ocr-calibrate', (_e, displayId) => {
   if (calWin && !calWin.isDestroyed()) { calWin.focus(); return; }
-  const display = screen.getPrimaryDisplay();
+  calDisplayId = displayId ?? screen.getPrimaryDisplay().id;
+  const display = screen.getAllDisplays().find((d) => d.id === calDisplayId) || screen.getPrimaryDisplay();
+  const html = CALIBRATE_HTML.replace('DISPLAY_ID_PLACEHOLDER', String(calDisplayId));
   calWin = new BrowserWindow({
-    ...display.bounds,
+    x: display.bounds.x,
+    y: display.bounds.y,
+    width: display.bounds.width,
+    height: display.bounds.height,
     transparent: true,
     frame: false,
     resizable: false,
@@ -256,7 +368,7 @@ ipcMain.on('ocr-calibrate', () => {
     }
   });
   calWin.setAlwaysOnTop(true, 'screen-saver');
-  calWin.loadURL('data:text/html;charset=utf-8,' + encodeURIComponent(CALIBRATE_HTML));
+  calWin.loadURL('data:text/html;charset=utf-8,' + encodeURIComponent(html));
   calWin.on('closed', () => { calWin = null; });
 });
 
@@ -283,10 +395,49 @@ ipcMain.handle('import-guides', async () => {
   return { ok: true, guides, version: raw.version || '1.0.0' };
 });
 
-ipcMain.on('quit-app', () => app.quit());
+ipcMain.handle('export-profile', async (_e, profile) => {
+  const { canceled, filePath } = await dialog.showSaveDialog(win, {
+    defaultPath: `${profile.name || 'profile'}.json`,
+    filters: [{ name: 'JSON', extensions: ['json'] }]
+  });
+  if (canceled || !filePath) return { ok: false };
+  fs.writeFileSync(filePath, JSON.stringify(profile, null, 2));
+  return { ok: true };
+});
+
+ipcMain.handle('import-profile', async () => {
+  const { canceled, filePaths } = await dialog.showOpenDialog(win, {
+    filters: [{ name: 'JSON', extensions: ['json'] }],
+    properties: ['openFile']
+  });
+  if (canceled || !filePaths.length) return { ok: false };
+  return { ok: true, profile: JSON.parse(fs.readFileSync(filePaths[0], 'utf8')) };
+});
+
+ipcMain.handle('update-download', async () => {
+  const updater = getAutoUpdater();
+  if (!updater) return { ok: false };
+  await updater.downloadUpdate();
+  return { ok: true };
+});
+
+ipcMain.handle('update-install', () => {
+  const updater = getAutoUpdater();
+  if (!updater) return { ok: false };
+  isQuitting = true;
+  updater.quitAndInstall(false, true);
+  return { ok: true };
+});
+
+ipcMain.handle('update-check', async () => {
+  const updater = getAutoUpdater();
+  if (!updater) return { ok: false, reason: 'dev' };
+  const result = await updater.checkForUpdates();
+  return { ok: true, version: result?.updateInfo?.version ?? null };
+});
 
 app.on('will-quit', () => {
   globalShortcut.unregisterAll();
-  ocr.stop().catch(() => {}); // destruye el worker si quedó vivo
+  ocr.stop().catch(() => {});
 });
-app.on('window-all-closed', () => app.quit());
+app.on('window-all-closed', () => { /* tray keeps app alive */ });

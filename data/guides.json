@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.2.0",
   "server": "MapleRoyals v83",
   "guides": [
     {
@@ -8,17 +8,143 @@
       "job": "thief",
       "category": "job_advancement",
       "steps": [
-        { "id": "nl-01", "type": "travel", "text": "Go to Kerning City (Jazz Bar, hidden entrance).", "map": "Kerning City", "mapRef": "map:kerning_city", "questRef": "quest:rogue_first_job", "req": { "level": 10 } },
-        { "id": "nl-02", "type": "accept", "text": "Talk to Dark Lord → 1st Job: Rogue. Requires DEX 25.", "npc": "Dark Lord", "npcRef": "npc:dark_lord", "questRef": "quest:rogue_first_job", "req": { "level": 10 } },
-        { "id": "nl-03", "type": "grind", "text": "Grind to level 30. Suggested maps below.", "grind_to": { "level": 30 }, "maps": ["Kerning Construction Site (Octopus)", "Subway B1 (Stirge — JCd quest)"] },
-        { "id": "nl-04", "type": "prequest", "text": "2nd Job: talk to Dark Lord, receive the Dark Marble quest → Inner Door (portal in Swamp Region). Collect 30 Dark Marbles from the test snails/octis.", "npc": "Dark Lord", "npcRef": "npc:dark_lord", "questRef": "quest:assassin_second_job", "itemRefs": ["item:dark_marble"], "req": { "level": 30 } },
-        { "id": "nl-05", "type": "complete", "text": "Return to Dark Lord → choose Assassin. Raise Claw Mastery and Critical Throw first.", "npc": "Dark Lord", "npcRef": "npc:dark_lord", "questRef": "quest:assassin_second_job", "req": { "level": 30 } },
-        { "id": "nl-06", "type": "grind", "text": "Grind to level 70.", "grind_to": { "level": 70 }, "maps": ["Kerning PQ (21-30, in party)", "Ludi PQ (35-50)", "Mysterious Path 3 (55-70; use Truckers/Wild Kargo as alternatives)"] },
-        { "id": "nl-07", "type": "prequest", "text": "3rd Job: talk to Dark Lord in Kerning City → then Arec in El Nath. Door of Dimension (Ant Tunnel) → defeat Dark Lord's clone → Black Charm → Holy Stone quiz (5 questions, bring mesos for failed answers).", "npc": "Arec (El Nath)", "npcRef": "npc:arec", "questRef": "quest:hermit_third_job", "req": { "level": 70 } },
-        { "id": "nl-08", "type": "complete", "text": "Turn in to Arec → Hermit. Prioritize Shadow Partner and Avenger depending on your build.", "npc": "Arec", "npcRef": "npc:arec", "questRef": "quest:hermit_third_job", "req": { "level": 70 } },
-        { "id": "nl-09", "type": "grind", "text": "Grind to level 120.", "grind_to": { "level": 120 }, "maps": ["Wolf Spiders (80-100)", "Himes / Dreamy Ghosts (90-120, HS mule ideal)", "Gallos (100-120 alternative)"] },
-        { "id": "nl-10", "type": "prequest", "text": "4th Job: talk to Hellin in Leafre (Valley of the Antelope). Collect Heroic Star (Manon) and Heroic Pentagon (Griffey) — drops are tradeable in Royals, you can buy them.", "npc": "Hellin (Leafre)", "npcRef": "npc:hellin", "questRef": "quest:night_lord_fourth_job", "req": { "level": 120 }, "items": ["Heroic Star", "Heroic Pentagon"], "itemRefs": ["item:heroic_star", "item:heroic_pentagon"] },
-        { "id": "nl-11", "type": "complete", "text": "Turn in to Hellin → Night Lord. Buy Triple Throw skill books and max according to The Clinic's guide.", "npc": "Hellin", "npcRef": "npc:hellin", "questRef": "quest:night_lord_fourth_job", "req": { "level": 120 } }
+        {
+          "id": "nl-01",
+          "type": "travel",
+          "text": "Go to Kerning City (Jazz Bar, hidden entrance).",
+          "map": "Kerning City",
+          "mapRef": "map:kerning_city",
+          "questRef": "quest:rogue_first_job",
+          "req": {
+            "level": 10
+          }
+        },
+        {
+          "id": "nl-02",
+          "type": "accept",
+          "text": "Talk to Dark Lord → 1st Job: Rogue. Requires DEX 25.",
+          "npc": "Dark Lord",
+          "npcRef": "npc:dark_lord",
+          "questRef": "quest:rogue_first_job",
+          "req": {
+            "level": 10
+          }
+        },
+        {
+          "id": "nl-03",
+          "type": "grind",
+          "text": "Grind to level 30. Suggested maps below.",
+          "grind_to": {
+            "level": 30
+          },
+          "maps": [
+            "Kerning Construction Site (Octopus)",
+            "Subway B1 (Stirge — JCd quest)"
+          ]
+        },
+        {
+          "id": "nl-04",
+          "type": "prequest",
+          "text": "2nd Job: talk to Dark Lord, receive the Dark Marble quest → Inner Door (portal in Swamp Region). Collect 30 Dark Marbles from the test snails/octis.",
+          "npc": "Dark Lord",
+          "npcRef": "npc:dark_lord",
+          "questRef": "quest:assassin_second_job",
+          "itemRefs": [
+            "item:dark_marble"
+          ],
+          "req": {
+            "level": 30
+          }
+        },
+        {
+          "id": "nl-05",
+          "type": "complete",
+          "text": "Return to Dark Lord → choose Assassin. Raise Claw Mastery and Critical Throw first.",
+          "npc": "Dark Lord",
+          "npcRef": "npc:dark_lord",
+          "questRef": "quest:assassin_second_job",
+          "req": {
+            "level": 30
+          }
+        },
+        {
+          "id": "nl-06",
+          "type": "grind",
+          "text": "Grind to level 70.",
+          "grind_to": {
+            "level": 70
+          },
+          "maps": [
+            "Kerning PQ (21-30, in party)",
+            "Ludi PQ (35-50)",
+            "Mysterious Path 3 (55-70; use Truckers/Wild Kargo as alternatives)"
+          ]
+        },
+        {
+          "id": "nl-07",
+          "type": "prequest",
+          "text": "3rd Job: talk to Dark Lord in Kerning City → then Arec in El Nath. Door of Dimension (Ant Tunnel) → defeat Dark Lord's clone → Black Charm → Holy Stone quiz (5 questions, bring mesos for failed answers).",
+          "npc": "Arec (El Nath)",
+          "npcRef": "npc:arec",
+          "questRef": "quest:hermit_third_job",
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "nl-08",
+          "type": "complete",
+          "text": "Turn in to Arec → Hermit. Prioritize Shadow Partner and Avenger depending on your build.",
+          "npc": "Arec",
+          "npcRef": "npc:arec",
+          "questRef": "quest:hermit_third_job",
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "nl-09",
+          "type": "grind",
+          "text": "Grind to level 120.",
+          "grind_to": {
+            "level": 120
+          },
+          "maps": [
+            "Wolf Spiders (80-100)",
+            "Himes / Dreamy Ghosts (90-120, HS mule ideal)",
+            "Gallos (100-120 alternative)"
+          ]
+        },
+        {
+          "id": "nl-10",
+          "type": "prequest",
+          "text": "4th Job: talk to Hellin in Leafre (Valley of the Antelope). Collect Heroic Star (Manon) and Heroic Pentagon (Griffey) — drops are tradeable in Royals, you can buy them.",
+          "npc": "Hellin (Leafre)",
+          "npcRef": "npc:hellin",
+          "questRef": "quest:night_lord_fourth_job",
+          "req": {
+            "level": 120
+          },
+          "items": [
+            "Heroic Star",
+            "Heroic Pentagon"
+          ],
+          "itemRefs": [
+            "item:heroic_star",
+            "item:heroic_pentagon"
+          ]
+        },
+        {
+          "id": "nl-11",
+          "type": "complete",
+          "text": "Turn in to Hellin → Night Lord. Buy Triple Throw skill books and max according to The Clinic's guide.",
+          "npc": "Hellin",
+          "npcRef": "npc:hellin",
+          "questRef": "quest:night_lord_fourth_job",
+          "req": {
+            "level": 120
+          }
+        }
       ]
     },
     {
@@ -27,17 +153,147 @@
       "job": "warrior",
       "category": "job_advancement",
       "steps": [
-        { "id": "hr-01", "type": "travel", "text": "Go to Perion → Warriors' Sanctuary.", "map": "Perion", "mapRef": "map:perion", "questRef": "quest:fighter_first_job", "req": { "level": 10 } },
-        { "id": "hr-02", "type": "accept", "text": "Talk to Dances with Balrog → 1st Job: Warrior. Requires STR 35.", "npc": "Dances with Balrog", "npcRef": "npc:dances_with_balrog", "questRef": "quest:fighter_first_job", "req": { "level": 10 } },
-        { "id": "hr-03", "type": "grind", "text": "Grind to level 30. Suggested maps below.", "grind_to": { "level": 30 }, "maps": ["Perion Warning Street (Slimes, Stumps)", "Perion Dungeon (Evil Eyes, Dark Stumps)", "Construction Site (Octopus — if leeching from KC)"] },
-        { "id": "hr-04", "type": "prequest", "text": "2nd Job: talk to Dances with Balrog, receive the test quest → Underground Pass (portal in Perion). Collect 30 Black Crystals from the test monsters.", "npc": "Dances with Balrog", "npcRef": "npc:dances_with_balrog", "questRef": "quest:fighter_second_job", "mapRef": "map:underground_pass", "itemRefs": ["item:black_crystal"], "req": { "level": 30 } },
-        { "id": "hr-05", "type": "complete", "text": "Return to Dances with Balrog → choose Fighter. Raise Sword Mastery and Rage first.", "npc": "Dances with Balrog", "npcRef": "npc:dances_with_balrog", "questRef": "quest:fighter_second_job", "req": { "level": 30 } },
-        { "id": "hr-06", "type": "grind", "text": "Grind to level 70.", "grind_to": { "level": 70 }, "maps": ["Kerning PQ (21-30, in party)", "Ludi PQ (35-50)", "Mysterious Path 3 (55-70)", "Wild Kargo / Truckers (55-70 alternative)"] },
-        { "id": "hr-07", "type": "prequest", "text": "3rd Job: talk to Dances with Balrog in Perion → then Tylus in El Nath. Door of Dimension (Cave of Life) → defeat Dances with Balrog's clone → Black Charm → Holy Stone quiz (5 questions, bring mesos for failed answers).", "npc": "Tylus (El Nath)", "npcRef": "npc:tylus", "questRef": "quest:crusader_third_job", "mapRef": "map:cave_of_life", "req": { "level": 70 } },
-        { "id": "hr-08", "type": "complete", "text": "Turn in to Tylus → Crusader. Prioritize Combo Attack and Panic depending on your build.", "npc": "Tylus", "npcRef": "npc:tylus", "questRef": "quest:crusader_third_job", "req": { "level": 70 } },
-        { "id": "hr-09", "type": "grind", "text": "Grind to level 120.", "grind_to": { "level": 120 }, "maps": ["Wolf Spiders (80-100)", "Himes / Dreamy Ghosts (90-120, HS mule ideal)", "Gallos (100-120 alternative)"] },
-        { "id": "hr-10", "type": "prequest", "text": "4th Job: talk to Hellin in Leafre (Valley of the Antelope). Collect Heroic Star (Manon) and Heroic Pentagon (Griffey) — drops are tradeable in Royals, you can buy them.", "npc": "Hellin (Leafre)", "npcRef": "npc:hellin", "questRef": "quest:hero_fourth_job", "req": { "level": 120 }, "items": ["Heroic Star", "Heroic Pentagon"], "itemRefs": ["item:heroic_star", "item:heroic_pentagon"] },
-        { "id": "hr-11", "type": "complete", "text": "Turn in to Hellin → Hero. Buy Advanced Combo Attack and Enrage skill books and max according to The Clinic's guide.", "npc": "Hellin", "npcRef": "npc:hellin", "questRef": "quest:hero_fourth_job", "req": { "level": 120 } }
+        {
+          "id": "hr-01",
+          "type": "travel",
+          "text": "Go to Perion → Warriors' Sanctuary.",
+          "map": "Perion",
+          "mapRef": "map:perion",
+          "questRef": "quest:fighter_first_job",
+          "req": {
+            "level": 10
+          }
+        },
+        {
+          "id": "hr-02",
+          "type": "accept",
+          "text": "Talk to Dances with Balrog → 1st Job: Warrior. Requires STR 35.",
+          "npc": "Dances with Balrog",
+          "npcRef": "npc:dances_with_balrog",
+          "questRef": "quest:fighter_first_job",
+          "req": {
+            "level": 10
+          }
+        },
+        {
+          "id": "hr-03",
+          "type": "grind",
+          "text": "Grind to level 30. Suggested maps below.",
+          "grind_to": {
+            "level": 30
+          },
+          "maps": [
+            "Perion Warning Street (Slimes, Stumps)",
+            "Perion Dungeon (Evil Eyes, Dark Stumps)",
+            "Construction Site (Octopus — if leeching from KC)"
+          ]
+        },
+        {
+          "id": "hr-04",
+          "type": "prequest",
+          "text": "2nd Job: talk to Dances with Balrog, receive the test quest → Underground Pass (portal in Perion). Collect 30 Black Crystals from the test monsters.",
+          "npc": "Dances with Balrog",
+          "npcRef": "npc:dances_with_balrog",
+          "questRef": "quest:fighter_second_job",
+          "mapRef": "map:underground_pass",
+          "itemRefs": [
+            "item:black_crystal"
+          ],
+          "req": {
+            "level": 30
+          }
+        },
+        {
+          "id": "hr-05",
+          "type": "complete",
+          "text": "Return to Dances with Balrog → choose Fighter. Raise Sword Mastery and Rage first.",
+          "npc": "Dances with Balrog",
+          "npcRef": "npc:dances_with_balrog",
+          "questRef": "quest:fighter_second_job",
+          "req": {
+            "level": 30
+          }
+        },
+        {
+          "id": "hr-06",
+          "type": "grind",
+          "text": "Grind to level 70.",
+          "grind_to": {
+            "level": 70
+          },
+          "maps": [
+            "Kerning PQ (21-30, in party)",
+            "Ludi PQ (35-50)",
+            "Mysterious Path 3 (55-70)",
+            "Wild Kargo / Truckers (55-70 alternative)"
+          ]
+        },
+        {
+          "id": "hr-07",
+          "type": "prequest",
+          "text": "3rd Job: talk to Dances with Balrog in Perion → then Tylus in El Nath. Door of Dimension (Cave of Life) → defeat Dances with Balrog's clone → Black Charm → Holy Stone quiz (5 questions, bring mesos for failed answers).",
+          "npc": "Tylus (El Nath)",
+          "npcRef": "npc:tylus",
+          "questRef": "quest:crusader_third_job",
+          "mapRef": "map:cave_of_life",
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "hr-08",
+          "type": "complete",
+          "text": "Turn in to Tylus → Crusader. Prioritize Combo Attack and Panic depending on your build.",
+          "npc": "Tylus",
+          "npcRef": "npc:tylus",
+          "questRef": "quest:crusader_third_job",
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "hr-09",
+          "type": "grind",
+          "text": "Grind to level 120.",
+          "grind_to": {
+            "level": 120
+          },
+          "maps": [
+            "Wolf Spiders (80-100)",
+            "Himes / Dreamy Ghosts (90-120, HS mule ideal)",
+            "Gallos (100-120 alternative)"
+          ]
+        },
+        {
+          "id": "hr-10",
+          "type": "prequest",
+          "text": "4th Job: talk to Hellin in Leafre (Valley of the Antelope). Collect Heroic Star (Manon) and Heroic Pentagon (Griffey) — drops are tradeable in Royals, you can buy them.",
+          "npc": "Hellin (Leafre)",
+          "npcRef": "npc:hellin",
+          "questRef": "quest:hero_fourth_job",
+          "req": {
+            "level": 120
+          },
+          "items": [
+            "Heroic Star",
+            "Heroic Pentagon"
+          ],
+          "itemRefs": [
+            "item:heroic_star",
+            "item:heroic_pentagon"
+          ]
+        },
+        {
+          "id": "hr-11",
+          "type": "complete",
+          "text": "Turn in to Hellin → Hero. Buy Advanced Combo Attack and Enrage skill books and max according to The Clinic's guide.",
+          "npc": "Hellin",
+          "npcRef": "npc:hellin",
+          "questRef": "quest:hero_fourth_job",
+          "req": {
+            "level": 120
+          }
+        }
       ]
     },
     {
@@ -46,17 +302,147 @@
       "job": "magician",
       "category": "job_advancement",
       "steps": [
-        { "id": "fp-01", "type": "travel", "text": "Go to Ellinia → Magic Library.", "map": "Ellinia", "mapRef": "map:ellinia", "questRef": "quest:magician_first_job", "req": { "level": 10 } },
-        { "id": "fp-02", "type": "accept", "text": "Talk to Gwin → 1st Job: Magician. Requires INT 20.", "npc": "Gwin", "npcRef": "npc:gwin", "questRef": "quest:magician_first_job", "req": { "level": 10 } },
-        { "id": "fp-03", "type": "grind", "text": "Grind to level 30. Suggested maps below.", "grind_to": { "level": 30 }, "maps": ["Ellinia Southern Forest (Slimes, Pigs)", "Ellinia Forest III (Evil Eyes)", "Ant Tunnel 1 (Jr. Sentinels — if funded)"] },
-        { "id": "fp-04", "type": "prequest", "text": "2nd Job: talk to Gwin, receive the test quest → Golem Temple (Victoria Road). Collect 30 Black Charms from the Stone Golems in the test.", "npc": "Gwin", "npcRef": "npc:gwin", "questRef": "quest:fp_mage_second_job", "mapRef": "map:golem_temple", "itemRefs": ["item:black_charm"], "req": { "level": 30 } },
-        { "id": "fp-05", "type": "complete", "text": "Return to Gwin → choose Fire/Poison Wizard (FP Mage). Raise Magic Mastery and Explosion first.", "npc": "Gwin", "npcRef": "npc:gwin", "questRef": "quest:fp_mage_second_job", "req": { "level": 30 } },
-        { "id": "fp-06", "type": "grind", "text": "Grind to level 70.", "grind_to": { "level": 70 }, "maps": ["Kerning PQ (21-30, in party)", "Ludi PQ (35-50)", "Mysterious Path 3 (55-70)", "Fire Turtles / Wild Kargo (55-70 alternative)"] },
-        { "id": "fp-07", "type": "prequest", "text": "3rd Job: talk to Gwin in Ellinia → then Robeira in El Nath. Door of Dimension (Drake's Cave) → defeat Gwin's clone → Black Charm → Holy Stone quiz (5 questions, bring mesos for failed answers).", "npc": "Robeira (El Nath)", "npcRef": "npc:robeira", "questRef": "quest:fp_arch_mage_third_job", "mapRef": "map:drakes_cave", "req": { "level": 70 } },
-        { "id": "fp-08", "type": "complete", "text": "Turn in to Robeira → FP Arch Mage. Prioritize Paralyze and Meteor Shower depending on your build.", "npc": "Robeira", "npcRef": "npc:robeira", "questRef": "quest:fp_arch_mage_third_job", "req": { "level": 70 } },
-        { "id": "fp-09", "type": "grind", "text": "Grind to level 120.", "grind_to": { "level": 120 }, "maps": ["Wolf Spiders (80-100)", "Himes / Dreamy Ghosts (90-120, HS mule ideal)", "Gallos (100-120 alternative)"] },
-        { "id": "fp-10", "type": "prequest", "text": "4th Job: talk to Hellin in Leafre (Valley of the Antelope). Collect Heroic Star (Manon) and Heroic Pentagon (Griffey) — drops are tradeable in Royals, you can buy them.", "npc": "Hellin (Leafre)", "npcRef": "npc:hellin", "questRef": "quest:fp_arch_mage_fourth_job", "req": { "level": 120 }, "items": ["Heroic Star", "Heroic Pentagon"], "itemRefs": ["item:heroic_star", "item:heroic_pentagon"] },
-        { "id": "fp-11", "type": "complete", "text": "Turn in to Hellin → Fire/Poison Arch Mage. Buy Big Bang and Infinity skill books and max according to The Clinic's guide.", "npc": "Hellin", "npcRef": "npc:hellin", "questRef": "quest:fp_arch_mage_fourth_job", "req": { "level": 120 } }
+        {
+          "id": "fp-01",
+          "type": "travel",
+          "text": "Go to Ellinia → Magic Library.",
+          "map": "Ellinia",
+          "mapRef": "map:ellinia",
+          "questRef": "quest:magician_first_job",
+          "req": {
+            "level": 10
+          }
+        },
+        {
+          "id": "fp-02",
+          "type": "accept",
+          "text": "Talk to Gwin → 1st Job: Magician. Requires INT 20.",
+          "npc": "Gwin",
+          "npcRef": "npc:gwin",
+          "questRef": "quest:magician_first_job",
+          "req": {
+            "level": 10
+          }
+        },
+        {
+          "id": "fp-03",
+          "type": "grind",
+          "text": "Grind to level 30. Suggested maps below.",
+          "grind_to": {
+            "level": 30
+          },
+          "maps": [
+            "Ellinia Southern Forest (Slimes, Pigs)",
+            "Ellinia Forest III (Evil Eyes)",
+            "Ant Tunnel 1 (Jr. Sentinels — if funded)"
+          ]
+        },
+        {
+          "id": "fp-04",
+          "type": "prequest",
+          "text": "2nd Job: talk to Gwin, receive the test quest → Golem Temple (Victoria Road). Collect 30 Black Charms from the Stone Golems in the test.",
+          "npc": "Gwin",
+          "npcRef": "npc:gwin",
+          "questRef": "quest:fp_mage_second_job",
+          "mapRef": "map:golem_temple",
+          "itemRefs": [
+            "item:black_charm"
+          ],
+          "req": {
+            "level": 30
+          }
+        },
+        {
+          "id": "fp-05",
+          "type": "complete",
+          "text": "Return to Gwin → choose Fire/Poison Wizard (FP Mage). Raise Magic Mastery and Explosion first.",
+          "npc": "Gwin",
+          "npcRef": "npc:gwin",
+          "questRef": "quest:fp_mage_second_job",
+          "req": {
+            "level": 30
+          }
+        },
+        {
+          "id": "fp-06",
+          "type": "grind",
+          "text": "Grind to level 70.",
+          "grind_to": {
+            "level": 70
+          },
+          "maps": [
+            "Kerning PQ (21-30, in party)",
+            "Ludi PQ (35-50)",
+            "Mysterious Path 3 (55-70)",
+            "Fire Turtles / Wild Kargo (55-70 alternative)"
+          ]
+        },
+        {
+          "id": "fp-07",
+          "type": "prequest",
+          "text": "3rd Job: talk to Gwin in Ellinia → then Robeira in El Nath. Door of Dimension (Drake's Cave) → defeat Gwin's clone → Black Charm → Holy Stone quiz (5 questions, bring mesos for failed answers).",
+          "npc": "Robeira (El Nath)",
+          "npcRef": "npc:robeira",
+          "questRef": "quest:fp_arch_mage_third_job",
+          "mapRef": "map:drakes_cave",
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "fp-08",
+          "type": "complete",
+          "text": "Turn in to Robeira → FP Arch Mage. Prioritize Paralyze and Meteor Shower depending on your build.",
+          "npc": "Robeira",
+          "npcRef": "npc:robeira",
+          "questRef": "quest:fp_arch_mage_third_job",
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "fp-09",
+          "type": "grind",
+          "text": "Grind to level 120.",
+          "grind_to": {
+            "level": 120
+          },
+          "maps": [
+            "Wolf Spiders (80-100)",
+            "Himes / Dreamy Ghosts (90-120, HS mule ideal)",
+            "Gallos (100-120 alternative)"
+          ]
+        },
+        {
+          "id": "fp-10",
+          "type": "prequest",
+          "text": "4th Job: talk to Hellin in Leafre (Valley of the Antelope). Collect Heroic Star (Manon) and Heroic Pentagon (Griffey) — drops are tradeable in Royals, you can buy them.",
+          "npc": "Hellin (Leafre)",
+          "npcRef": "npc:hellin",
+          "questRef": "quest:fp_arch_mage_fourth_job",
+          "req": {
+            "level": 120
+          },
+          "items": [
+            "Heroic Star",
+            "Heroic Pentagon"
+          ],
+          "itemRefs": [
+            "item:heroic_star",
+            "item:heroic_pentagon"
+          ]
+        },
+        {
+          "id": "fp-11",
+          "type": "complete",
+          "text": "Turn in to Hellin → Fire/Poison Arch Mage. Buy Big Bang and Infinity skill books and max according to The Clinic's guide.",
+          "npc": "Hellin",
+          "npcRef": "npc:hellin",
+          "questRef": "quest:fp_arch_mage_fourth_job",
+          "req": {
+            "level": 120
+          }
+        }
       ]
     },
     {
@@ -65,17 +451,147 @@
       "job": "bowman",
       "category": "job_advancement",
       "steps": [
-        { "id": "bm-01", "type": "travel", "text": "Go to Henesys → Bowman Instructional School.", "map": "Henesys", "mapRef": "map:henesys", "questRef": "quest:bowman_first_job", "req": { "level": 10 } },
-        { "id": "bm-02", "type": "accept", "text": "Talk to Athena Pierce → 1st Job: Bowman. Requires DEX 25.", "npc": "Athena Pierce", "npcRef": "npc:athena_pierce", "questRef": "quest:bowman_first_job", "req": { "level": 10 } },
-        { "id": "bm-03", "type": "grind", "text": "Grind to level 30. Suggested maps below.", "grind_to": { "level": 30 }, "maps": ["Henesys Hunting Ground I (Orange Mushrooms, Pigs)", "Henesys Hunting Ground II (Green Mushrooms)", "Kerning Construction Site (Octopus — if leeching)"] },
-        { "id": "bm-04", "type": "prequest", "text": "2nd Job: talk to Athena Pierce, receive the test quest → Henesys Dungeon (portal in Henesys). Collect 30 Black Gems from the Horny Mushrooms in the test.", "npc": "Athena Pierce", "npcRef": "npc:athena_pierce", "questRef": "quest:hunter_second_job", "mapRef": "map:henesys_dungeon", "itemRefs": ["item:black_gem"], "req": { "level": 30 } },
-        { "id": "bm-05", "type": "complete", "text": "Return to Athena Pierce → choose Hunter. Raise Bow Mastery and Power Knock-Back first.", "npc": "Athena Pierce", "npcRef": "npc:athena_pierce", "questRef": "quest:hunter_second_job", "req": { "level": 30 } },
-        { "id": "bm-06", "type": "grind", "text": "Grind to level 70.", "grind_to": { "level": 70 }, "maps": ["Kerning PQ (21-30, in party)", "Ludi PQ (35-50)", "Mysterious Path 3 (55-70)", "Wild Kargo / Truckers (55-70 alternative)"] },
-        { "id": "bm-07", "type": "prequest", "text": "3rd Job: talk to Athena Pierce in Henesys → then Rene in El Nath. Door of Dimension (Mushroom Castle) → defeat Athena Pierce's clone → Black Charm → Holy Stone quiz (5 questions, bring mesos for failed answers).", "npc": "Rene (El Nath)", "npcRef": "npc:rene", "questRef": "quest:ranger_third_job", "mapRef": "map:mushroom_castle", "req": { "level": 70 } },
-        { "id": "bm-08", "type": "complete", "text": "Turn in to Rene → Ranger. Prioritize Strafe and Arrow Bomb depending on your build.", "npc": "Rene", "npcRef": "npc:rene", "questRef": "quest:ranger_third_job", "req": { "level": 70 } },
-        { "id": "bm-09", "type": "grind", "text": "Grind to level 120.", "grind_to": { "level": 120 }, "maps": ["Wolf Spiders (80-100)", "Himes / Dreamy Ghosts (90-120, HS mule ideal)", "Gallos (100-120 alternative)"] },
-        { "id": "bm-10", "type": "prequest", "text": "4th Job: talk to Hellin in Leafre (Valley of the Antelope). Collect Heroic Star (Manon) and Heroic Pentagon (Griffey) — drops are tradeable in Royals, you can buy them.", "npc": "Hellin (Leafre)", "npcRef": "npc:hellin", "questRef": "quest:bowmaster_fourth_job", "req": { "level": 120 }, "items": ["Heroic Star", "Heroic Pentagon"], "itemRefs": ["item:heroic_star", "item:heroic_pentagon"] },
-        { "id": "bm-11", "type": "complete", "text": "Turn in to Hellin → Bowmaster. Buy Hurricane and Sharp Eyes skill books and max according to The Clinic's guide.", "npc": "Hellin", "npcRef": "npc:hellin", "questRef": "quest:bowmaster_fourth_job", "req": { "level": 120 } }
+        {
+          "id": "bm-01",
+          "type": "travel",
+          "text": "Go to Henesys → Bowman Instructional School.",
+          "map": "Henesys",
+          "mapRef": "map:henesys",
+          "questRef": "quest:bowman_first_job",
+          "req": {
+            "level": 10
+          }
+        },
+        {
+          "id": "bm-02",
+          "type": "accept",
+          "text": "Talk to Athena Pierce → 1st Job: Bowman. Requires DEX 25.",
+          "npc": "Athena Pierce",
+          "npcRef": "npc:athena_pierce",
+          "questRef": "quest:bowman_first_job",
+          "req": {
+            "level": 10
+          }
+        },
+        {
+          "id": "bm-03",
+          "type": "grind",
+          "text": "Grind to level 30. Suggested maps below.",
+          "grind_to": {
+            "level": 30
+          },
+          "maps": [
+            "Henesys Hunting Ground I (Orange Mushrooms, Pigs)",
+            "Henesys Hunting Ground II (Green Mushrooms)",
+            "Kerning Construction Site (Octopus — if leeching)"
+          ]
+        },
+        {
+          "id": "bm-04",
+          "type": "prequest",
+          "text": "2nd Job: talk to Athena Pierce, receive the test quest → Henesys Dungeon (portal in Henesys). Collect 30 Black Gems from the Horny Mushrooms in the test.",
+          "npc": "Athena Pierce",
+          "npcRef": "npc:athena_pierce",
+          "questRef": "quest:hunter_second_job",
+          "mapRef": "map:henesys_dungeon",
+          "itemRefs": [
+            "item:black_gem"
+          ],
+          "req": {
+            "level": 30
+          }
+        },
+        {
+          "id": "bm-05",
+          "type": "complete",
+          "text": "Return to Athena Pierce → choose Hunter. Raise Bow Mastery and Power Knock-Back first.",
+          "npc": "Athena Pierce",
+          "npcRef": "npc:athena_pierce",
+          "questRef": "quest:hunter_second_job",
+          "req": {
+            "level": 30
+          }
+        },
+        {
+          "id": "bm-06",
+          "type": "grind",
+          "text": "Grind to level 70.",
+          "grind_to": {
+            "level": 70
+          },
+          "maps": [
+            "Kerning PQ (21-30, in party)",
+            "Ludi PQ (35-50)",
+            "Mysterious Path 3 (55-70)",
+            "Wild Kargo / Truckers (55-70 alternative)"
+          ]
+        },
+        {
+          "id": "bm-07",
+          "type": "prequest",
+          "text": "3rd Job: talk to Athena Pierce in Henesys → then Rene in El Nath. Door of Dimension (Mushroom Castle) → defeat Athena Pierce's clone → Black Charm → Holy Stone quiz (5 questions, bring mesos for failed answers).",
+          "npc": "Rene (El Nath)",
+          "npcRef": "npc:rene",
+          "questRef": "quest:ranger_third_job",
+          "mapRef": "map:mushroom_castle",
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "bm-08",
+          "type": "complete",
+          "text": "Turn in to Rene → Ranger. Prioritize Strafe and Arrow Bomb depending on your build.",
+          "npc": "Rene",
+          "npcRef": "npc:rene",
+          "questRef": "quest:ranger_third_job",
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "bm-09",
+          "type": "grind",
+          "text": "Grind to level 120.",
+          "grind_to": {
+            "level": 120
+          },
+          "maps": [
+            "Wolf Spiders (80-100)",
+            "Himes / Dreamy Ghosts (90-120, HS mule ideal)",
+            "Gallos (100-120 alternative)"
+          ]
+        },
+        {
+          "id": "bm-10",
+          "type": "prequest",
+          "text": "4th Job: talk to Hellin in Leafre (Valley of the Antelope). Collect Heroic Star (Manon) and Heroic Pentagon (Griffey) — drops are tradeable in Royals, you can buy them.",
+          "npc": "Hellin (Leafre)",
+          "npcRef": "npc:hellin",
+          "questRef": "quest:bowmaster_fourth_job",
+          "req": {
+            "level": 120
+          },
+          "items": [
+            "Heroic Star",
+            "Heroic Pentagon"
+          ],
+          "itemRefs": [
+            "item:heroic_star",
+            "item:heroic_pentagon"
+          ]
+        },
+        {
+          "id": "bm-11",
+          "type": "complete",
+          "text": "Turn in to Hellin → Bowmaster. Buy Hurricane and Sharp Eyes skill books and max according to The Clinic's guide.",
+          "npc": "Hellin",
+          "npcRef": "npc:hellin",
+          "questRef": "quest:bowmaster_fourth_job",
+          "req": {
+            "level": 120
+          }
+        }
       ]
     },
     {
@@ -84,17 +600,145 @@
       "job": "thief",
       "category": "job_advancement",
       "steps": [
-        { "id": "sw-01", "type": "travel", "text": "Go to Kerning City (Jazz Bar, hidden entrance).", "map": "Kerning City", "mapRef": "map:kerning_city", "questRef": "quest:rogue_first_job", "req": { "level": 10 } },
-        { "id": "sw-02", "type": "accept", "text": "Talk to Dark Lord → 1st Job: Rogue. Requires DEX 25.", "npc": "Dark Lord", "npcRef": "npc:dark_lord", "questRef": "quest:rogue_first_job", "req": { "level": 10 } },
-        { "id": "sw-03", "type": "grind", "text": "Grind to level 30. Suggested maps below.", "grind_to": { "level": 30 }, "maps": ["Kerning Construction Site (Octopus)", "Subway B1 (Stirge — JCd quest)"] },
-        { "id": "sw-04", "type": "prequest", "text": "2nd Job: talk to Dark Lord, receive the Dark Marble quest → Inner Door (portal in Swamp Region). Collect 30 Dark Marbles from the test snails/octis.", "npc": "Dark Lord", "npcRef": "npc:dark_lord", "questRef": "quest:bandit_second_job", "mapRef": "map:swamp_region", "itemRefs": ["item:dark_marble"], "req": { "level": 30 } },
-        { "id": "sw-05", "type": "complete", "text": "Return to Dark Lord → choose Bandit. Raise Dagger Mastery and Steal first.", "npc": "Dark Lord", "npcRef": "npc:dark_lord", "questRef": "quest:bandit_second_job", "req": { "level": 30 } },
-        { "id": "sw-06", "type": "grind", "text": "Grind to level 70.", "grind_to": { "level": 70 }, "maps": ["Kerning PQ (21-30, in party)", "Ludi PQ (35-50)", "Mysterious Path 3 (55-70; use Truckers/Wild Kargo as alternatives)"] },
-        { "id": "sw-07", "type": "prequest", "text": "3rd Job: talk to Dark Lord in Kerning City → then Arec in El Nath. Door of Dimension (Ant Tunnel) → defeat Dark Lord's clone → Black Charm → Holy Stone quiz (5 questions, bring mesos for failed answers).", "npc": "Arec (El Nath)", "npcRef": "npc:arec", "questRef": "quest:chief_bandit_third_job", "mapRef": "map:ant_tunnel", "req": { "level": 70 } },
-        { "id": "sw-08", "type": "complete", "text": "Turn in to Arec → Chief Bandit. Prioritize Meso Explosion and Band of Thieves depending on your build.", "npc": "Arec", "npcRef": "npc:arec", "questRef": "quest:chief_bandit_third_job", "req": { "level": 70 } },
-        { "id": "sw-09", "type": "grind", "text": "Grind to level 120.", "grind_to": { "level": 120 }, "maps": ["Wolf Spiders (80-100)", "Himes / Dreamy Ghosts (90-120, HS mule ideal)", "Gallos (100-120 alternative)"] },
-        { "id": "sw-10", "type": "prequest", "text": "4th Job: talk to Hellin in Leafre (Valley of the Antelope). Collect Heroic Star (Manon) and Heroic Pentagon (Griffey) — drops are tradeable in Royals, you can buy them.", "npc": "Hellin (Leafre)", "npcRef": "npc:hellin", "questRef": "quest:shadower_fourth_job", "req": { "level": 120 }, "items": ["Heroic Star", "Heroic Pentagon"], "itemRefs": ["item:heroic_star", "item:heroic_pentagon"] },
-        { "id": "sw-11", "type": "complete", "text": "Turn in to Hellin → Shadower. Buy Boomerang Step and Assassinate skill books and max according to The Clinic's guide.", "npc": "Hellin", "npcRef": "npc:hellin", "questRef": "quest:shadower_fourth_job", "req": { "level": 120 } }
+        {
+          "id": "sw-01",
+          "type": "travel",
+          "text": "Go to Kerning City (Jazz Bar, hidden entrance).",
+          "map": "Kerning City",
+          "mapRef": "map:kerning_city",
+          "questRef": "quest:rogue_first_job",
+          "req": {
+            "level": 10
+          }
+        },
+        {
+          "id": "sw-02",
+          "type": "accept",
+          "text": "Talk to Dark Lord → 1st Job: Rogue. Requires DEX 25.",
+          "npc": "Dark Lord",
+          "npcRef": "npc:dark_lord",
+          "questRef": "quest:rogue_first_job",
+          "req": {
+            "level": 10
+          }
+        },
+        {
+          "id": "sw-03",
+          "type": "grind",
+          "text": "Grind to level 30. Suggested maps below.",
+          "grind_to": {
+            "level": 30
+          },
+          "maps": [
+            "Kerning Construction Site (Octopus)",
+            "Subway B1 (Stirge — JCd quest)"
+          ]
+        },
+        {
+          "id": "sw-04",
+          "type": "prequest",
+          "text": "2nd Job: talk to Dark Lord, receive the Dark Marble quest → Inner Door (portal in Swamp Region). Collect 30 Dark Marbles from the test snails/octis.",
+          "npc": "Dark Lord",
+          "npcRef": "npc:dark_lord",
+          "questRef": "quest:bandit_second_job",
+          "mapRef": "map:swamp_region",
+          "itemRefs": [
+            "item:dark_marble"
+          ],
+          "req": {
+            "level": 30
+          }
+        },
+        {
+          "id": "sw-05",
+          "type": "complete",
+          "text": "Return to Dark Lord → choose Bandit. Raise Dagger Mastery and Steal first.",
+          "npc": "Dark Lord",
+          "npcRef": "npc:dark_lord",
+          "questRef": "quest:bandit_second_job",
+          "req": {
+            "level": 30
+          }
+        },
+        {
+          "id": "sw-06",
+          "type": "grind",
+          "text": "Grind to level 70.",
+          "grind_to": {
+            "level": 70
+          },
+          "maps": [
+            "Kerning PQ (21-30, in party)",
+            "Ludi PQ (35-50)",
+            "Mysterious Path 3 (55-70; use Truckers/Wild Kargo as alternatives)"
+          ]
+        },
+        {
+          "id": "sw-07",
+          "type": "prequest",
+          "text": "3rd Job: talk to Dark Lord in Kerning City → then Arec in El Nath. Door of Dimension (Ant Tunnel) → defeat Dark Lord's clone → Black Charm → Holy Stone quiz (5 questions, bring mesos for failed answers).",
+          "npc": "Arec (El Nath)",
+          "npcRef": "npc:arec",
+          "questRef": "quest:chief_bandit_third_job",
+          "mapRef": "map:ant_tunnel",
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "sw-08",
+          "type": "complete",
+          "text": "Turn in to Arec → Chief Bandit. Prioritize Meso Explosion and Band of Thieves depending on your build.",
+          "npc": "Arec",
+          "npcRef": "npc:arec",
+          "questRef": "quest:chief_bandit_third_job",
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "sw-09",
+          "type": "grind",
+          "text": "Grind to level 120.",
+          "grind_to": {
+            "level": 120
+          },
+          "maps": [
+            "Wolf Spiders (80-100)",
+            "Himes / Dreamy Ghosts (90-120, HS mule ideal)",
+            "Gallos (100-120 alternative)"
+          ]
+        },
+        {
+          "id": "sw-10",
+          "type": "prequest",
+          "text": "4th Job: talk to Hellin in Leafre (Valley of the Antelope). Collect Heroic Star (Manon) and Heroic Pentagon (Griffey) — drops are tradeable in Royals, you can buy them.",
+          "npc": "Hellin (Leafre)",
+          "npcRef": "npc:hellin",
+          "questRef": "quest:shadower_fourth_job",
+          "req": {
+            "level": 120
+          },
+          "items": [
+            "Heroic Star",
+            "Heroic Pentagon"
+          ],
+          "itemRefs": [
+            "item:heroic_star",
+            "item:heroic_pentagon"
+          ]
+        },
+        {
+          "id": "sw-11",
+          "type": "complete",
+          "text": "Turn in to Hellin → Shadower. Buy Boomerang Step and Assassinate skill books and max according to The Clinic's guide.",
+          "npc": "Hellin",
+          "npcRef": "npc:hellin",
+          "questRef": "quest:shadower_fourth_job",
+          "req": {
+            "level": 120
+          }
+        }
       ]
     },
     {
@@ -103,17 +747,147 @@
       "job": "pirate",
       "category": "job_advancement",
       "steps": [
-        { "id": "bc-01", "type": "travel", "text": "Go to Nautilus Harbor → Nautilus HQ.", "map": "Nautilus Harbor", "mapRef": "map:nautilus_harbor", "questRef": "quest:pirate_first_job", "req": { "level": 10 } },
-        { "id": "bc-02", "type": "accept", "text": "Talk to Kyrin → 1st Job: Pirate. Requires STR 20 and DEX 20.", "npc": "Kyrin", "npcRef": "npc:kyrin", "questRef": "quest:pirate_first_job", "req": { "level": 10 } },
-        { "id": "bc-03", "type": "grind", "text": "Grind to level 30. Suggested maps below.", "grind_to": { "level": 30 }, "maps": ["Florina Beach (Crab, Krip)", "Nautilus Training Room (Jr. Cellion)", "Kerning Construction Site (Octopus — if leeching)"] },
-        { "id": "bc-04", "type": "prequest", "text": "2nd Job: talk to Kyrin, receive the test quest → Keru Island (portal from Nautilus). Collect 30 Black Crystals from the test monkeys and cracklers.", "npc": "Kyrin", "npcRef": "npc:kyrin", "questRef": "quest:brawler_second_job", "mapRef": "map:keru_island", "itemRefs": ["item:black_crystal"], "req": { "level": 30 } },
-        { "id": "bc-05", "type": "complete", "text": "Return to Kyrin → choose Brawler. Raise Knuckle Mastery and Corkscrew Blow first.", "npc": "Kyrin", "npcRef": "npc:kyrin", "questRef": "quest:brawler_second_job", "req": { "level": 30 } },
-        { "id": "bc-06", "type": "grind", "text": "Grind to level 70.", "grind_to": { "level": 70 }, "maps": ["Kerning PQ (21-30, in party)", "Ludi PQ (35-50)", "Mysterious Path 3 (55-70)", "Wild Kargo / Truckers (55-70 alternative)"] },
-        { "id": "bc-07", "type": "prequest", "text": "3rd Job: talk to Kyrin in Nautilus → then Pedro in El Nath. Door of Dimension (Pirate's Door) → defeat Kyrin's clone → Black Charm → Holy Stone quiz (5 questions, bring mesos for failed answers).", "npc": "Pedro (El Nath)", "npcRef": "npc:pedro", "questRef": "quest:marauder_third_job", "mapRef": "map:pirates_door", "req": { "level": 70 } },
-        { "id": "bc-08", "type": "complete", "text": "Turn in to Pedro → Marauder. Prioritize Energy Charge and Transformation depending on your build.", "npc": "Pedro", "npcRef": "npc:pedro", "questRef": "quest:marauder_third_job", "req": { "level": 70 } },
-        { "id": "bc-09", "type": "grind", "text": "Grind to level 120.", "grind_to": { "level": 120 }, "maps": ["Wolf Spiders (80-100)", "Himes / Dreamy Ghosts (90-120, HS mule ideal)", "Gallos (100-120 alternative)"] },
-        { "id": "bc-10", "type": "prequest", "text": "4th Job: talk to Hellin in Leafre (Valley of the Antelope). Collect Heroic Star (Manon) and Heroic Pentagon (Griffey) — drops are tradeable in Royals, you can buy them.", "npc": "Hellin (Leafre)", "npcRef": "npc:hellin", "questRef": "quest:buccaneer_fourth_job", "req": { "level": 120 }, "items": ["Heroic Star", "Heroic Pentagon"], "itemRefs": ["item:heroic_star", "item:heroic_pentagon"] },
-        { "id": "bc-11", "type": "complete", "text": "Turn in to Hellin → Buccaneer. Buy Dragon Strike and Time Leap skill books and max according to The Clinic's guide.", "npc": "Hellin", "npcRef": "npc:hellin", "questRef": "quest:buccaneer_fourth_job", "req": { "level": 120 } }
+        {
+          "id": "bc-01",
+          "type": "travel",
+          "text": "Go to Nautilus Harbor → Nautilus HQ.",
+          "map": "Nautilus Harbor",
+          "mapRef": "map:nautilus_harbor",
+          "questRef": "quest:pirate_first_job",
+          "req": {
+            "level": 10
+          }
+        },
+        {
+          "id": "bc-02",
+          "type": "accept",
+          "text": "Talk to Kyrin → 1st Job: Pirate. Requires STR 20 and DEX 20.",
+          "npc": "Kyrin",
+          "npcRef": "npc:kyrin",
+          "questRef": "quest:pirate_first_job",
+          "req": {
+            "level": 10
+          }
+        },
+        {
+          "id": "bc-03",
+          "type": "grind",
+          "text": "Grind to level 30. Suggested maps below.",
+          "grind_to": {
+            "level": 30
+          },
+          "maps": [
+            "Florina Beach (Crab, Krip)",
+            "Nautilus Training Room (Jr. Cellion)",
+            "Kerning Construction Site (Octopus — if leeching)"
+          ]
+        },
+        {
+          "id": "bc-04",
+          "type": "prequest",
+          "text": "2nd Job: talk to Kyrin, receive the test quest → Keru Island (portal from Nautilus). Collect 30 Black Crystals from the test monkeys and cracklers.",
+          "npc": "Kyrin",
+          "npcRef": "npc:kyrin",
+          "questRef": "quest:brawler_second_job",
+          "mapRef": "map:keru_island",
+          "itemRefs": [
+            "item:black_crystal"
+          ],
+          "req": {
+            "level": 30
+          }
+        },
+        {
+          "id": "bc-05",
+          "type": "complete",
+          "text": "Return to Kyrin → choose Brawler. Raise Knuckle Mastery and Corkscrew Blow first.",
+          "npc": "Kyrin",
+          "npcRef": "npc:kyrin",
+          "questRef": "quest:brawler_second_job",
+          "req": {
+            "level": 30
+          }
+        },
+        {
+          "id": "bc-06",
+          "type": "grind",
+          "text": "Grind to level 70.",
+          "grind_to": {
+            "level": 70
+          },
+          "maps": [
+            "Kerning PQ (21-30, in party)",
+            "Ludi PQ (35-50)",
+            "Mysterious Path 3 (55-70)",
+            "Wild Kargo / Truckers (55-70 alternative)"
+          ]
+        },
+        {
+          "id": "bc-07",
+          "type": "prequest",
+          "text": "3rd Job: talk to Kyrin in Nautilus → then Pedro in El Nath. Door of Dimension (Pirate's Door) → defeat Kyrin's clone → Black Charm → Holy Stone quiz (5 questions, bring mesos for failed answers).",
+          "npc": "Pedro (El Nath)",
+          "npcRef": "npc:pedro",
+          "questRef": "quest:marauder_third_job",
+          "mapRef": "map:pirates_door",
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "bc-08",
+          "type": "complete",
+          "text": "Turn in to Pedro → Marauder. Prioritize Energy Charge and Transformation depending on your build.",
+          "npc": "Pedro",
+          "npcRef": "npc:pedro",
+          "questRef": "quest:marauder_third_job",
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "bc-09",
+          "type": "grind",
+          "text": "Grind to level 120.",
+          "grind_to": {
+            "level": 120
+          },
+          "maps": [
+            "Wolf Spiders (80-100)",
+            "Himes / Dreamy Ghosts (90-120, HS mule ideal)",
+            "Gallos (100-120 alternative)"
+          ]
+        },
+        {
+          "id": "bc-10",
+          "type": "prequest",
+          "text": "4th Job: talk to Hellin in Leafre (Valley of the Antelope). Collect Heroic Star (Manon) and Heroic Pentagon (Griffey) — drops are tradeable in Royals, you can buy them.",
+          "npc": "Hellin (Leafre)",
+          "npcRef": "npc:hellin",
+          "questRef": "quest:buccaneer_fourth_job",
+          "req": {
+            "level": 120
+          },
+          "items": [
+            "Heroic Star",
+            "Heroic Pentagon"
+          ],
+          "itemRefs": [
+            "item:heroic_star",
+            "item:heroic_pentagon"
+          ]
+        },
+        {
+          "id": "bc-11",
+          "type": "complete",
+          "text": "Turn in to Hellin → Buccaneer. Buy Dragon Strike and Time Leap skill books and max according to The Clinic's guide.",
+          "npc": "Hellin",
+          "npcRef": "npc:hellin",
+          "questRef": "quest:buccaneer_fourth_job",
+          "req": {
+            "level": 120
+          }
+        }
       ]
     },
     {
@@ -122,13 +896,102 @@
       "job": "any",
       "category": "boss_prequest",
       "steps": [
-        { "id": "zk-01", "type": "travel", "text": "Go to El Nath → Chief's Residence → talk to Adobis (Door to Zakum).", "map": "El Nath", "mapRef": "map:el_nath", "npc": "Adobis", "npcRef": "npc:adobis", "questRef": "quest:zakum_prequest", "req": { "level": 50 } },
-        { "id": "zk-02", "type": "accept", "text": "Stage 1 — The Dead Mine: accept 'Zakum Dungeon Quest'. Enter the Dead Mine and collect Fire Ore x30 (drops from mobs in the mine).", "npc": "Adobis", "npcRef": "npc:adobis", "questRef": "quest:zakum_prequest", "itemRefs": ["item:fire_ore"], "req": { "level": 50 } },
-        { "id": "zk-03", "type": "collect", "text": "Stage 1 JQ: complete the Dead Mine jump quest to the end and pick up the Breath of Fire at the exit. Careful: falls send you back whole sections.", "map": "Dead Mine JQ", "mapRef": "map:dead_mine_jq", "questRef": "quest:zakum_prequest", "items": ["Breath of Fire (Stage 1)"], "itemRefs": ["item:breath_of_fire"] },
-        { "id": "zk-04", "type": "complete", "text": "Turn in to Adobis → receive Paper of Fire (Stage 1 done).", "npc": "Adobis", "npcRef": "npc:adobis", "questRef": "quest:zakum_prequest", "itemRefs": ["item:paper_of_fire"] },
-        { "id": "zk-05", "type": "collect", "text": "Stage 2 — Mineshaft: collect 30 Zombie's Lost Gold Tooth (Miner Zombies) and hand them in with the paper. Receive Breath of Lava.", "mapRef": "map:dead_mine", "questRef": "quest:zakum_prequest", "items": ["Zombie's Lost Gold Tooth x30"], "itemRefs": ["item:zombies_lost_gold_tooth", "item:breath_of_lava"] },
-        { "id": "zk-06", "type": "prequest", "text": "Stage 3 — Refinement: bring Breath of Fire + Breath of Lava to Adobis → receive Eye of Fire. This is your entry ticket to the Altar.", "npc": "Adobis", "npcRef": "npc:adobis", "questRef": "quest:zakum_prequest", "items": ["Eye of Fire"], "itemRefs": ["item:breath_of_fire", "item:breath_of_lava", "item:eye_of_fire"] },
-        { "id": "zk-07", "type": "travel", "text": "Run day: enter through Door to Zakum with your Eye of Fire. In Royals each entry consumes one Eye — bring one per run. Coordinate with The Clinic: weapon/magic cancel, arms first.", "map": "Zakum's Altar", "mapRef": "map:zakums_altar", "bossRef": "boss:zakum", "itemRefs": ["item:eye_of_fire"], "req": { "level": 70 } }
+        {
+          "id": "zk-01",
+          "type": "travel",
+          "text": "Go to El Nath → Chief's Residence → talk to Adobis (Door to Zakum).",
+          "map": "El Nath",
+          "mapRef": "map:el_nath",
+          "npc": "Adobis",
+          "npcRef": "npc:adobis",
+          "questRef": "quest:zakum_prequest",
+          "req": {
+            "level": 50
+          }
+        },
+        {
+          "id": "zk-02",
+          "type": "accept",
+          "text": "Stage 1 — The Dead Mine: accept 'Zakum Dungeon Quest'. Enter the Dead Mine and collect Fire Ore x30 (drops from mobs in the mine).",
+          "npc": "Adobis",
+          "npcRef": "npc:adobis",
+          "questRef": "quest:zakum_prequest",
+          "itemRefs": [
+            "item:fire_ore"
+          ],
+          "req": {
+            "level": 50
+          }
+        },
+        {
+          "id": "zk-03",
+          "type": "collect",
+          "text": "Stage 1 JQ: complete the Dead Mine jump quest to the end and pick up the Breath of Fire at the exit. Careful: falls send you back whole sections.",
+          "map": "Dead Mine JQ",
+          "mapRef": "map:dead_mine_jq",
+          "questRef": "quest:zakum_prequest",
+          "items": [
+            "Breath of Fire (Stage 1)"
+          ],
+          "itemRefs": [
+            "item:breath_of_fire"
+          ]
+        },
+        {
+          "id": "zk-04",
+          "type": "complete",
+          "text": "Turn in to Adobis → receive Paper of Fire (Stage 1 done).",
+          "npc": "Adobis",
+          "npcRef": "npc:adobis",
+          "questRef": "quest:zakum_prequest",
+          "itemRefs": [
+            "item:paper_of_fire"
+          ]
+        },
+        {
+          "id": "zk-05",
+          "type": "collect",
+          "text": "Stage 2 — Mineshaft: collect 30 Zombie's Lost Gold Tooth (Miner Zombies) and hand them in with the paper. Receive Breath of Lava.",
+          "mapRef": "map:dead_mine",
+          "questRef": "quest:zakum_prequest",
+          "items": [
+            "Zombie's Lost Gold Tooth x30"
+          ],
+          "itemRefs": [
+            "item:zombies_lost_gold_tooth",
+            "item:breath_of_lava"
+          ]
+        },
+        {
+          "id": "zk-06",
+          "type": "prequest",
+          "text": "Stage 3 — Refinement: bring Breath of Fire + Breath of Lava to Adobis → receive Eye of Fire. This is your entry ticket to the Altar.",
+          "npc": "Adobis",
+          "npcRef": "npc:adobis",
+          "questRef": "quest:zakum_prequest",
+          "items": [
+            "Eye of Fire"
+          ],
+          "itemRefs": [
+            "item:breath_of_fire",
+            "item:breath_of_lava",
+            "item:eye_of_fire"
+          ]
+        },
+        {
+          "id": "zk-07",
+          "type": "travel",
+          "text": "Run day: enter through Door to Zakum with your Eye of Fire. In Royals each entry consumes one Eye — bring one per run. Coordinate with The Clinic: weapon/magic cancel, arms first.",
+          "map": "Zakum's Altar",
+          "mapRef": "map:zakums_altar",
+          "bossRef": "boss:zakum",
+          "itemRefs": [
+            "item:eye_of_fire"
+          ],
+          "req": {
+            "level": 70
+          }
+        }
       ]
     },
     {
@@ -137,16 +1000,1263 @@
       "job": "any",
       "category": "boss_prequest",
       "steps": [
-        { "id": "ht-01", "type": "travel", "text": "Go to Leafre Town Square → find the Nameless Cat (near the town entrance).", "map": "Leafre", "mapRef": "map:leafre", "npc": "Nameless Cat", "npcRef": "npc:nameless_cat", "questRef": "quest:horntail_prequest", "req": { "level": 80 } },
-        { "id": "ht-02", "type": "accept", "text": "Accept the Horntail prequest from the Nameless Cat. You will need materials from Minar Forest and the Temple of Time area.", "npc": "Nameless Cat", "npcRef": "npc:nameless_cat", "questRef": "quest:horntail_prequest", "req": { "level": 80 } },
-        { "id": "ht-03", "type": "collect", "text": "Collect Dragon Moss x20 (Mossy Snails in Minar Forest) and Dragon Wood x20 (Dual Birk / Minar mobs). Both are tradeable in Royals — you can buy them.", "mapRef": "map:minar_forest", "questRef": "quest:horntail_prequest", "items": ["Dragon Moss x20", "Dragon Wood x20"], "itemRefs": ["item:dragon_moss", "item:dragon_wood"] },
-        { "id": "ht-04", "type": "complete", "text": "Return to the Nameless Cat with Dragon Moss and Dragon Wood → receive the first key item.", "npc": "Nameless Cat", "npcRef": "npc:nameless_cat", "questRef": "quest:horntail_prequest", "itemRefs": ["item:dragon_moss", "item:dragon_wood"] },
-        { "id": "ht-05", "type": "travel", "text": "Go to the Cave of Life entrance (Minar Forest) → talk to the High Priest.", "map": "Cave of Life", "mapRef": "map:cave_of_life", "npc": "High Priest", "npcRef": "npc:high_priest", "questRef": "quest:horntail_prequest", "req": { "level": 80 } },
-        { "id": "ht-06", "type": "prequest", "text": "Temple of Time: enter the Dragon Nest area and collect the Secret Document from the Temple Priest (drops from temple mobs or given after clearing the area).", "mapRef": "map:temple_of_time", "npcRef": "npc:temple_priest", "questRef": "quest:horntail_prequest", "itemRefs": ["item:secret_document"] },
-        { "id": "ht-07", "type": "collect", "text": "Collect 9 Red Keys and 9 Blue Keys from the Temple Priests in the Dragon Nest (one of each color per priest room). Keys are consumed on use — bring extras.", "mapRef": "map:dragon_nest", "questRef": "quest:horntail_prequest", "items": ["Red Key x9", "Blue Key x9"], "itemRefs": ["item:red_key", "item:blue_key"] },
-        { "id": "ht-08", "type": "prequest", "text": "Use the keys to unlock the sealed rooms in the Temple of Time → obtain the Nine Spirit's Egg and deliver it to the High Priest.", "npc": "High Priest", "npcRef": "npc:high_priest", "questRef": "quest:horntail_prequest", "mapRef": "map:temple_of_time", "itemRefs": ["item:nine_spirits_egg"] },
-        { "id": "ht-09", "type": "complete", "text": "Turn in to the High Priest → receive the Horntail Cave Pass. You can now enter Horntail's Cave.", "npc": "High Priest", "npcRef": "npc:high_priest", "questRef": "quest:horntail_prequest", "itemRefs": ["item:horntail_cave_pass"] },
-        { "id": "ht-10", "type": "travel", "text": "Run day: enter Horntail's Cave with your party. Recommended level 120+ with seduce/cleanse roles. Coordinate with The Clinic: left head → right head → hands → wings → tail → main body.", "map": "Horntail's Cave", "mapRef": "map:horntails_cave", "bossRef": "boss:horntail", "itemRefs": ["item:horntail_cave_pass"], "req": { "level": 80 } }
+        {
+          "id": "ht-01",
+          "type": "travel",
+          "text": "Go to Leafre Town Square → find the Nameless Cat (near the town entrance).",
+          "map": "Leafre",
+          "mapRef": "map:leafre",
+          "npc": "Nameless Cat",
+          "npcRef": "npc:nameless_cat",
+          "questRef": "quest:horntail_prequest",
+          "req": {
+            "level": 80
+          }
+        },
+        {
+          "id": "ht-02",
+          "type": "accept",
+          "text": "Accept the Horntail prequest from the Nameless Cat. You will need materials from Minar Forest and the Temple of Time area.",
+          "npc": "Nameless Cat",
+          "npcRef": "npc:nameless_cat",
+          "questRef": "quest:horntail_prequest",
+          "req": {
+            "level": 80
+          }
+        },
+        {
+          "id": "ht-03",
+          "type": "collect",
+          "text": "Collect Dragon Moss x20 (Mossy Snails in Minar Forest) and Dragon Wood x20 (Dual Birk / Minar mobs). Both are tradeable in Royals — you can buy them.",
+          "mapRef": "map:minar_forest",
+          "questRef": "quest:horntail_prequest",
+          "items": [
+            "Dragon Moss x20",
+            "Dragon Wood x20"
+          ],
+          "itemRefs": [
+            "item:dragon_moss",
+            "item:dragon_wood"
+          ]
+        },
+        {
+          "id": "ht-04",
+          "type": "complete",
+          "text": "Return to the Nameless Cat with Dragon Moss and Dragon Wood → receive the first key item.",
+          "npc": "Nameless Cat",
+          "npcRef": "npc:nameless_cat",
+          "questRef": "quest:horntail_prequest",
+          "itemRefs": [
+            "item:dragon_moss",
+            "item:dragon_wood"
+          ]
+        },
+        {
+          "id": "ht-05",
+          "type": "travel",
+          "text": "Go to the Cave of Life entrance (Minar Forest) → talk to the High Priest.",
+          "map": "Cave of Life",
+          "mapRef": "map:cave_of_life",
+          "npc": "High Priest",
+          "npcRef": "npc:high_priest",
+          "questRef": "quest:horntail_prequest",
+          "req": {
+            "level": 80
+          }
+        },
+        {
+          "id": "ht-06",
+          "type": "prequest",
+          "text": "Temple of Time: enter the Dragon Nest area and collect the Secret Document from the Temple Priest (drops from temple mobs or given after clearing the area).",
+          "mapRef": "map:temple_of_time",
+          "npcRef": "npc:temple_priest",
+          "questRef": "quest:horntail_prequest",
+          "itemRefs": [
+            "item:secret_document"
+          ]
+        },
+        {
+          "id": "ht-07",
+          "type": "collect",
+          "text": "Collect 9 Red Keys and 9 Blue Keys from the Temple Priests in the Dragon Nest (one of each color per priest room). Keys are consumed on use — bring extras.",
+          "mapRef": "map:dragon_nest",
+          "questRef": "quest:horntail_prequest",
+          "items": [
+            "Red Key x9",
+            "Blue Key x9"
+          ],
+          "itemRefs": [
+            "item:red_key",
+            "item:blue_key"
+          ]
+        },
+        {
+          "id": "ht-08",
+          "type": "prequest",
+          "text": "Use the keys to unlock the sealed rooms in the Temple of Time → obtain the Nine Spirit's Egg and deliver it to the High Priest.",
+          "npc": "High Priest",
+          "npcRef": "npc:high_priest",
+          "questRef": "quest:horntail_prequest",
+          "mapRef": "map:temple_of_time",
+          "itemRefs": [
+            "item:nine_spirits_egg"
+          ]
+        },
+        {
+          "id": "ht-09",
+          "type": "complete",
+          "text": "Turn in to the High Priest → receive the Horntail Cave Pass. You can now enter Horntail's Cave.",
+          "npc": "High Priest",
+          "npcRef": "npc:high_priest",
+          "questRef": "quest:horntail_prequest",
+          "itemRefs": [
+            "item:horntail_cave_pass"
+          ]
+        },
+        {
+          "id": "ht-10",
+          "type": "travel",
+          "text": "Run day: enter Horntail's Cave with your party. Recommended level 120+ with seduce/cleanse roles. Coordinate with The Clinic: left head → right head → hands → wings → tail → main body.",
+          "map": "Horntail's Cave",
+          "mapRef": "map:horntails_cave",
+          "bossRef": "boss:horntail",
+          "itemRefs": [
+            "item:horntail_cave_pass"
+          ],
+          "req": {
+            "level": 80
+          }
+        }
+      ]
+    },
+    {
+      "id": "bishop_path",
+      "title": "Bishop — Job Path",
+      "job": "magician",
+      "category": "job_advancement",
+      "steps": [
+        {
+          "id": "bp-01",
+          "type": "travel",
+          "text": "Go to Ellinia → Magic Library.",
+          "map": "Ellinia",
+          "mapRef": "map:ellinia",
+          "questRef": "quest:magician_first_job",
+          "req": {
+            "level": 10
+          }
+        },
+        {
+          "id": "bp-02",
+          "type": "accept",
+          "text": "Talk to Gwin → 1st Job: Magician. Requires INT 20.",
+          "npc": "Gwin",
+          "npcRef": "npc:gwin",
+          "questRef": "quest:magician_first_job",
+          "req": {
+            "level": 10
+          }
+        },
+        {
+          "id": "bp-03",
+          "type": "grind",
+          "text": "Grind to level 30. Suggested maps below.",
+          "grind_to": {
+            "level": 30
+          },
+          "maps": [
+            "Ellinia Southern Forest (Slimes, Pigs)",
+            "Ellinia Forest III (Evil Eyes)",
+            "Ant Tunnel 1 (Jr. Sentinels — if funded)"
+          ],
+          "trainRefs": [
+            "train:ellinia_southern_forest",
+            "train:ellinia_forest_iii",
+            "train:ant_tunnel_1_jr_sentinel"
+          ]
+        },
+        {
+          "id": "bp-04",
+          "type": "prequest",
+          "text": "2nd Job: talk to Gwin, receive the test quest → Golem Temple (Victoria Road). Collect 30 Black Charms from the Stone Golems in the test.",
+          "npc": "Gwin",
+          "npcRef": "npc:gwin",
+          "questRef": "quest:cleric_second_job",
+          "mapRef": "map:golem_temple",
+          "itemRefs": [
+            "item:black_charm"
+          ],
+          "req": {
+            "level": 30
+          }
+        },
+        {
+          "id": "bp-05",
+          "type": "complete",
+          "text": "Return to Gwin → choose Cleric. Raise Magic Mastery and Heal first.",
+          "npc": "Gwin",
+          "npcRef": "npc:gwin",
+          "questRef": "quest:cleric_second_job",
+          "req": {
+            "level": 30
+          }
+        },
+        {
+          "id": "bp-06",
+          "type": "grind",
+          "text": "Grind to level 70.",
+          "grind_to": {
+            "level": 70
+          },
+          "maps": [
+            "Kerning PQ (21-30, in party)",
+            "Ludi PQ (35-50)",
+            "Mysterious Path 3 (55-70)"
+          ],
+          "trainRefs": [
+            "train:kerning_pq",
+            "train:ludi_pq",
+            "train:mysterious_path_3",
+            "train:wild_kargo_truckers"
+          ]
+        },
+        {
+          "id": "bp-07",
+          "type": "prequest",
+          "text": "3rd Job: talk to Gwin in Ellinia → then Robeira in El Nath. Door of Dimension (Drake's Cave) → defeat Gwin's clone → Black Charm → Holy Stone quiz (5 questions, bring mesos for failed answers).",
+          "npc": "Robeira (El Nath)",
+          "npcRef": "npc:robeira",
+          "questRef": "quest:priest_third_job",
+          "mapRef": "map:drakes_cave",
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "bp-08",
+          "type": "complete",
+          "text": "Turn in to Robeira → Priest. Prioritize Holy Symbol and Shining Ray depending on your build.",
+          "npc": "Robeira",
+          "npcRef": "npc:robeira",
+          "questRef": "quest:priest_third_job",
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "bp-09",
+          "type": "grind",
+          "text": "Grind to level 120.",
+          "grind_to": {
+            "level": 120
+          },
+          "maps": [
+            "Wolf Spiders (80-100)",
+            "Himes / Dreamy Ghosts (90-120, HS mule ideal)",
+            "Gallos (100-120 alternative)"
+          ],
+          "trainRefs": [
+            "train:wolf_spiders",
+            "train:himes",
+            "train:gallos"
+          ]
+        },
+        {
+          "id": "bp-10",
+          "type": "prequest",
+          "text": "4th Job: talk to Hellin in Leafre (Valley of the Antelope). Collect Heroic Star (Manon) and Heroic Pentagon (Griffey) — drops are tradeable in Royals, you can buy them.",
+          "npc": "Hellin (Leafre)",
+          "npcRef": "npc:hellin",
+          "questRef": "quest:bishop_fourth_job",
+          "req": {
+            "level": 120
+          },
+          "items": [
+            "Heroic Star",
+            "Heroic Pentagon"
+          ],
+          "itemRefs": [
+            "item:heroic_star",
+            "item:heroic_pentagon"
+          ]
+        },
+        {
+          "id": "bp-11",
+          "type": "complete",
+          "text": "Turn in to Hellin → Bishop. Buy Big Bang and Infinity skill books and max according to The Clinic's guide.",
+          "npc": "Hellin",
+          "npcRef": "npc:hellin",
+          "questRef": "quest:bishop_fourth_job",
+          "req": {
+            "level": 120
+          }
+        }
+      ]
+    },
+    {
+      "id": "ice_lit_mage_path",
+      "title": "Ice/Lightning Arch Mage — Job Path",
+      "job": "magician",
+      "category": "job_advancement",
+      "steps": [
+        {
+          "id": "il-01",
+          "type": "travel",
+          "text": "Go to Ellinia → Magic Library.",
+          "map": "Ellinia",
+          "mapRef": "map:ellinia",
+          "questRef": "quest:magician_first_job",
+          "req": {
+            "level": 10
+          }
+        },
+        {
+          "id": "il-02",
+          "type": "accept",
+          "text": "Talk to Gwin → 1st Job: Magician. Requires INT 20.",
+          "npc": "Gwin",
+          "npcRef": "npc:gwin",
+          "questRef": "quest:magician_first_job",
+          "req": {
+            "level": 10
+          }
+        },
+        {
+          "id": "il-03",
+          "type": "grind",
+          "text": "Grind to level 30. Suggested maps below.",
+          "grind_to": {
+            "level": 30
+          },
+          "maps": [
+            "Ellinia Southern Forest (Slimes, Pigs)",
+            "Ellinia Forest III (Evil Eyes)",
+            "Ant Tunnel 1 (Jr. Sentinels — if funded)"
+          ],
+          "trainRefs": [
+            "train:ellinia_southern_forest",
+            "train:ellinia_forest_iii",
+            "train:ant_tunnel_1_jr_sentinel"
+          ]
+        },
+        {
+          "id": "il-04",
+          "type": "prequest",
+          "text": "2nd Job: talk to Gwin, receive the test quest → Golem Temple (Victoria Road). Collect 30 Black Charms from the Stone Golems in the test.",
+          "npc": "Gwin",
+          "npcRef": "npc:gwin",
+          "questRef": "quest:il_mage_second_job",
+          "mapRef": "map:golem_temple",
+          "itemRefs": [
+            "item:black_charm"
+          ],
+          "req": {
+            "level": 30
+          }
+        },
+        {
+          "id": "il-05",
+          "type": "complete",
+          "text": "Return to Gwin → choose Ice/Lightning Wizard (IL Mage). Raise Magic Mastery and Thunder Bolt first.",
+          "npc": "Gwin",
+          "npcRef": "npc:gwin",
+          "questRef": "quest:il_mage_second_job",
+          "req": {
+            "level": 30
+          }
+        },
+        {
+          "id": "il-06",
+          "type": "grind",
+          "text": "Grind to level 70.",
+          "grind_to": {
+            "level": 70
+          },
+          "maps": [
+            "Kerning PQ (21-30, in party)",
+            "Ludi PQ (35-50)",
+            "Mysterious Path 3 (55-70)",
+            "Fire Turtles / Wild Kargo (55-70 alternative)"
+          ],
+          "trainRefs": [
+            "train:kerning_pq",
+            "train:ludi_pq",
+            "train:mysterious_path_3",
+            "train:fire_turtle_area",
+            "train:wild_kargo_truckers"
+          ]
+        },
+        {
+          "id": "il-07",
+          "type": "prequest",
+          "text": "3rd Job: talk to Gwin in Ellinia → then Robeira in El Nath. Door of Dimension (Drake's Cave) → defeat Gwin's clone → Black Charm → Holy Stone quiz (5 questions, bring mesos for failed answers).",
+          "npc": "Robeira (El Nath)",
+          "npcRef": "npc:robeira",
+          "questRef": "quest:il_arch_mage_third_job",
+          "mapRef": "map:drakes_cave",
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "il-08",
+          "type": "complete",
+          "text": "Turn in to Robeira → IL Arch Mage. Prioritize Blizzard and Chain Lightning depending on your build.",
+          "npc": "Robeira",
+          "npcRef": "npc:robeira",
+          "questRef": "quest:il_arch_mage_third_job",
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "il-09",
+          "type": "grind",
+          "text": "Grind to level 120.",
+          "grind_to": {
+            "level": 120
+          },
+          "maps": [
+            "Wolf Spiders (80-100)",
+            "Himes / Dreamy Ghosts (90-120, HS mule ideal)",
+            "Gallos (100-120 alternative)"
+          ],
+          "trainRefs": [
+            "train:wolf_spiders",
+            "train:himes",
+            "train:gallos"
+          ]
+        },
+        {
+          "id": "il-10",
+          "type": "prequest",
+          "text": "4th Job: talk to Hellin in Leafre (Valley of the Antelope). Collect Heroic Star (Manon) and Heroic Pentagon (Griffey) — drops are tradeable in Royals, you can buy them.",
+          "npc": "Hellin (Leafre)",
+          "npcRef": "npc:hellin",
+          "questRef": "quest:il_arch_mage_fourth_job",
+          "req": {
+            "level": 120
+          },
+          "items": [
+            "Heroic Star",
+            "Heroic Pentagon"
+          ],
+          "itemRefs": [
+            "item:heroic_star",
+            "item:heroic_pentagon"
+          ]
+        },
+        {
+          "id": "il-11",
+          "type": "complete",
+          "text": "Turn in to Hellin → Ice/Lightning Arch Mage. Buy Big Bang and Infinity skill books and max according to The Clinic's guide.",
+          "npc": "Hellin",
+          "npcRef": "npc:hellin",
+          "questRef": "quest:il_arch_mage_fourth_job",
+          "req": {
+            "level": 120
+          }
+        }
+      ]
+    },
+    {
+      "id": "marksman_path",
+      "title": "Marksman — Job Path",
+      "job": "bowman",
+      "category": "job_advancement",
+      "steps": [
+        {
+          "id": "ms-01",
+          "type": "travel",
+          "text": "Go to Henesys → Bowman Instructional School.",
+          "map": "Henesys",
+          "mapRef": "map:henesys",
+          "questRef": "quest:bowman_first_job",
+          "req": {
+            "level": 10
+          }
+        },
+        {
+          "id": "ms-02",
+          "type": "accept",
+          "text": "Talk to Athena Pierce → 1st Job: Bowman. Requires DEX 25.",
+          "npc": "Athena Pierce",
+          "npcRef": "npc:athena_pierce",
+          "questRef": "quest:bowman_first_job",
+          "req": {
+            "level": 10
+          }
+        },
+        {
+          "id": "ms-03",
+          "type": "grind",
+          "text": "Grind to level 30. Suggested maps below.",
+          "grind_to": {
+            "level": 30
+          },
+          "maps": [
+            "Henesys Hunting Ground I (Orange Mushrooms, Pigs)",
+            "Henesys Hunting Ground II (Green Mushrooms)",
+            "Kerning Construction Site (Octopus — if leeching)"
+          ],
+          "trainRefs": [
+            "train:henesys_hg1",
+            "train:henesys_hg2",
+            "train:construction_site_octopus"
+          ]
+        },
+        {
+          "id": "ms-04",
+          "type": "prequest",
+          "text": "2nd Job: talk to Athena Pierce, receive the test quest → Henesys Dungeon (portal in Henesys). Collect 30 Black Gems from the Horny Mushrooms in the test.",
+          "npc": "Athena Pierce",
+          "npcRef": "npc:athena_pierce",
+          "questRef": "quest:crossbowman_second_job",
+          "mapRef": "map:henesys_dungeon",
+          "itemRefs": [
+            "item:black_gem"
+          ],
+          "req": {
+            "level": 30
+          }
+        },
+        {
+          "id": "ms-05",
+          "type": "complete",
+          "text": "Return to Athena Pierce → choose Crossbowman. Raise Crossbow Mastery and Iron Arrow first.",
+          "npc": "Athena Pierce",
+          "npcRef": "npc:athena_pierce",
+          "questRef": "quest:crossbowman_second_job",
+          "req": {
+            "level": 30
+          }
+        },
+        {
+          "id": "ms-06",
+          "type": "grind",
+          "text": "Grind to level 70.",
+          "grind_to": {
+            "level": 70
+          },
+          "maps": [
+            "Kerning PQ (21-30, in party)",
+            "Ludi PQ (35-50)",
+            "Mysterious Path 3 (55-70)",
+            "Wild Kargo / Truckers (55-70 alternative)"
+          ],
+          "trainRefs": [
+            "train:kerning_pq",
+            "train:ludi_pq",
+            "train:mysterious_path_3",
+            "train:wild_kargo_truckers"
+          ]
+        },
+        {
+          "id": "ms-07",
+          "type": "prequest",
+          "text": "3rd Job: talk to Athena Pierce in Henesys → then Rene in El Nath. Door of Dimension (Mushroom Castle) → defeat Athena Pierce's clone → Black Charm → Holy Stone quiz (5 questions, bring mesos for failed answers).",
+          "npc": "Rene (El Nath)",
+          "npcRef": "npc:rene",
+          "questRef": "quest:sniper_third_job",
+          "mapRef": "map:mushroom_castle",
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "ms-08",
+          "type": "complete",
+          "text": "Turn in to Rene → Sniper. Prioritize Snipe and Ice Shot depending on your build.",
+          "npc": "Rene",
+          "npcRef": "npc:rene",
+          "questRef": "quest:sniper_third_job",
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "ms-09",
+          "type": "grind",
+          "text": "Grind to level 120.",
+          "grind_to": {
+            "level": 120
+          },
+          "maps": [
+            "Wolf Spiders (80-100)",
+            "Himes / Dreamy Ghosts (90-120, HS mule ideal)",
+            "Gallos (100-120 alternative)"
+          ],
+          "trainRefs": [
+            "train:wolf_spiders",
+            "train:himes",
+            "train:gallos"
+          ]
+        },
+        {
+          "id": "ms-10",
+          "type": "prequest",
+          "text": "4th Job: talk to Hellin in Leafre (Valley of the Antelope). Collect Heroic Star (Manon) and Heroic Pentagon (Griffey) — drops are tradeable in Royals, you can buy them.",
+          "npc": "Hellin (Leafre)",
+          "npcRef": "npc:hellin",
+          "questRef": "quest:marksman_fourth_job",
+          "req": {
+            "level": 120
+          },
+          "items": [
+            "Heroic Star",
+            "Heroic Pentagon"
+          ],
+          "itemRefs": [
+            "item:heroic_star",
+            "item:heroic_pentagon"
+          ]
+        },
+        {
+          "id": "ms-11",
+          "type": "complete",
+          "text": "Turn in to Hellin → Marksman. Buy Piercing Arrow and Sharp Eyes skill books and max according to The Clinic's guide.",
+          "npc": "Hellin",
+          "npcRef": "npc:hellin",
+          "questRef": "quest:marksman_fourth_job",
+          "req": {
+            "level": 120
+          }
+        }
+      ]
+    },
+    {
+      "id": "corsair_path",
+      "title": "Corsair — Job Path",
+      "job": "pirate",
+      "category": "job_advancement",
+      "steps": [
+        {
+          "id": "cr-01",
+          "type": "travel",
+          "text": "Go to Nautilus Harbor → Nautilus HQ.",
+          "map": "Nautilus Harbor",
+          "mapRef": "map:nautilus_harbor",
+          "questRef": "quest:pirate_first_job",
+          "req": {
+            "level": 10
+          }
+        },
+        {
+          "id": "cr-02",
+          "type": "accept",
+          "text": "Talk to Kyrin → 1st Job: Pirate. Requires STR 20 and DEX 20.",
+          "npc": "Kyrin",
+          "npcRef": "npc:kyrin",
+          "questRef": "quest:pirate_first_job",
+          "req": {
+            "level": 10
+          }
+        },
+        {
+          "id": "cr-03",
+          "type": "grind",
+          "text": "Grind to level 30. Suggested maps below.",
+          "grind_to": {
+            "level": 30
+          },
+          "maps": [
+            "Florina Beach (Crab, Krip)",
+            "Nautilus Training Room (Jr. Cellion)",
+            "Kerning Construction Site (Octopus — if leeching)"
+          ],
+          "trainRefs": [
+            "train:florina_beach",
+            "train:nautilus_training_room",
+            "train:construction_site_octopus"
+          ]
+        },
+        {
+          "id": "cr-04",
+          "type": "prequest",
+          "text": "2nd Job: talk to Kyrin, receive the test quest → Keru Island (portal from Nautilus). Collect 30 Black Crystals from the test monkeys and cracklers.",
+          "npc": "Kyrin",
+          "npcRef": "npc:kyrin",
+          "questRef": "quest:gunslinger_second_job",
+          "mapRef": "map:keru_island",
+          "itemRefs": [
+            "item:black_crystal"
+          ],
+          "req": {
+            "level": 30
+          }
+        },
+        {
+          "id": "cr-05",
+          "type": "complete",
+          "text": "Return to Kyrin → choose Gunslinger. Raise Gun Mastery and Invisible Shot first.",
+          "npc": "Kyrin",
+          "npcRef": "npc:kyrin",
+          "questRef": "quest:gunslinger_second_job",
+          "req": {
+            "level": 30
+          }
+        },
+        {
+          "id": "cr-06",
+          "type": "grind",
+          "text": "Grind to level 70.",
+          "grind_to": {
+            "level": 70
+          },
+          "maps": [
+            "Kerning PQ (21-30, in party)",
+            "Ludi PQ (35-50)",
+            "Mysterious Path 3 (55-70)",
+            "Wild Kargo / Truckers (55-70 alternative)"
+          ],
+          "trainRefs": [
+            "train:kerning_pq",
+            "train:ludi_pq",
+            "train:mysterious_path_3",
+            "train:wild_kargo_truckers"
+          ]
+        },
+        {
+          "id": "cr-07",
+          "type": "prequest",
+          "text": "3rd Job: talk to Kyrin in Nautilus → then Pedro in El Nath. Door of Dimension (Pirate's Door) → defeat Kyrin's clone → Black Charm → Holy Stone quiz (5 questions, bring mesos for failed answers).",
+          "npc": "Pedro (El Nath)",
+          "npcRef": "npc:pedro",
+          "questRef": "quest:outlaw_third_job",
+          "mapRef": "map:pirates_door",
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "cr-08",
+          "type": "complete",
+          "text": "Turn in to Pedro → Outlaw. Prioritize Triple Fire and Octopus Bomb depending on your build.",
+          "npc": "Pedro",
+          "npcRef": "npc:pedro",
+          "questRef": "quest:outlaw_third_job",
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "cr-09",
+          "type": "grind",
+          "text": "Grind to level 120.",
+          "grind_to": {
+            "level": 120
+          },
+          "maps": [
+            "Wolf Spiders (80-100)",
+            "Himes / Dreamy Ghosts (90-120, HS mule ideal)",
+            "Gallos (100-120 alternative)"
+          ],
+          "trainRefs": [
+            "train:wolf_spiders",
+            "train:himes",
+            "train:gallos"
+          ]
+        },
+        {
+          "id": "cr-10",
+          "type": "prequest",
+          "text": "4th Job: talk to Hellin in Leafre (Valley of the Antelope). Collect Heroic Star (Manon) and Heroic Pentagon (Griffey) — drops are tradeable in Royals, you can buy them.",
+          "npc": "Hellin (Leafre)",
+          "npcRef": "npc:hellin",
+          "questRef": "quest:corsair_fourth_job",
+          "req": {
+            "level": 120
+          },
+          "items": [
+            "Heroic Star",
+            "Heroic Pentagon"
+          ],
+          "itemRefs": [
+            "item:heroic_star",
+            "item:heroic_pentagon"
+          ]
+        },
+        {
+          "id": "cr-11",
+          "type": "complete",
+          "text": "Turn in to Hellin → Corsair. Buy Battleship and Elemental Boost skill books and max according to The Clinic's guide.",
+          "npc": "Hellin",
+          "npcRef": "npc:hellin",
+          "questRef": "quest:corsair_fourth_job",
+          "req": {
+            "level": 120
+          }
+        }
+      ]
+    },
+    {
+      "id": "paladin_path",
+      "title": "Paladin — Job Path",
+      "job": "warrior",
+      "category": "job_advancement",
+      "steps": [
+        {
+          "id": "pl-01",
+          "type": "travel",
+          "text": "Go to Perion → Warriors' Sanctuary.",
+          "map": "Perion",
+          "mapRef": "map:perion",
+          "questRef": "quest:fighter_first_job",
+          "req": {
+            "level": 10
+          }
+        },
+        {
+          "id": "pl-02",
+          "type": "accept",
+          "text": "Talk to Dances with Balrog → 1st Job: Warrior. Requires STR 35.",
+          "npc": "Dances with Balrog",
+          "npcRef": "npc:dances_with_balrog",
+          "questRef": "quest:fighter_first_job",
+          "req": {
+            "level": 10
+          }
+        },
+        {
+          "id": "pl-03",
+          "type": "grind",
+          "text": "Grind to level 30. Suggested maps below.",
+          "grind_to": {
+            "level": 30
+          },
+          "maps": [
+            "Perion Warning Street (Slimes, Stumps)",
+            "Perion Dungeon (Evil Eyes, Dark Stumps)",
+            "Construction Site (Octopus — if leeching from KC)"
+          ],
+          "trainRefs": [
+            "train:perion_warning_street",
+            "train:perion_dungeon",
+            "train:construction_site_octopus"
+          ]
+        },
+        {
+          "id": "pl-04",
+          "type": "prequest",
+          "text": "2nd Job: talk to Dances with Balrog, receive the test quest → Forest East of Henesys (portal near Henesys). Collect 30 Black Crystals from the Dark Axe Stumps in the test.",
+          "npc": "Dances with Balrog",
+          "npcRef": "npc:dances_with_balrog",
+          "questRef": "quest:page_second_job",
+          "mapRef": "map:forest_east_henesys",
+          "itemRefs": [
+            "item:black_crystal"
+          ],
+          "req": {
+            "level": 30
+          }
+        },
+        {
+          "id": "pl-05",
+          "type": "complete",
+          "text": "Return to Dances with Balrog → choose Page. Raise Sword Mastery and HP Recovery first.",
+          "npc": "Dances with Balrog",
+          "npcRef": "npc:dances_with_balrog",
+          "questRef": "quest:page_second_job",
+          "req": {
+            "level": 30
+          }
+        },
+        {
+          "id": "pl-06",
+          "type": "grind",
+          "text": "Grind to level 70.",
+          "grind_to": {
+            "level": 70
+          },
+          "maps": [
+            "Kerning PQ (21-30, in party)",
+            "Ludi PQ (35-50)",
+            "Mysterious Path 3 (55-70)",
+            "Wild Kargo / Truckers (55-70 alternative)"
+          ],
+          "trainRefs": [
+            "train:kerning_pq",
+            "train:ludi_pq",
+            "train:mysterious_path_3",
+            "train:wild_kargo_truckers"
+          ]
+        },
+        {
+          "id": "pl-07",
+          "type": "prequest",
+          "text": "3rd Job: talk to Dances with Balrog in Perion → then Tylus in El Nath. Door of Dimension (Sleepywood Forest) → defeat Dances with Balrog's clone → Black Charm → Holy Stone quiz (5 questions, bring mesos for failed answers).",
+          "npc": "Tylus (El Nath)",
+          "npcRef": "npc:tylus",
+          "questRef": "quest:white_knight_third_job",
+          "mapRef": "map:sleepywood_forest",
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "pl-08",
+          "type": "complete",
+          "text": "Turn in to Tylus → White Knight. Prioritize Charge and Magic Crash depending on your build.",
+          "npc": "Tylus",
+          "npcRef": "npc:tylus",
+          "questRef": "quest:white_knight_third_job",
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "pl-09",
+          "type": "grind",
+          "text": "Grind to level 120.",
+          "grind_to": {
+            "level": 120
+          },
+          "maps": [
+            "Wolf Spiders (80-100)",
+            "Himes / Dreamy Ghosts (90-120, HS mule ideal)",
+            "Gallos (100-120 alternative)"
+          ],
+          "trainRefs": [
+            "train:wolf_spiders",
+            "train:himes",
+            "train:gallos"
+          ]
+        },
+        {
+          "id": "pl-10",
+          "type": "prequest",
+          "text": "4th Job: talk to Hellin in Leafre (Valley of the Antelope). Collect Heroic Star (Manon) and Heroic Pentagon (Griffey) — drops are tradeable in Royals, you can buy them.",
+          "npc": "Hellin (Leafre)",
+          "npcRef": "npc:hellin",
+          "questRef": "quest:paladin_fourth_job",
+          "req": {
+            "level": 120
+          },
+          "items": [
+            "Heroic Star",
+            "Heroic Pentagon"
+          ],
+          "itemRefs": [
+            "item:heroic_star",
+            "item:heroic_pentagon"
+          ]
+        },
+        {
+          "id": "pl-11",
+          "type": "complete",
+          "text": "Turn in to Hellin → Paladin. Buy Guardian and Heaven's Hammer skill books and max according to The Clinic's guide.",
+          "npc": "Hellin",
+          "npcRef": "npc:hellin",
+          "questRef": "quest:paladin_fourth_job",
+          "req": {
+            "level": 120
+          }
+        }
+      ]
+    },
+    {
+      "id": "kerning_pq",
+      "title": "Kerning City Party Quest",
+      "job": "any",
+      "category": "party_quest",
+      "steps": [
+        {
+          "id": "kpq-01",
+          "type": "travel",
+          "text": "Go to Kerning City → find Lakis near the Construction Site PQ portal.",
+          "map": "Kerning City",
+          "mapRef": "map:kerning_city",
+          "npc": "Lakis",
+          "npcRef": "npc:lakis",
+          "questRef": "quest:kerning_pq",
+          "req": {
+            "level": 21
+          }
+        },
+        {
+          "id": "kpq-02",
+          "type": "accept",
+          "text": "Form a party of 4 (levels 21-30) and talk to Lakis to enter Kerning PQ.",
+          "npc": "Lakis",
+          "npcRef": "npc:lakis",
+          "questRef": "quest:kerning_pq",
+          "mapRef": "map:kerning_pq",
+          "req": {
+            "level": 21
+          }
+        },
+        {
+          "id": "kpq-03",
+          "type": "collect",
+          "text": "Stage 1: each party member collects their coupon from the designated room. Split up and meet at the exit.",
+          "mapRef": "map:kerning_pq",
+          "questRef": "quest:kerning_pq"
+        },
+        {
+          "id": "kpq-04",
+          "type": "collect",
+          "text": "Stage 2: kill monsters and collect the passes dropped. Hand them to the NPC at the end of the stage.",
+          "mapRef": "map:kerning_pq",
+          "questRef": "quest:kerning_pq"
+        },
+        {
+          "id": "kpq-05",
+          "type": "prequest",
+          "text": "Stage 3: navigate the box maze — push boxes onto switches to open gates. Coordinate with your party.",
+          "mapRef": "map:kerning_pq",
+          "questRef": "quest:kerning_pq"
+        },
+        {
+          "id": "kpq-06",
+          "type": "complete",
+          "text": "Stage 4: defeat the final boss and loot the reward. Exit and talk to Lakis to re-enter.",
+          "npc": "Lakis",
+          "npcRef": "npc:lakis",
+          "questRef": "quest:kerning_pq",
+          "mapRef": "map:kerning_pq"
+        }
+      ]
+    },
+    {
+      "id": "ludi_pq",
+      "title": "Ludibrium Party Quest",
+      "job": "any",
+      "category": "party_quest",
+      "steps": [
+        {
+          "id": "lpq-01",
+          "type": "travel",
+          "text": "Go to Ludibrium → find Elin at the Party Quest entrance.",
+          "map": "Ludibrium",
+          "mapRef": "map:ludibrium",
+          "npc": "Elin",
+          "npcRef": "npc:elin",
+          "questRef": "quest:ludi_pq",
+          "req": {
+            "level": 35
+          }
+        },
+        {
+          "id": "lpq-02",
+          "type": "accept",
+          "text": "Form a party of 6 (levels 35-50) and talk to Elin to enter Ludibrium PQ.",
+          "npc": "Elin",
+          "npcRef": "npc:elin",
+          "questRef": "quest:ludi_pq",
+          "mapRef": "map:ludi_pq",
+          "req": {
+            "level": 35
+          }
+        },
+        {
+          "id": "lpq-03",
+          "type": "collect",
+          "text": "Stage 1: each party member collects their passport from the designated room.",
+          "mapRef": "map:ludi_pq",
+          "questRef": "quest:ludi_pq"
+        },
+        {
+          "id": "lpq-04",
+          "type": "collect",
+          "text": "Stage 2: kill monsters and collect puzzle blocks. Bring them to the center platform.",
+          "mapRef": "map:ludi_pq",
+          "questRef": "quest:ludi_pq"
+        },
+        {
+          "id": "lpq-05",
+          "type": "prequest",
+          "text": "Stage 3: assemble the block puzzle before the timer runs out. Assign roles: killers, collectors, builder.",
+          "mapRef": "map:ludi_pq",
+          "questRef": "quest:ludi_pq"
+        },
+        {
+          "id": "lpq-06",
+          "type": "complete",
+          "text": "Stage 4: defeat Alishar and collect the reward. Exit and talk to Elin to re-enter.",
+          "npc": "Elin",
+          "npcRef": "npc:elin",
+          "questRef": "quest:ludi_pq",
+          "mapRef": "map:ludi_pq"
+        }
+      ]
+    },
+    {
+      "id": "papulatus_prequest",
+      "title": "Papulatus — Full Prequest",
+      "job": "any",
+      "category": "boss_prequest",
+      "steps": [
+        {
+          "id": "pp-01",
+          "type": "travel",
+          "text": "Go to Ludibrium → Clock Tower area → talk to Rios.",
+          "map": "Ludibrium",
+          "mapRef": "map:ludibrium",
+          "npc": "Rios",
+          "npcRef": "npc:rios",
+          "questRef": "quest:papulatus_prequest",
+          "req": {
+            "level": 115
+          }
+        },
+        {
+          "id": "pp-02",
+          "type": "accept",
+          "text": "Accept Papulatus prequest from Rios. You'll need to collect Lost Time Pieces from the Labyrinth.",
+          "npc": "Rios",
+          "npcRef": "npc:rios",
+          "questRef": "quest:papulatus_prequest",
+          "req": {
+            "level": 115
+          }
+        },
+        {
+          "id": "pp-03",
+          "type": "collect",
+          "text": "Enter the Ludibrium Labyrinth and collect Lost Time Piece x20 (drops from Lorangs and labyrinth mobs).",
+          "mapRef": "map:ludi_labyrinth",
+          "questRef": "quest:papulatus_prequest",
+          "items": [
+            "Lost Time Piece x20"
+          ],
+          "itemRefs": [
+            "item:lost_time_piece"
+          ]
+        },
+        {
+          "id": "pp-04",
+          "type": "complete",
+          "text": "Return to Rios with 20 Lost Time Pieces → receive Papulatus Ticket.",
+          "npc": "Rios",
+          "npcRef": "npc:rios",
+          "questRef": "quest:papulatus_prequest",
+          "itemRefs": [
+            "item:lost_time_piece",
+            "item:papulatus_ticket"
+          ]
+        },
+        {
+          "id": "pp-05",
+          "type": "travel",
+          "text": "Run day: enter Papulatus' Altar with your party and ticket. Recommended level 120+. Coordinate with The Clinic: watch for time-stop mechanics.",
+          "map": "Papulatus' Altar",
+          "mapRef": "map:papulatus_altar",
+          "bossRef": "boss:papulatus",
+          "itemRefs": [
+            "item:papulatus_ticket"
+          ],
+          "req": {
+            "level": 115
+          }
+        }
+      ]
+    },
+    {
+      "id": "pink_bean_prequest",
+      "title": "Pink Bean — Full Prequest",
+      "job": "any",
+      "category": "boss_prequest",
+      "steps": [
+        {
+          "id": "pb-01",
+          "type": "travel",
+          "text": "Go to Mushroom Shrine (Zipangu) → find Pato near the entrance.",
+          "map": "Mushroom Shrine",
+          "mapRef": "map:mushroom_shrine",
+          "npc": "Pato",
+          "npcRef": "npc:pato",
+          "questRef": "quest:pink_bean_prequest",
+          "req": {
+            "level": 120
+          }
+        },
+        {
+          "id": "pb-02",
+          "type": "accept",
+          "text": "Accept the Pink Bean prequest from Pato. You will need Squishy Liquid from mobs in the area.",
+          "npc": "Pato",
+          "npcRef": "npc:pato",
+          "questRef": "quest:pink_bean_prequest",
+          "req": {
+            "level": 120
+          }
+        },
+        {
+          "id": "pb-03",
+          "type": "collect",
+          "text": "Collect Squishy Liquid x50 from Himes and other mobs in Mushroom Shrine. Tradeable in Royals — you can buy them.",
+          "mapRef": "map:mushroom_shrine",
+          "questRef": "quest:pink_bean_prequest",
+          "items": [
+            "Squishy Liquid x50"
+          ],
+          "itemRefs": [
+            "item:squishy_liquid"
+          ]
+        },
+        {
+          "id": "pb-04",
+          "type": "complete",
+          "text": "Return to Pato with 50 Squishy Liquid → receive Pink Bean Ticket.",
+          "npc": "Pato",
+          "npcRef": "npc:pato",
+          "questRef": "quest:pink_bean_prequest",
+          "itemRefs": [
+            "item:squishy_liquid",
+            "item:pink_bean_ticket"
+          ]
+        },
+        {
+          "id": "pb-05",
+          "type": "travel",
+          "text": "Run day: enter Pink Bean's Altar with your party and ticket. Recommended level 130+. Coordinate with The Clinic: watch for stun and seduce phases.",
+          "map": "Pink Bean's Altar",
+          "mapRef": "map:pink_bean_altar",
+          "bossRef": "boss:pink_bean",
+          "itemRefs": [
+            "item:pink_bean_ticket"
+          ],
+          "req": {
+            "level": 120
+          }
+        }
+      ]
+    },
+    {
+      "id": "nlc_travel",
+      "title": "New Leaf City — Travel Guide",
+      "job": "any",
+      "category": "utility",
+      "steps": [
+        {
+          "id": "nlc-01",
+          "type": "travel",
+          "text": "Go to any major town (Henesys, Ellinia, Kerning, Perion, or Leafre) → find Spinel.",
+          "map": "Henesys",
+          "mapRef": "map:henesys",
+          "npc": "Spinel",
+          "npcRef": "npc:spinel",
+          "req": {
+            "level": 1
+          }
+        },
+        {
+          "id": "nlc-02",
+          "type": "accept",
+          "text": "Talk to Spinel → select \"Move to Masteria\" → choose New Leaf City. Small meso fee applies.",
+          "npc": "Spinel",
+          "npcRef": "npc:spinel",
+          "mapRef": "map:new_leaf_city"
+        },
+        {
+          "id": "nlc-03",
+          "type": "complete",
+          "text": "You arrive in New Leaf City (Masteria). Use Spinel in NLC to return to Victoria Island or other regions.",
+          "map": "New Leaf City",
+          "mapRef": "map:new_leaf_city",
+          "npc": "Spinel",
+          "npcRef": "npc:spinel"
+        }
       ]
     }
   ]

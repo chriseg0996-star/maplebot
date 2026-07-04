@@ -1,8 +1,11 @@
-// Maplebot — display-only quest helper. Nunca envía input al juego.
-
-const { refName, renderTextWithLinks, loadDatabase, buildMigrationReport } = window.MaplebotDb;
+// Maplebot — display-only quest helper.
+const {
+  refName, renderTextWithLinks, loadDatabase, buildMigrationReport,
+  setGuidesIndex, resolveGrindLine
+} = window.MaplebotDb;
 const { openDbPanel } = window.MaplebotDbPanel;
-const { ocrView, runOcrMatch, applyOcrHighlight } = window.MaplebotOcr;
+const { ocrView, runOcrMatch, applyOcrHighlight, getClosestMapHint } = window.MaplebotOcr;
+const { normalizeState, activeProfile, switchProfile, syncProfile, addProfile } = window.MaplebotProfiles;
 
 const state = {
   guides: [],
@@ -13,7 +16,16 @@ const state = {
   favorites: {},
   recent: [],
   view: 'steps',
-  libQuery: ''
+  libQuery: '',
+  profiles: [],
+  activeProfileId: null,
+  settings: {
+    ocrMinConfidence: 60,
+    ocrFastTick: false,
+    ocrDisplayId: null,
+    hideSkipped: false,
+    alwaysOnTopLevel: 'screen-saver'
+  }
 };
 
 const CATEGORIES = {
@@ -35,12 +47,13 @@ function load() {
   try {
     const raw = localStorage.getItem('maplebot-state');
     if (raw) Object.assign(state, JSON.parse(raw));
-  } catch (_) { /* corrupt state */ }
-  if (!Array.isArray(state.recent)) state.recent = [];
-  if (!state.favorites || typeof state.favorites !== 'object') state.favorites = {};
+  } catch (_) { /* ignore */ }
+  normalizeState(state);
+  switchProfile(state, state.activeProfileId);
 }
 
 function save() {
+  syncProfile(state);
   const { guides, view, libQuery, ...persistable } = state;
   localStorage.setItem('maplebot-state', JSON.stringify(persistable));
 }
@@ -48,6 +61,7 @@ function save() {
 async function loadGuides() {
   const data = await window.maplebot.getGuides();
   state.guides = data.guides;
+  setGuidesIndex(state.guides);
   if (!state.activeGuideId) state.activeGuideId = data.guides[0]?.id;
 }
 
@@ -105,7 +119,65 @@ function guideProgress(guide) {
   return { done, total: guide.steps.length };
 }
 
+function profileInitial(name) {
+  const n = (name || 'A').trim();
+  return (n[0] || 'A').toUpperCase();
+}
+
+function renderProfileBar() {
+  const p = activeProfile(state);
+  if (!p) return;
+  $('#profile-avatar').textContent = profileInitial(p.name);
+  $('#profile-name').textContent = p.name;
+  $('#profile-level').textContent = `Lv ${p.level}`;
+  $('#profile-trigger').classList.toggle('open', !$('#profile-menu').classList.contains('hidden'));
+
+  const list = $('#profile-list');
+  list.innerHTML = state.profiles.map((prof) => `
+    <button type="button" class="profile-option ${prof.id === state.activeProfileId ? 'active' : ''}" data-id="${prof.id}">
+      <span class="profile-option-avatar">${profileInitial(prof.name)}</span>
+      <span class="profile-option-body">
+        <span class="profile-option-name">${prof.name}</span>
+        <span class="profile-option-lv">Level ${prof.level}</span>
+      </span>
+      ${prof.id === state.activeProfileId ? '<span class="profile-option-check">✓</span>' : ''}
+    </button>`).join('');
+}
+
+function openProfileMenu() {
+  $('#profile-menu').classList.remove('hidden');
+  $('#profile-trigger').classList.add('open');
+}
+
+function closeProfileMenu() {
+  $('#profile-menu').classList.add('hidden');
+  $('#profile-trigger').classList.remove('open');
+}
+
+function toggleProfileMenu() {
+  if ($('#profile-menu').classList.contains('hidden')) openProfileMenu();
+  else closeProfileMenu();
+}
+
+function renderGrindMaps(step) {
+  const lines = [];
+  (step.trainRefs || []).forEach((r) => {
+    const name = refName(r, r);
+    lines.push(`<li><span class="db-link grind-link" data-ref="${r}">${name}</span></li>`);
+  });
+  (step.maps || []).forEach((m) => {
+    const hit = resolveGrindLine(m);
+    if (hit) {
+      lines.push(`<li><span class="db-link grind-link" data-ref="${hit.ref}">${m}</span></li>`);
+    } else {
+      lines.push(`<li>${m}</li>`);
+    }
+  });
+  return lines.length ? `<ul class="step-maps">${lines.join('')}</ul>` : '';
+}
+
 function render() {
+  renderProfileBar();
   renderSelect();
   $('#level-input').value = state.level;
   $('#btn-library').classList.toggle('active', state.view === 'library');
@@ -159,6 +231,8 @@ function renderSteps() {
   guide.steps.forEach((step) => {
     const status = stepStatus(step);
     if (status === 'done' || status === 'skipped') doneCount++;
+    if (state.settings.hideSkipped && status === 'skipped') return;
+
     const el = document.createElement('div');
     el.className = `step ${status}`;
     el.dataset.stepId = step.id;
@@ -182,7 +256,7 @@ function renderSteps() {
         <span class="step-tag ${step.type}">${step.type}</span>
         <div class="step-text">${renderTextWithLinks(step.text)}</div>
         ${meta.length ? `<div class="step-meta">${meta.join(' · ')}</div>` : ''}
-        ${step.maps ? `<ul class="step-maps">${step.maps.map((m) => `<li>${m}</li>`).join('')}</ul>` : ''}
+        ${renderGrindMaps(step)}
       </div>`;
 
     el.addEventListener('click', (e) => {
@@ -223,7 +297,7 @@ function libCard(g) {
     <div class="lib-guide ${isActive ? 'active' : ''}" data-id="${g.id}">
       <div class="lib-guide-top">
         <div class="lib-guide-title">${g.title}</div>
-        <button class="lib-fav ${isFav ? 'on' : ''}" data-fav="${g.id}" title="Favorite">${isFav ? '★' : '☆'}</button>
+        <button class="lib-fav ${isFav ? 'on' : ''}" data-fav="${g.id}">${isFav ? '★' : '☆'}</button>
       </div>
       <div class="lib-guide-meta">
         <span class="lib-badge">${(g.job || 'any').toUpperCase()}</span>
@@ -237,29 +311,19 @@ function libCard(g) {
 function renderLibList() {
   const list = $('#lib-list');
   const q = state.libQuery.trim().toLowerCase();
-  const matchesQuery = (g) => {
+  const matches = state.guides.filter((g) => {
     if (!q) return true;
     const cat = guideCategory(g);
-    return g.title.toLowerCase().includes(q) ||
-      cat.includes(q) || CATEGORIES[cat].toLowerCase().includes(q) ||
-      (g.job || '').toLowerCase().includes(q);
-  };
-  const matches = state.guides.filter(matchesQuery);
+    return g.title.toLowerCase().includes(q) || CATEGORIES[cat].toLowerCase().includes(q);
+  });
   if (!matches.length) {
-    list.innerHTML = `<div class="lib-empty">No results for "${state.libQuery.trim()}"</div>`;
+    list.innerHTML = `<div class="lib-empty">No results</div>`;
     return;
   }
-  const sections = [];
-  const favs = matches.filter((g) => state.favorites[g.id]);
-  if (favs.length) sections.push({ label: '★ Favorites', guides: favs });
-  const recents = state.recent.map((id) => matches.find((g) => g.id === id)).filter(Boolean);
-  if (recents.length) sections.push({ label: 'Recent', guides: recents });
   const byCat = {};
   matches.forEach((g) => { const cat = guideCategory(g); (byCat[cat] = byCat[cat] || []).push(g); });
-  Object.keys(CATEGORIES).filter((cat) => byCat[cat]).forEach((cat) =>
-    sections.push({ label: CATEGORIES[cat], guides: byCat[cat] }));
-  list.innerHTML = sections.map((s) =>
-    `<div class="lib-cat">${s.label}</div>` + s.guides.map(libCard).join('')).join('');
+  list.innerHTML = Object.keys(CATEGORIES).filter((c) => byCat[c])
+    .map((c) => `<div class="lib-cat">${CATEGORIES[c]}</div>` + byCat[c].map(libCard).join('')).join('');
   list.querySelectorAll('.lib-fav').forEach((btn) => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -276,38 +340,44 @@ function renderLibList() {
 }
 
 let ocrStatus = 'off';
-const OCR_TOGGLE_LABELS = { off: 'OFF', starting: 'STARTING...', ready: 'READY' };
-const OCR_BAR_LABELS = { off: 'OCR OFF', starting: 'OCR STARTING', ready: 'OCR READY' };
 
-async function updateOcrCalibrationUI() {
-  try {
-    const cfg = await window.maplebot.getOCRConfig();
-    $('#ocr-calibrate').classList.toggle('calibrated', !!cfg);
-    $('#ocr-calibrate').title = cfg ? 'Recalibrate map name region' : 'Calibrate the map name region';
-  } catch (_) { /* ignore */ }
+async function applyOcrSettings() {
+  await window.maplebot.setOCRSettings({
+    minConfidence: state.settings.ocrMinConfidence,
+    fastTick: state.settings.ocrFastTick,
+    displayId: state.settings.ocrDisplayId,
+    intervalMs: state.settings.ocrFastTick ? 2000 : 3000
+  });
 }
 
-function updateOcrUI() {
-  $('#ocr-toggle-state').textContent = OCR_TOGGLE_LABELS[ocrStatus] || 'OFF';
-  const toggle = $('#ocr-toggle');
-  toggle.classList.toggle('starting', ocrStatus === 'starting');
-  toggle.classList.toggle('on', ocrStatus === 'ready');
-  $('#ocr-status').textContent = OCR_BAR_LABELS[ocrStatus] || 'OCR OFF';
-  $('#ocr-map').classList.toggle('visible', ocrStatus === 'ready');
-  if (ocrStatus !== 'ready') {
-    document.querySelectorAll('.step.ocr-here').forEach((el) => el.classList.remove('ocr-here'));
-  }
+async function loadSettingsUI() {
+  const displays = await window.maplebot.getDisplays();
+  const sel = $('#set-display');
+  sel.innerHTML = '<option value="">Primary monitor</option>' + displays.map((d) =>
+    `<option value="${d.id}" ${d.id === state.settings.ocrDisplayId ? 'selected' : ''}>${d.label}${d.primary ? ' ★' : ''}</option>`
+  ).join('');
+  $('#set-ocr-conf').value = state.settings.ocrMinConfidence;
+  $('#set-ocr-fast').checked = state.settings.ocrFastTick;
+  $('#set-hide-skipped').checked = state.settings.hideSkipped;
+  $('#set-on-top').value = state.settings.alwaysOnTopLevel;
+  await applyOcrSettings();
 }
 
 function onOcrResult(r) {
   const name = $('#ocr-map-name');
   const conf = $('#ocr-map-conf');
   const match = $('#ocr-map-match');
+  const hint = $('#ocr-map-hint');
   if (r.reason === 'uncalibrated') {
     name.textContent = 'Not calibrated — use CAL';
     name.classList.add('unknown');
     conf.textContent = '';
     match.textContent = '';
+    hint.textContent = '';
+    return;
+  }
+  if (r.reason === 'error') {
+    hint.textContent = r.message || 'Capture error';
     return;
   }
   if (Number.isFinite(r.confidence)) conf.textContent = `Confidence: ${r.confidence}%`;
@@ -316,6 +386,7 @@ function onOcrResult(r) {
     name.textContent = 'Unknown Map';
     name.classList.add('unknown');
     match.textContent = '';
+    hint.textContent = '';
     return;
   }
   name.classList.remove('unknown');
@@ -325,27 +396,102 @@ function onOcrResult(r) {
     runOcrMatch(activeGuide());
     if (state.view === 'steps') applyOcrHighlight($('#steps'), ocrStatus, activeGuide());
   }
-  match.textContent = ocrView.matchedStepId ? '🟢 Map Match' : '🔴 Wrong Map';
-  match.className = ocrView.matchedStepId ? 'match' : 'wrong';
-}
-
-async function toggleOcr() {
-  if (ocrStatus === 'off') {
-    ocrStatus = 'starting';
-    updateOcrUI();
-    try { await window.maplebot.startOCR(); } catch (_) { ocrStatus = 'off'; updateOcrUI(); }
-  } else {
-    await window.maplebot.stopOCR();
-  }
+  const hasMatch = !!ocrView.matchedStepId;
+  match.textContent = hasMatch ? '🟢 Map Match' : '🔴 Wrong Map';
+  match.className = hasMatch ? 'match' : 'wrong';
+  if (!hasMatch) {
+    const closest = getClosestMapHint(detected);
+    hint.textContent = closest
+      ? `Closest: ${closest.name} (${Math.round(closest.score * 100)}%)`
+      : '';
+  } else hint.textContent = '';
 }
 
 function bindControls() {
-  $('#ocr-toggle').addEventListener('click', toggleOcr);
-  $('#ocr-calibrate').addEventListener('click', () => {
-    window.maplebot.calibrateOCR();
-    setTimeout(updateOcrCalibrationUI, 500);
+  $('#profile-trigger').addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleProfileMenu();
   });
-  window.maplebot.onOCRStatusChanged((s) => { ocrStatus = s; updateOcrUI(); });
+  document.addEventListener('click', () => closeProfileMenu());
+  $('#profile-menu').addEventListener('click', (e) => {
+    e.stopPropagation();
+    const opt = e.target.closest('.profile-option');
+    if (!opt) return;
+    syncProfile(state);
+    switchProfile(state, opt.dataset.id);
+    save();
+    closeProfileMenu();
+    render();
+  });
+  $('#btn-add-profile').addEventListener('click', () => {
+    const name = $('#profile-new-name').value.trim();
+    if (!name) return;
+    addProfile(state, name);
+    $('#profile-new-name').value = '';
+    save();
+    closeProfileMenu();
+    render();
+  });
+  $('#profile-new-name').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') $('#btn-add-profile').click();
+  });
+  $('#btn-settings').addEventListener('click', () => {
+    $('#settings-panel').classList.toggle('hidden');
+  });
+  $('#set-ocr-conf').addEventListener('input', (e) => {
+    state.settings.ocrMinConfidence = parseInt(e.target.value, 10);
+    save();
+    applyOcrSettings();
+  });
+  $('#set-ocr-fast').addEventListener('change', (e) => {
+    state.settings.ocrFastTick = e.target.checked;
+    save();
+    applyOcrSettings();
+  });
+  $('#set-display').addEventListener('change', (e) => {
+    state.settings.ocrDisplayId = e.target.value ? parseInt(e.target.value, 10) : null;
+    save();
+    applyOcrSettings();
+  });
+  $('#set-hide-skipped').addEventListener('change', (e) => {
+    state.settings.hideSkipped = e.target.checked;
+    save();
+    render();
+  });
+  $('#set-on-top').addEventListener('change', (e) => {
+    state.settings.alwaysOnTopLevel = e.target.value;
+    window.maplebot.setAlwaysOnTopLevel(e.target.value);
+    save();
+  });
+  $('#btn-tray').addEventListener('click', () => window.maplebot.minimizeToTray());
+  window.maplebot.onHotkey((action) => {
+    if (action === 'cycle-guide') stepGuide(1);
+    if (action === 'toggle-library') {
+      state.view = state.view === 'library' ? 'steps' : 'library';
+      animateSwap();
+      render();
+    }
+  });
+  $('#ocr-toggle').addEventListener('click', async () => {
+    if (ocrStatus === 'off') {
+      ocrStatus = 'starting';
+      $('#ocr-toggle-state').textContent = 'STARTING...';
+      try { await window.maplebot.startOCR(); } catch (_) { ocrStatus = 'off'; }
+    } else await window.maplebot.stopOCR();
+  });
+  $('#ocr-calibrate').addEventListener('click', () => {
+    window.maplebot.calibrateOCR(state.settings.ocrDisplayId);
+    setTimeout(async () => {
+      const cfg = await window.maplebot.getOCRConfig();
+      $('#ocr-calibrate').classList.toggle('calibrated', !!cfg);
+    }, 500);
+  });
+  window.maplebot.onOCRStatusChanged((s) => {
+    ocrStatus = s;
+    $('#ocr-toggle-state').textContent = s.toUpperCase();
+    $('#ocr-toggle').classList.toggle('on', s === 'ready');
+    $('#ocr-map').classList.toggle('visible', s === 'ready');
+  });
   window.maplebot.onOCRResult(onOcrResult);
   ['wheel', 'touchmove'].forEach((ev) =>
     $('#steps').addEventListener(ev, () => { ocrView.lastUserScrollAt = Date.now(); }, { passive: true }));
@@ -353,15 +499,16 @@ function bindControls() {
   $('#btn-prev').addEventListener('click', () => stepGuide(-1));
   $('#btn-next').addEventListener('click', () => stepGuide(1));
   $('#dash-fav').addEventListener('click', () => {
-    const guide = activeGuide();
-    if (!guide) return;
-    if (state.favorites[guide.id]) delete state.favorites[guide.id];
-    else state.favorites[guide.id] = true;
+    const g = activeGuide();
+    if (!g) return;
+    if (state.favorites[g.id]) delete state.favorites[g.id];
+    else state.favorites[g.id] = true;
     save();
-    renderDashboard(guide);
+    renderDashboard(g);
   });
   $('#level-input').addEventListener('change', (e) => {
     state.level = Math.min(200, Math.max(1, parseInt(e.target.value, 10) || 1));
+    activeProfile(state).level = state.level;
     save();
     render();
   });
@@ -380,37 +527,56 @@ function bindControls() {
     const collapsed = document.body.classList.toggle('collapsed');
     window.maplebot.setCollapsed(collapsed, $('#titlebar').offsetHeight + 2);
   });
-  $('#btn-quit').addEventListener('click', () => window.maplebot.quit());
   window.maplebot.onLockChanged((locked) => {
     $('#btn-lock').textContent = locked ? '🔒' : '🔓';
-    $('#lock-label').textContent = locked ? 'LOCK (F8 to release)' : '';
+    $('#lock-label').textContent = locked ? 'LOCK (F8)' : '';
+  });
+  bindUpdateHandlers();
+}
+
+function bindUpdateHandlers() {
+  const el = $('#update-label');
+  if (!el || !window.maplebot.onUpdateAvailable) return;
+
+  window.maplebot.onUpdateAvailable(({ version }) => {
+    el.classList.remove('hidden', 'downloading', 'ready');
+    el.textContent = `v${version} available — click to download`;
+    el.onclick = async () => {
+      el.classList.add('downloading');
+      el.textContent = 'Downloading update…';
+      el.onclick = null;
+      await window.maplebot.downloadUpdate();
+    };
+  });
+  window.maplebot.onUpdateProgress((pct) => {
+    el.classList.add('downloading');
+    el.classList.remove('hidden');
+    el.textContent = `Downloading ${pct}%`;
+  });
+  window.maplebot.onUpdateDownloaded(({ version }) => {
+    el.classList.remove('downloading');
+    el.classList.add('ready');
+    el.textContent = `v${version} ready — restart to install`;
+    el.onclick = () => window.maplebot.installUpdate();
+  });
+  window.maplebot.onUpdateError(() => {
+    el.classList.add('hidden');
   });
 }
 
 (async function init() {
   load();
   window.MaplebotDbPanel.bindPanel();
-  window.MaplebotEditor.init({
-    getState: () => state,
-    getActiveGuide: activeGuide,
-    editBtn: $('#btn-edit-guide'),
-    newBtn: $('#btn-new-guide'),
-    onSaved: (g) => { state.activeGuideId = g.id; save(); render(); }
-  });
   bindControls();
   window.maplebot.setOpacity(state.opacity);
-  window.maplebot.getOCRStatus().then((s) => { ocrStatus = s; updateOcrUI(); }).catch(() => {});
-  updateOcrCalibrationUI();
-  loadDatabase().then(() => {
-    if (state.guides.length) {
-      render();
-      console.log('[Migration Report]', JSON.stringify(buildMigrationReport(state.guides), null, 2));
-    }
-  });
+  window.maplebot.setAlwaysOnTopLevel(state.settings.alwaysOnTopLevel);
+  await loadSettingsUI();
+  await loadDatabase();
   try {
     await loadGuides();
     render();
+    console.log('[Migration]', buildMigrationReport(state.guides));
   } catch (err) {
-    $('#steps').innerHTML = `<div class="step"><div class="step-body"><div class="step-text">Error loading guides.json: ${err.message}</div></div></div>`;
+    $('#steps').innerHTML = `<div class="step"><div class="step-body"><div class="step-text">Error: ${err.message}</div></div></div>`;
   }
 })();

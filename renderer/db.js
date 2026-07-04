@@ -34,7 +34,8 @@
         mapNpcs: new Map(),
         itemDroppedBy: new Map(),
         npcQuests: new Map(),
-        itemQuests: new Map()
+        itemQuests: new Map(),
+        mapGuides: new Map()
       }
     };
     for (const type of Object.values(DB_TYPE_BY_PREFIX)) {
@@ -63,6 +64,61 @@
       ((q.rewards && q.rewards.items) || []).forEach((ref) => push(idx.reverse.itemQuests, ref, id));
     });
     return idx;
+  }
+
+  let guidesIndex = [];
+
+  function setGuidesIndex(guides) {
+    guidesIndex = guides || [];
+    if (!db) return;
+    db.reverse.mapGuides = new Map();
+    const pushG = (ref, info) => {
+      const k = stripRefPrefix(ref);
+      if (!db.reverse.mapGuides.has(k)) db.reverse.mapGuides.set(k, []);
+      db.reverse.mapGuides.get(k).push(info);
+    };
+    for (const g of guidesIndex) {
+      for (const st of g.steps) {
+        const info = { guideId: g.id, guideTitle: g.title, stepId: st.id, stepText: st.text };
+        if (st.mapRef) pushG(st.mapRef, info);
+        (st.trainRefs || []).forEach((r) => {
+          const tr = dbResolve(r);
+          if (tr && tr.maps) tr.maps.forEach((m) => pushG(m, info));
+        });
+      }
+    }
+  }
+
+  function getGuidesForRef(ref) {
+    if (!db || !ref) return [];
+    return db.reverse.mapGuides.get(stripRefPrefix(ref)) || [];
+  }
+
+  function resolveGrindLine(line) {
+    if (!db || !line) return null;
+    const s = String(line).trim();
+    if (s.startsWith('train:') || s.startsWith('map:')) return dbResolve(s) ? { ref: s, entity: dbResolve(s) } : null;
+    const stripped = s.replace(/\(.*?\)/g, ' ').trim();
+    for (const [alias, id] of db.mapAliases) {
+      if (stripped.toLowerCase().includes(alias) || alias.includes(normalizeMapName(stripped))) {
+        return { ref: `map:${id}`, entity: db.byType.maps.get(id) };
+      }
+    }
+    for (const [id, t] of db.byType.training) {
+      if (t.name && stripped.toLowerCase().includes(t.name.toLowerCase())) {
+        return { ref: `train:${id}`, entity: t };
+      }
+    }
+    return null;
+  }
+
+  function listEntities(typePrefix) {
+    const type = DB_TYPE_BY_PREFIX[typePrefix];
+    if (!db || !type || !db.byType[type]) return [];
+    return [...db.byType[type].entries()].map(([id, e]) => ({
+      ref: `${typePrefix}:${id}`,
+      name: e.name || id
+    }));
   }
 
   function dbResolve(ref) {
@@ -173,6 +229,10 @@
     findMapEntity,
     findMapId,
     loadDatabase,
-    buildMigrationReport
+    buildMigrationReport,
+    setGuidesIndex,
+    getGuidesForRef,
+    resolveGrindLine,
+    listEntities
   };
 })(window);

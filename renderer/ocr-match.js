@@ -117,11 +117,26 @@
     }
   }
 
+  function getClosestMapHint(mapName) {
+    const normalized = normalizeMapName(mapName);
+    if (!normalized || !global.MaplebotDb.db) return null;
+    let best = null;
+    for (const [alias, mapId] of global.MaplebotDb.db.mapAliases) {
+      const score = mapSimilarity(alias, normalized);
+      if (!best || score > best.score) {
+        const ent = global.MaplebotDb.db.byType.maps.get(mapId);
+        best = { mapId, name: ent && ent.name, score };
+      }
+    }
+    return best && best.score >= 0.5 ? best : null;
+  }
+
   global.MaplebotOcr = {
     ocrView,
     findStepForMap,
     runOcrMatch,
     applyOcrHighlight,
-    resolveOcrToMapId
+    resolveOcrToMapId,
+    getClosestMapHint
   };
 })(window);

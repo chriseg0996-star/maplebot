@@ -45,6 +45,11 @@
     return JSON.parse(JSON.stringify(g));
   }
 
+  function refPickerOptions(typePrefix) {
+    const list = global.MaplebotDb.listEntities(typePrefix);
+    return list.map((e) => `<option value="${e.ref}">${e.name}</option>`).join('');
+  }
+
   function renderEditorForm() {
     const g = editingGuide;
     const cats = Object.keys({
@@ -65,13 +70,19 @@
           </select>
         </label>
         <label>Text <textarea class="ed-in" data-field="text" data-idx="${idx}" rows="2">${st.text || ''}</textarea></label>
-        <label>Map ref <input class="ed-in" data-field="mapRef" data-idx="${idx}" value="${st.mapRef || ''}" placeholder="map:kerning_city" /></label>
-        <label>NPC ref <input class="ed-in" data-field="npcRef" data-idx="${idx}" value="${st.npcRef || ''}" placeholder="npc:dark_lord" /></label>
+        <label>Map ref
+          <input class="ed-in" list="dl-maps" data-field="mapRef" data-idx="${idx}" value="${st.mapRef || ''}" placeholder="map:kerning_city" />
+        </label>
+        <label>NPC ref
+          <input class="ed-in" list="dl-npcs" data-field="npcRef" data-idx="${idx}" value="${st.npcRef || ''}" placeholder="npc:dark_lord" />
+        </label>
         <label>Req level <input class="ed-in" data-field="reqLevel" data-idx="${idx}" type="number" value="${st.req?.level || ''}" /></label>
         <label>Maps (grind, comma-sep) <input class="ed-in" data-field="maps" data-idx="${idx}" value="${(st.maps || []).join(', ')}" /></label>
       </div>`).join('');
 
     return `
+      <datalist id="dl-maps">${refPickerOptions('map')}</datalist>
+      <datalist id="dl-npcs">${refPickerOptions('npc')}</datalist>
       <div class="ed-form">
         <label>Guide ID <input id="ed-guide-id" value="${g.id}" /></label>
         <label>Title <input id="ed-guide-title" value="${g.title || ''}" /></label>
@@ -85,7 +96,7 @@
         <button type="button" id="ed-add-step">+ Add step</button>
         <div id="ed-errors" class="ed-errors"></div>
         <div class="ed-actions">
-          <button type="button" id="ed-save">Apply to session</button>
+          <button type="button" id="ed-save">Apply + save locally</button>
           <button type="button" id="ed-export">Export JSON</button>
           <button type="button" id="ed-import">Import JSON</button>
           <button type="button" id="ed-cancel">Cancel</button>
@@ -182,15 +193,16 @@
       });
     });
 
-    document.getElementById('ed-save').addEventListener('click', () => {
+    document.getElementById('ed-save').addEventListener('click', async () => {
       const g = readFormFromDom();
       const state = getState();
       const errors = validateGuide(g, state.guides, replaceId);
-      showErrors(errors);
-      if (errors.length) return;
+      showErrors(errors.filter((e) => !e.startsWith('Warning:')));
+      if (errors.some((e) => !e.startsWith('Warning:'))) return;
       const idx = state.guides.findIndex((x) => x.id === replaceId);
       if (idx >= 0) state.guides[idx] = g;
       else state.guides.push(g);
+      await window.maplebot.saveUserGuides(state.guides);
       if (onSaved) onSaved(g);
       closeEditor();
     });

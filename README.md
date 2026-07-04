@@ -1,72 +1,54 @@
 # Maplebot
 
-Quest helper overlay for **MapleRoyals v83**. Shows step-by-step guides (job advancement, boss prequests) on top of your game window.
+Quest helper overlay for **MapleRoyals v83**. Step-by-step guides (job advancement, boss prequests, PQs) beside your game window.
 
 **Display-only** — Maplebot never sends keyboard or mouse input to the game.
 
 ## Install (Windows)
 
-1. Download **Maplebot Setup 1.0.0.exe** from the [Releases](https://github.com/your-org/maplebot/releases) page (or run `npm run dist` to build locally).
-2. Run the installer. If Windows SmartScreen appears, choose **More info → Run anyway** (the build is not code-signed).
-3. Launch **Maplebot** from the Start menu or desktop shortcut.
+1. Open **[GitHub Releases](https://github.com/chriseg0996-star/maplebot/releases)** and download **Maplebot Setup 2.1.0.exe** (or the portable `.exe`).
+2. Run the installer. If SmartScreen warns, choose **More info → Run anyway** (builds are not code-signed yet).
+3. Launch **Maplebot** from Start or the desktop shortcut.
 
-MapleRoyals must run in **windowed** or **borderless windowed** mode. Exclusive fullscreen covers the overlay.
+MapleRoyals must run in **windowed** or **borderless windowed** mode — exclusive fullscreen covers the overlay.
 
 ## First run
 
-1. Position the overlay beside your minimap (drag the title bar).
-2. Set your character **Level** in the header.
-3. Pick a guide from the dropdown or open the **Library** (📖).
-4. Click steps to mark them done as you play.
+1. Drag the title bar to park the overlay beside your minimap.
+2. Pick your character from the profile pill in the header (default **Adventurer**).
+3. Set **Level**, choose a guide, and check off steps as you play.
+4. Optional: **CAL** → drag over the in-game map name → **OCR** for read-only map matching.
 
 ## Controls
 
-| Control | Action |
-|---------|--------|
+| Input | Action |
+|-------|--------|
 | **F8** | Toggle click-through (play through the overlay) |
+| **F9** | Next guide |
+| **F10** | Toggle guide library |
 | **◐** | Cycle opacity |
-| **—** | Collapse to title bar only |
-| **🔓 / 🔒** | Click-through toggle |
-| **EDIT / +** | Edit current guide or create a new one |
+| **—** | Collapse to title bar |
+| **_** | Minimize to system tray |
+| **⚙** | Settings (OCR confidence, monitor, etc.) |
 
-## Optional: Map OCR
+## Updates
 
-OCR reads the in-game map name from your screen and highlights the matching guide step. It is optional — guides work without it.
-
-1. Click **CAL** and drag a rectangle over the map name area in MapleRoyals.
-2. Click **OCR** to turn on read-only recognition (updates every ~3 seconds).
-3. **CAL** shows a green border when calibrated.
-
-OCR works fully offline after install. It only supports the **primary monitor**.
-
-## Guide editor
-
-- **EDIT** — change the active guide in memory for this session.
-- **Apply to session** — save edits locally (localStorage progress unchanged).
-- **Export JSON** — save `guides.json` format to share or merge.
-- **Import JSON** — load guides from a file.
-
-## Troubleshooting
-
-| Problem | Fix |
-|---------|-----|
-| Overlay hidden behind game | Use borderless windowed, not exclusive fullscreen |
-| OCR shows "Unknown Map" | Recalibrate CAL; check map name region is visible |
-| OCR never starts | Ensure `resources/tesseract/eng.traineddata` exists (re-run `npm install`) |
-| Antivirus blocks installer | Allow Maplebot or build from source |
+Packaged builds check GitHub Releases on startup. When an update is available, the status bar shows **vX.Y.Z available — click to download**. After download, click **restart to install**.
 
 ## Build from source
 
-```bash
+```powershell
+cd maplebot
 npm install
 npm start          # development
-npm run dist       # Windows installer + portable in dist/
+npm run dist       # local installer in dist/ (no upload)
 ```
 
-## Guides included (v1.0)
+See [RELEASING.md](RELEASING.md) for publishing a tagged release to GitHub.
 
-- Job paths: Hero, FP Arch Mage, Bowmaster, Night Lord, Shadower, Buccaneer
-- Boss prequests: Zakum, Horntail
+## Guides included (v2.1)
+
+18 guides — job paths (Hero, FP/IL/Bishop, Bowmaster, Marksman, NL, Shadower, Buccaneer, Corsair, Paladin), Zakum, Horntail, Pink Bean, Papulatus, Kerning/Ludi PQ, NLC travel, and more.
 
 ## License
 

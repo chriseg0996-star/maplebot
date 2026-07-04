@@ -1,22 +1,32 @@
 {
   "name": "maplebot",
-  "version": "1.0.0",
+  "version": "2.1.0",
   "description": "Quest helper overlay (display-only) for MapleRoyals v83",
   "main": "main.js",
   "author": "Maplebot",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chriseg0996-star/maplebot.git"
+  },
+  "homepage": "https://github.com/chriseg0996-star/maplebot#readme",
+  "bugs": {
+    "url": "https://github.com/chriseg0996-star/maplebot/issues"
+  },
   "scripts": {
     "start": "electron .",
+    "validate": "node scripts/validate-content.js",
     "postinstall": "node scripts/download-tesseract-lang.js",
-    "predist": "node scripts/download-tesseract-lang.js",
-    "dist": "electron-builder --win",
-    "dist:portable": "electron-builder --win portable"
+    "predist": "node scripts/validate-content.js && node scripts/download-tesseract-lang.js",
+    "dist": "electron-builder --win --publish never",
+    "dist:publish": "electron-builder --win --publish always"
   },
   "devDependencies": {
     "electron": "^31.0.0",
     "electron-builder": "^25.1.8"
   },
   "dependencies": {
+    "electron-updater": "^6.3.9",
     "tesseract.js": "^7.0.0"
   },
   "build": {
@@ -35,16 +45,14 @@
       "data/**/*",
       "node_modules/**/*"
     ],
-    "asarUnpack": [
-      "data/**/*"
-    ],
+    "asarUnpack": ["data/**/*"],
     "extraResources": [
-      {
-        "from": "resources/tesseract",
-        "to": "tesseract",
-        "filter": ["**/*"]
-      }
+      { "from": "resources/tesseract", "to": "tesseract", "filter": ["**/*"] }
     ],
+    "publish": {
+      "provider": "github",
+      "releaseType": "release"
+    },
     "win": {
       "target": [
         { "target": "nsis", "arch": ["x64"] },

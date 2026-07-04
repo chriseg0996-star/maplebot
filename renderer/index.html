@@ -9,34 +9,58 @@
   <div id="overlay">
     <header id="titlebar">
       <span class="logo">MAPLEBOT</span>
+      <div class="titlebar-mid">
+        <button id="profile-trigger" type="button" class="profile-trigger profile-trigger--inline" aria-haspopup="listbox">
+          <span id="profile-avatar" class="profile-avatar">A</span>
+          <span class="profile-meta">
+            <span id="profile-name" class="profile-name">Adventurer</span>
+            <span id="profile-level" class="profile-level">Lv 10</span>
+          </span>
+          <span class="profile-chevron" aria-hidden="true">▾</span>
+        </button>
+      </div>
       <div class="controls">
+        <button id="btn-settings" title="Settings">⚙</button>
         <button id="btn-opacity" title="Opacity">◐</button>
         <button id="btn-lock" title="Click-through (F8)">🔓</button>
         <button id="btn-collapse" title="Collapse">—</button>
-        <button id="btn-quit" title="Quit">✕</button>
+        <button id="btn-tray" title="Minimize to tray">_</button>
+      </div>
+      <div id="profile-menu" class="profile-menu hidden" role="listbox">
+        <div id="profile-list"></div>
+        <div class="profile-menu-footer">
+          <input id="profile-new-name" type="text" placeholder="New character…" spellcheck="false" />
+          <button id="btn-add-profile" type="button">Add</button>
+        </div>
       </div>
     </header>
 
-    <section id="setup">
+    <section id="toolbar">
       <select id="guide-select"></select>
-      <button id="btn-library" title="Guide Library">📖</button>
-      <div class="level-row">
-        <label for="level-input">Level</label>
-        <input id="level-input" type="number" min="1" max="200" value="10" />
-      </div>
-    </section>
-
-    <section id="settings">
+      <button id="btn-library" title="Guide Library (F10)">📖</button>
+      <input id="level-input" type="number" min="1" max="200" value="10" title="Character level" />
+      <div class="toolbar-gap"></div>
       <button id="ocr-toggle" title="Read-only map name OCR">
         <span>OCR</span><span id="ocr-toggle-state">OFF</span>
       </button>
-      <button id="ocr-calibrate" title="Calibrate the map name region">CAL</button>
-      <button id="btn-edit-guide" title="Edit current guide">EDIT</button>
-      <button id="btn-new-guide" title="New guide">+</button>
+      <button id="ocr-calibrate" title="Calibrate map name region">CAL</button>
+    </section>
+
+    <section id="settings-panel" class="hidden">
+      <label>OCR confidence <input id="set-ocr-conf" type="range" min="40" max="95" value="60" /></label>
+      <label><input id="set-ocr-fast" type="checkbox" /> Fast OCR (2s tick)</label>
+      <label>Monitor <select id="set-display" class="ui-select"></select></label>
+      <label><input id="set-hide-skipped" type="checkbox" /> Collapse skipped steps</label>
+      <label>On-top level
+        <select id="set-on-top" class="ui-select">
+          <option value="screen-saver">High (screen-saver)</option>
+          <option value="normal">Normal</option>
+        </select>
+      </label>
     </section>
 
     <section id="dashboard">
-      <button id="btn-prev" title="Previous Guide">‹</button>
+      <button id="btn-prev" title="Previous Guide (F9)">‹</button>
       <div class="dash-main">
         <div class="dash-top">
           <span id="dash-title"></span>
@@ -49,14 +73,15 @@
         </div>
         <div class="dash-bar"><div id="dash-fill"></div></div>
       </div>
-      <button id="btn-next" title="Next Guide">›</button>
+      <button id="btn-next" title="Next Guide (F9)">›</button>
     </section>
 
     <section id="ocr-map">
       <span class="ocr-map-pin">📍</span>
       <div class="ocr-map-body">
-        <div class="ocr-map-label">Current Map</div>
-        <div id="ocr-map-name">—</div>
+        <span class="ocr-map-label">Map</span>
+        <span id="ocr-map-name">—</span>
+        <span id="ocr-map-hint" class="ocr-hint"></span>
       </div>
       <div class="ocr-map-right">
         <span id="ocr-map-match"></span>
@@ -68,6 +93,7 @@
 
     <footer id="statusbar">
       <span id="progress-label"></span>
+      <span id="update-label" class="update-label hidden"></span>
       <span id="ocr-status">OCR OFF</span>
       <span id="lock-label"></span>
     </footer>
@@ -78,24 +104,15 @@
     <header class="panel-header">
       <span id="db-panel-type" class="panel-type"></span>
       <h2 id="db-panel-title"></h2>
-      <button id="db-panel-close" type="button" title="Close">✕</button>
+      <button id="db-panel-close" type="button">✕</button>
     </header>
     <div id="db-panel-body" class="panel-body"></div>
   </aside>
 
-  <div id="editor-backdrop" class="modal-backdrop"></div>
-  <div id="editor-modal" class="editor-modal">
-    <header class="panel-header">
-      <h2>Guide Editor</h2>
-      <button id="editor-close" type="button" title="Close">✕</button>
-    </header>
-    <div id="editor-body" class="panel-body editor-scroll"></div>
-  </div>
-
+  <script src="profiles.js"></script>
   <script src="db.js"></script>
   <script src="ocr-match.js"></script>
   <script src="db-panel.js"></script>
-  <script src="editor.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

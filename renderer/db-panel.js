@@ -1,7 +1,7 @@
 // Companion DB detail panel — read-only entity viewer.
 (function (global) {
   const {
-    dbResolve, refType, refName, renderTextWithLinks, stripRefPrefix, db
+    dbResolve, refType, refName, renderTextWithLinks, stripRefPrefix, db, getGuidesForRef
   } = global.MaplebotDb;
 
   let panelOpen = false;
@@ -32,12 +32,15 @@
       .map((mid) => linkRef(`mob:${mid}`)).join(', ') || '—';
     const npcs = (db.reverse.mapNpcs.get(stripRefPrefix(`map:${id}`)) || [])
       .map((nid) => linkRef(`npc:${nid}`)).join(', ') || '—';
+    const guides = getGuidesForRef(`map:${id}`)
+      .map((g) => esc(g.guideTitle)).join(', ') || '—';
     return [
       field('Region', esc(e.region || '—')),
       field('Level range', esc(lvl)),
       field('Connections', conn),
       field('Monsters', mobs),
       field('NPCs', npcs),
+      field('In guides', guides),
       field('Notes', renderTextWithLinks(e.notes || ''))
     ].join('');
   }
@@ -90,7 +93,9 @@
   }
 
   function renderQuest(e) {
-    const items = (e.items || []).map((it) => `${linkRef(it.item)} ×${it.qty || 1}`).join(', ') || '—';
+    const items = (e.items || []).map((it) =>
+      `<div class="quest-item">${linkRef(it.item)} ×${it.qty || 1}</div>`
+    ).join('') || '—';
     const rewards = e.rewards ? [
       e.rewards.exp != null && `EXP ${e.rewards.exp}`,
       e.rewards.mesos != null && `${e.rewards.mesos} mesos`,

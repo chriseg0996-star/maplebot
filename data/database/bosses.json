@@ -8,21 +8,81 @@
     "zakum": {
       "name": "Zakum",
       "map": "map:zakums_altar",
-      "requirements": { "level": 50 },
+      "requirements": {
+        "level": 50
+      },
       "recommendedLevel": 70,
-      "prequests": ["quest:zakum_prequest"],
-      "partySize": [6, 30],
-      "entries": { "perDay": null, "consumes": "item:eye_of_fire" },
+      "prequests": [
+        "quest:zakum_prequest"
+      ],
+      "partySize": [
+        6,
+        30
+      ],
+      "entries": {
+        "perDay": null,
+        "consumes": "item:eye_of_fire"
+      },
       "drops": []
     },
     "horntail": {
       "name": "Horntail",
       "map": "map:horntails_cave",
-      "requirements": { "level": 80 },
+      "requirements": {
+        "level": 80
+      },
       "recommendedLevel": 120,
-      "prequests": ["quest:horntail_prequest"],
-      "partySize": [6, 12],
-      "entries": { "perDay": null, "consumes": "item:horntail_cave_pass" },
+      "prequests": [
+        "quest:horntail_prequest"
+      ],
+      "partySize": [
+        6,
+        12
+      ],
+      "entries": {
+        "perDay": null,
+        "consumes": "item:horntail_cave_pass"
+      },
+      "drops": []
+    },
+    "papulatus": {
+      "name": "Papulatus",
+      "map": "map:papulatus_altar",
+      "requirements": {
+        "level": 115
+      },
+      "recommendedLevel": 120,
+      "prequests": [
+        "quest:papulatus_prequest"
+      ],
+      "partySize": [
+        6,
+        6
+      ],
+      "entries": {
+        "perDay": null,
+        "consumes": "item:papulatus_ticket"
+      },
+      "drops": []
+    },
+    "pink_bean": {
+      "name": "Pink Bean",
+      "map": "map:pink_bean_altar",
+      "requirements": {
+        "level": 120
+      },
+      "recommendedLevel": 130,
+      "prequests": [
+        "quest:pink_bean_prequest"
+      ],
+      "partySize": [
+        6,
+        12
+      ],
+      "entries": {
+        "perDay": null,
+        "consumes": "item:pink_bean_ticket"
+      },
       "drops": []
     }
   }

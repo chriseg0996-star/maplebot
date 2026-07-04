@@ -2,6 +2,33 @@
 
 All notable changes to Maplebot are documented in this file.
 
+## [2.1.0] - 2026-07-04
+
+### Added
+- GitHub Actions release pipeline (`npm run dist:publish` on version tags)
+- In-app update flow: download + restart from status bar
+- [RELEASING.md](RELEASING.md) with ship checklist
+
+### Changed
+- Slimmer overlay chrome (merged toolbar, compact profile in titlebar)
+- Removed in-overlay guide editor from UI
+- `npm run dist` builds locally without publishing; CI publishes to GitHub Releases
+- README updated for v2.1 install and controls
+
+## [2.0.0] - 2026-07-04
+
+### Added
+- Character profiles with separate progress per character
+- Settings panel: OCR confidence, fast tick, monitor picker, hide skipped steps
+- F9 cycle guide, F10 toggle library; minimize to system tray
+- 10 new guides (Bishop, IL Mage, Marksman, Corsair, Paladin, Kerning/Ludi PQ, Pink Bean, Pap, NLC)
+- Grind spots link to DB; OCR "closest map" hint on wrong map
+- Guide editor ref picker (datalist), save to userData
+- DB panel: guides mentioning map, quest item checklist
+- `npm run validate`, GitHub Actions release workflow
+- electron-updater (checks on packaged start)
+- Multi-monitor OCR calibration and capture
+
 ## [1.0.0] - 2026-07-03
 
 ### Added

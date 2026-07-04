@@ -118,6 +118,30 @@
       "type": "quest",
       "use": "Ticket de entrada a [[map:horntails_cave]] — recompensa de [[quest:horntail_prequest]].",
       "soldBy": []
+    },
+    "lost_time_piece": {
+      "name": "Lost Time Piece",
+      "type": "etc",
+      "use": "20 requeridos en [[quest:papulatus_prequest]] — drops en [[map:ludi_labyrinth]].",
+      "soldBy": []
+    },
+    "papulatus_ticket": {
+      "name": "Papulatus Ticket",
+      "type": "quest",
+      "use": "Ticket de entrada a [[map:papulatus_altar]] — recompensa de [[quest:papulatus_prequest]].",
+      "soldBy": []
+    },
+    "squishy_liquid": {
+      "name": "Squishy Liquid",
+      "type": "etc",
+      "use": "50 requeridos en [[quest:pink_bean_prequest]] — drops de mobs en [[map:mushroom_shrine]].",
+      "soldBy": []
+    },
+    "pink_bean_ticket": {
+      "name": "Pink Bean Ticket",
+      "type": "quest",
+      "use": "Ticket de entrada a [[map:pink_bean_altar]] — recompensa de [[quest:pink_bean_prequest]].",
+      "soldBy": []
     }
   }
 }
