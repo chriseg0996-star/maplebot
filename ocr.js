@@ -5,9 +5,9 @@ const crypto = require('crypto');
 const { desktopCapturer, screen, nativeImage, app } = require('electron');
 const { tesseractLangPath } = require('./paths');
 
-const DEFAULTS = { minConfidence: 60, intervalMs: 3000, displayId: null, fastTick: false };
-const UPSCALE = 3;
-const THRESHOLD = 170;
+const DEFAULTS = { minConfidence: 45, intervalMs: 3000, displayId: null, fastTick: false };
+const UPSCALE = 4;
+const THRESHOLD = 128;
 
 let worker = null;
 let status = 'off';
@@ -51,8 +51,9 @@ function setSettings(s) {
 function getSettings() { return { ...settings }; }
 
 function getTargetDisplay() {
-  if (settings.displayId != null) {
-    const found = screen.getAllDisplays().find((d) => d.id === settings.displayId);
+  const id = settings.displayId ?? calibration?.displayId ?? null;
+  if (id != null) {
+    const found = screen.getAllDisplays().find((d) => d.id === id);
     if (found) return found;
   }
   return screen.getPrimaryDisplay();
@@ -75,7 +76,7 @@ async function captureScreen() {
   return { img: src.thumbnail, physW };
 }
 
-function preprocess(img, physW) {
+function preprocess(img, physW, { threshold = THRESHOLD, invert = false } = {}) {
   const size = img.getSize();
   const k = size.width / physW;
   const rect = {
@@ -100,7 +101,8 @@ function preprocess(img, physW) {
       const sx = (x / UPSCALE) | 0;
       const si = (sy * width + sx) * 4;
       const lum = 0.114 * src[si] + 0.587 * src[si + 1] + 0.299 * src[si + 2];
-      const v = lum >= THRESHOLD ? 0 : 255;
+      const dark = lum >= threshold ? 0 : 255;
+      const v = invert ? (255 - dark) : dark;
       const di = (y * W + x) * 4;
       out[di] = v; out[di + 1] = v; out[di + 2] = v; out[di + 3] = 255;
     }
@@ -110,8 +112,31 @@ function preprocess(img, physW) {
   return { png, hash };
 }
 
+function readConfidence(data) {
+  const words = (data.words || []).filter((w) => (w.text || '').trim());
+  if (words.length) {
+    return Math.round(words.reduce((s, w) => s + (w.confidence || 0), 0) / words.length);
+  }
+  return Math.round(data.confidence || 0);
+}
+
+async function recognizeCrop(png) {
+  const { data } = await worker.recognize(png);
+  const normalized = normalize((data.text || '').trim());
+  const confidence = readConfidence(data);
+  return { normalized, confidence };
+}
+
 function normalize(raw) {
   return raw.replace(/\s+/g, ' ').trim();
+}
+
+function looksLikeMapName(s) {
+  if (!s || s.length < 3 || s.length > 52) return false;
+  if (s.split(/\s+/).length > 8) return false;
+  const alpha = (s.match(/[A-Za-z]/g) || []).length;
+  if (alpha / s.length < 0.45) return false;
+  return true;
 }
 
 async function tick() {
@@ -127,18 +152,44 @@ async function tick() {
     const { img, physW } = await captureScreen();
     const { png, hash } = preprocess(img, physW);
     if (hash === lastCropHash) {
-      emit({ ok: false, skipped: true, lastValid, reason: 'unchanged' });
+      if (lastValid) emit({ ok: true, normalized: lastValid.name, confidence: lastValid.confidence, lastValid, skipped: true });
+      else emit({ ok: false, skipped: true, reason: 'unchanged', lastValid });
       return;
     }
     lastCropHash = hash;
-    const { data } = await worker.recognize(png);
-    const normalized = normalize((data.text || '').trim());
-    const confidence = Math.round(data.confidence || 0);
+    let { normalized, confidence } = await recognizeCrop(png);
     const minConf = settings.minConfidence ?? DEFAULTS.minConfidence;
-    const ok = normalized.length > 0 && confidence >= minConf;
+    const softMin = Math.min(minConf, 28);
+    let ok = normalized.length >= 2 && confidence >= minConf;
+    if (!ok && normalized.length >= 3) {
+      const alt = preprocess(img, physW, { threshold: 100, invert: true });
+      const retry = await recognizeCrop(alt.png);
+      if (retry.normalized.length >= 2 && retry.confidence >= softMin &&
+          retry.confidence >= confidence) {
+        normalized = retry.normalized;
+        confidence = retry.confidence;
+        ok = confidence >= minConf || (confidence >= softMin && /^[A-Za-z][A-Za-z0-9' :\-]+$/.test(normalized));
+      }
+    }
+    if (!ok && normalized.length >= 3 && confidence >= softMin &&
+        /^[A-Za-z][A-Za-z0-9' :\-]+$/.test(normalized) && looksLikeMapName(normalized)) {
+      ok = true;
+    }
+    if (ok && !looksLikeMapName(normalized)) ok = false;
+    if (!ok && lastValid && normalized && !looksLikeMapName(normalized)) {
+      emit({ ok: true, normalized: lastValid.name, confidence: lastValid.confidence, lastValid, skipped: true, reason: 'rejected_garbage' });
+      return;
+    }
     if (ok) lastValid = { name: normalized, confidence };
-    if (DEV) console.log(`[OCR] "${normalized}" conf=${confidence}`);
-    emit({ ok, normalized, confidence, lastValid, minConfidence: minConf });
+    if (DEV) console.log(`[OCR] "${normalized}" conf=${confidence} ok=${ok}`);
+    emit({
+      ok,
+      normalized,
+      confidence,
+      lastValid,
+      minConfidence: minConf,
+      reason: !normalized.length ? 'no_text' : undefined
+    });
   } catch (err) {
     if (DEV) console.log('[OCR] error:', err.message);
     emit({ ok: false, reason: 'error', message: err.message, lastValid });
@@ -161,6 +212,16 @@ function stopLoop() {
   if (timer) { clearInterval(timer); timer = null; }
 }
 
+function seedTesseractCache(cachePath, langPath) {
+  const dest = path.join(cachePath, 'eng.traineddata');
+  if (fs.existsSync(dest) && fs.statSync(dest).size > 1_000_000) return true;
+  const src = path.join(langPath, 'eng.traineddata');
+  if (!fs.existsSync(src)) return false;
+  fs.mkdirSync(cachePath, { recursive: true });
+  fs.copyFileSync(src, dest);
+  return true;
+}
+
 async function start(opts = {}) {
   if (status !== 'off') return status;
   const myGen = ++generation;
@@ -168,12 +229,23 @@ async function start(opts = {}) {
   try {
     const { createWorker } = require('tesseract.js');
     const langPath = opts.langPath || tesseractLangPath();
-    const workerOpts = { cachePath: opts.cachePath || app.getPath('userData') };
-    if (fs.existsSync(path.join(langPath, 'eng.traineddata'))) workerOpts.langPath = langPath;
+    const cachePath = opts.cachePath || app.getPath('userData');
+    const workerOpts = { cachePath };
+    // Copy bundled eng.traineddata into userData so tesseract.js reads from cache
+    // (local langPath expects .traineddata.gz; our bundle is uncompressed).
+    if (!seedTesseractCache(cachePath, langPath)) {
+      if (fs.existsSync(path.join(langPath, 'eng.traineddata.gz'))) {
+        workerOpts.langPath = langPath;
+        workerOpts.gzip = true;
+      } else if (fs.existsSync(path.join(langPath, 'eng.traineddata'))) {
+        workerOpts.langPath = langPath;
+        workerOpts.gzip = false;
+      }
+    }
     const w = await createWorker('eng', 1, workerOpts);
     await w.setParameters({
       tessedit_char_whitelist: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 :'-",
-      tessedit_pageseg_mode: '7'
+      tessedit_pageseg_mode: '6'
     });
     if (myGen !== generation) {
       await w.terminate().catch(() => {});
@@ -201,7 +273,31 @@ async function stop() {
   return status;
 }
 
+async function previewCalibration() {
+  if (!calibration) return { ok: false, reason: 'uncalibrated' };
+  try {
+    const { img, physW } = await captureScreen();
+    const { png } = preprocess(img, physW);
+    let text = '';
+    let confidence = 0;
+    if (worker) {
+      const r = await recognizeCrop(png);
+      text = r.normalized;
+      confidence = r.confidence;
+    }
+    return {
+      ok: true,
+      image: `data:image/png;base64,${png.toString('base64')}`,
+      text,
+      confidence
+    };
+  } catch (err) {
+    return { ok: false, reason: 'error', message: err.message };
+  }
+}
+
 module.exports = {
   start, stop, getStatus, getSettings, setSettings,
-  setStatusListener, setResultListener, setPauseCheck, setCalibration
+  setStatusListener, setResultListener, setPauseCheck, setCalibration,
+  previewCalibration
 };

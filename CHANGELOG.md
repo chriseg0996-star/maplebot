@@ -2,6 +2,22 @@
 
 All notable changes to Maplebot are documented in this file.
 
+## [3.2.0] - 2026-07-04
+
+### Added
+- **Minimal UI** — merged chrome, single hero step, compact profile menu, settings behind ⚙
+- **Night Lord — Leveling** and **Warrior — Leveling** guides (level-band grind steps)
+- Singapore Ulu Estate I/II/III maps + training spot
+- OCR CAL preview in settings; monitor sync on calibrate
+- Close button (× quit) vs minimize (− tray)
+
+### Changed
+- Class filter always hides wrong-job guides; infers class from active guide
+- OCR: word-level confidence, garbage rejection, noisy map salvage, monitor fix
+- Profile menu: inline level + class setup
+- Guide count: **23 guides**, **205 steps**
+- Default window size reduced for overlay use
+
 ## [2.3.0] - 2026-07-04
 
 ### Added

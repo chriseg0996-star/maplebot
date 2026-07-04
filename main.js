@@ -12,7 +12,7 @@ let clickThrough = false;
 let expandedHeight = null;
 let isQuitting = false;
 
-const DEFAULT_BOUNDS = { width: 340, height: 560 };
+const DEFAULT_BOUNDS = { width: 300, height: 340 };
 const stateFile = () => path.join(app.getPath('userData'), 'window-state.json');
 const ocrConfigFile = () => path.join(app.getPath('userData'), 'ocr-config.json');
 const ocrSettingsFile = () => path.join(app.getPath('userData'), 'ocr-settings.json');
@@ -267,12 +267,20 @@ ipcMain.on('quit-app', () => { isQuitting = true; app.quit(); });
 ipcMain.on('open-external', (_e, url) => { if (typeof url === 'string') shell.openExternal(url); });
 
 // ---------- OCR ----------
-ipcMain.handle('ocr-start', () => ocr.start({
-  cachePath: app.getPath('userData'),
-  langPath: tesseractLangPath()
-}));
+ipcMain.handle('ocr-start', async () => {
+  try {
+    return await ocr.start({
+      cachePath: app.getPath('userData'),
+      langPath: tesseractLangPath()
+    });
+  } catch (err) {
+    console.error('[OCR start]', err.message);
+    return ocr.getStatus();
+  }
+});
 ipcMain.handle('ocr-stop', () => ocr.stop());
 ipcMain.handle('ocr-status', () => ocr.getStatus());
+ipcMain.handle('ocr-preview', () => ocr.previewCalibration());
 ipcMain.handle('ocr-get-config', () => loadOcrConfig());
 ipcMain.handle('ocr-get-settings', () => ocr.getSettings());
 ipcMain.handle('ocr-set-settings', (_e, s) => {
@@ -292,6 +300,11 @@ ipcMain.handle('ocr-save-config', (_e, rect) => {
   };
   fs.writeFileSync(ocrConfigFile(), JSON.stringify(clean));
   ocr.setCalibration(clean);
+  if (clean.displayId != null) {
+    const s = { ...loadJson(ocrSettingsFile(), {}), displayId: clean.displayId };
+    fs.writeFileSync(ocrSettingsFile(), JSON.stringify(s));
+    ocr.setSettings(s);
+  }
   closeCalibrationWindow();
   return clean;
 });

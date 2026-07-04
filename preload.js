@@ -29,6 +29,7 @@ contextBridge.exposeInMainWorld('maplebot', {
   onOCRStatusChanged: (cb) => ipcRenderer.on('ocr-status-changed', (_e, s) => cb(s)),
   onOCRResult: (cb) => ipcRenderer.on('ocr-result', (_e, r) => cb(r)),
   getOCRConfig: () => ipcRenderer.invoke('ocr-get-config'),
+  previewOCR: () => ipcRenderer.invoke('ocr-preview'),
   calibrateOCR: (displayId) => ipcRenderer.send('ocr-calibrate', displayId),
   exportGuides: (payload) => ipcRenderer.invoke('export-guides', payload),
   importGuides: () => ipcRenderer.invoke('import-guides'),

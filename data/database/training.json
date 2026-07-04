@@ -317,6 +317,22 @@
         "any"
       ],
       "notes": "Party PQ — good meso/EXP at 50–70 if you can find a party."
+    },
+    "singapore_ulu_estate": {
+      "name": "Singapore: Ulu Estate",
+      "maps": [
+        "map:singapore_ulu_estate_1",
+        "map:singapore_ulu_estate_2",
+        "map:singapore_ulu_estate_3"
+      ],
+      "levelRange": [
+        130,
+        155
+      ],
+      "jobs": [
+        "any"
+      ],
+      "notes": "Endgame grind — Veetron and estate mobs. [[map:singapore_ulu_estate_2]]."
     }
   }
 }

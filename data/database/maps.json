@@ -1864,6 +1864,85 @@
         70
       ],
       "notes": "Showa Party Quest interior ([[quest:showa_pq]]). Party 2–6, levels 50–70."
+    },
+    "singapore": {
+      "name": "Singapore",
+      "aliases": [
+        "Singapore CBD",
+        "CBD",
+        "Singapore City",
+        "Singapur"
+      ],
+      "region": "singapore",
+      "connections": [
+        "map:singapore_ulu_estate_1"
+      ],
+      "recommendedLevel": null,
+      "notes": "Singapore hub — trains to Ulu Estate maps."
+    },
+    "singapore_ulu_estate_1": {
+      "name": "Singapore: Ulu Estate I",
+      "aliases": [
+        "Ulu Estate I",
+        "Singapore Ulu Estate I",
+        "Singapore - Ulu Estate I",
+        "Singapore: Ulu Estate I",
+        "Ulu Estate 1",
+        "Ulu Estate1"
+      ],
+      "region": "singapore",
+      "connections": [
+        "map:singapore",
+        "map:singapore_ulu_estate_2"
+      ],
+      "recommendedLevel": [
+        130,
+        145
+      ],
+      "notes": "High-level training — Veetron and estate mobs."
+    },
+    "singapore_ulu_estate_2": {
+      "name": "Singapore: Ulu Estate II",
+      "aliases": [
+        "Ulu Estate II",
+        "Singapore Ulu Estate II",
+        "Singapore - Ulu Estate II",
+        "Singapore: Ulu Estate II",
+        "Ulu Estate 2",
+        "Ulu Estate2",
+        "Ulu Estate Il",
+        "Ulu Estat"
+      ],
+      "region": "singapore",
+      "connections": [
+        "map:singapore_ulu_estate_1",
+        "map:singapore_ulu_estate_3"
+      ],
+      "recommendedLevel": [
+        135,
+        150
+      ],
+      "notes": "High-level training — Veetron ([[mob:veetron]])."
+    },
+    "singapore_ulu_estate_3": {
+      "name": "Singapore: Ulu Estate III",
+      "aliases": [
+        "Ulu Estate III",
+        "Singapore Ulu Estate III",
+        "Singapore - Ulu Estate III",
+        "Singapore: Ulu Estate III",
+        "Ulu Estate 3",
+        "Ulu Estate3"
+      ],
+      "region": "singapore",
+      "connections": [
+        "map:singapore_ulu_estate_2"
+      ],
+      "recommendedLevel": [
+        140,
+        155
+      ],
+      "notes": "Highest Ulu Estate map — endgame grind."
     }
   }
 }

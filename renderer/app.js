@@ -4,7 +4,7 @@ const {
   setGuidesIndex, resolveGrindLine
 } = window.MaplebotDb;
 const { openDbPanel } = window.MaplebotDbPanel;
-const { ocrView, runOcrMatch, applyOcrHighlight, getClosestMapHints, resolveOcrToMapId, mapDisplayName } = window.MaplebotOcr;
+const { ocrView, runOcrMatch, applyOcrHighlight, getClosestMapHints, resolveOcrToMapId, mapDisplayName, extractMapCandidate, repairOcrText } = window.MaplebotOcr;
 const { normalizeState, activeProfile, switchProfile, syncProfile, addProfile, renameProfile, removeProfile, importProfile } = window.MaplebotProfiles;
 
 const state = {
@@ -20,10 +20,12 @@ const state = {
   profiles: [],
   activeProfileId: null,
   settings: {
-    ocrMinConfidence: 60,
+    filterMyJob: true,
+    ocrMinConfidence: 45,
     ocrFastTick: false,
     ocrDisplayId: null,
     hideSkipped: false,
+    collapseCompleted: true,
     alwaysOnTopLevel: 'screen-saver',
     ocrMatchThreshold: 75
   }
@@ -67,12 +69,83 @@ async function loadGuides() {
 }
 
 function activeGuide() {
-  return state.guides.find((g) => g.id === state.activeGuideId) || state.guides[0];
+  return state.guides.find((g) => g.id === state.activeGuideId) || visibleGuides()[0] || state.guides[0];
+}
+
+function effectiveJob() {
+  const pJob = activeProfile(state)?.job;
+  if (pJob && pJob !== 'any') return pJob;
+  const g = activeGuide();
+  if (g?.job && g.job !== 'any') return g.job;
+  return 'any';
+}
+
+function guideForProfile(g) {
+  const job = effectiveJob();
+  if (job !== 'any' && g.job !== 'any' && g.job !== job) return false;
+  if (!state.settings.filterMyJob) return true;
+  if (job === 'any') return g.job === 'any';
+  return true;
+}
+
+function visibleGuides() {
+  return state.guides.filter(guideForProfile);
+}
+
+function ensureActiveGuideValid() {
+  const vis = visibleGuides();
+  if (!vis.length) return;
+  if (!vis.some((g) => g.id === state.activeGuideId)) {
+    const pick = suggestGuideForJob(effectiveJob(), state.level) || vis[0].id;
+    state.activeGuideId = pick;
+  }
+}
+
+function suggestGuideForJob(job, level = 10) {
+  const j = job && job !== 'any' ? job : effectiveJob();
+  if (!j || j === 'any') return null;
+  const relevant = state.guides.filter((g) => (g.job === j || g.job === 'any'));
+  const leveling = relevant.filter((g) => g.category === 'leveling' && g.job === j);
+  if (level >= 100 && leveling.length) return leveling[0].id;
+  const jobAdv = relevant.filter((g) => g.category === 'job_advancement' && g.job === j);
+  if (level < 100 && jobAdv.length) {
+    const fav = jobAdv.find((g) => state.favorites[g.id]);
+    if (fav) return fav.id;
+    return jobAdv[0].id;
+  }
+  if (leveling.length) return leveling[0].id;
+  const fav = relevant.find((g) => state.favorites[g.id]);
+  if (fav) return fav.id;
+  const recent = state.recent.find((id) => relevant.some((g) => g.id === id));
+  if (recent) return recent;
+  return relevant[0]?.id || null;
+}
+
+function applyJobGuideIfFresh() {
+  const job = effectiveJob();
+  const suggested = suggestGuideForJob(job, state.level);
+  if (!suggested) return;
+  const g = state.guides.find((x) => x.id === state.activeGuideId);
+  const prog = g ? guideProgress(g) : { done: 0 };
+  const wrongClass = g && job !== 'any' && g.job !== 'any' && g.job !== job;
+  const preferLeveling = state.level >= 100 && g && g.category === 'job_advancement' &&
+    g.job === job && suggested !== state.activeGuideId;
+  if (wrongClass || preferLeveling || (prog.done === 0 && state.activeGuideId !== suggested)) {
+    state.activeGuideId = suggested;
+  }
+}
+
+function syncProfileJobFromGuide() {
+  const g = activeGuide();
+  const p = activeProfile(state);
+  if (!g || !p || g.job === 'any') return;
+  if (!p.job || p.job === 'any') p.job = g.job;
 }
 
 function orderedGuides() {
+  const pool = visibleGuides();
   const byCat = {};
-  state.guides.forEach((g) => {
+  pool.forEach((g) => {
     const cat = guideCategory(g);
     (byCat[cat] = byCat[cat] || []).push(g);
   });
@@ -80,8 +153,11 @@ function orderedGuides() {
 }
 
 function setActiveGuide(id, { toSteps = true } = {}) {
-  if (!state.guides.some((g) => g.id === id)) return;
+  const g = state.guides.find((x) => x.id === id);
+  if (!g) return;
   state.activeGuideId = id;
+  const p = activeProfile(state);
+  if (p && g.job && g.job !== 'any' && (!p.job || p.job === 'any')) p.job = g.job;
   state.recent = [id, ...state.recent.filter((r) => r !== id)].slice(0, 5);
   if (toSteps) state.view = 'steps';
   save();
@@ -130,20 +206,18 @@ let renameProfileId = null;
 function renderProfileBar() {
   const p = activeProfile(state);
   if (!p) return;
-  $('#profile-avatar').textContent = profileInitial(p.name);
   $('#profile-name').textContent = p.name;
-  $('#profile-level').textContent = `Lv ${p.level}`;
+  const lvEl = $('#profile-level');
+  lvEl.textContent = p.level;
+  lvEl.classList.toggle('warn', state.level <= 20);
   $('#profile-trigger').classList.toggle('open', !$('#profile-menu').classList.contains('hidden'));
 
   const canDelete = state.profiles.length > 1;
   const list = $('#profile-list');
   list.innerHTML = state.profiles.map((prof) => `
     <button type="button" class="profile-option ${prof.id === state.activeProfileId ? 'active' : ''}" data-id="${prof.id}">
-      <span class="profile-option-avatar">${profileInitial(prof.name)}</span>
-      <span class="profile-option-body">
-        <span class="profile-option-name">${prof.name}</span>
-        <span class="profile-option-lv">Level ${prof.level}</span>
-      </span>
+      <span class="profile-option-name">${prof.name}</span>
+      <span class="profile-option-lv">${prof.level}</span>
       <span class="profile-option-actions">
         <button type="button" class="profile-rename" data-id="${prof.id}" title="Rename">✎</button>
         ${canDelete ? `<button type="button" class="profile-delete" data-id="${prof.id}" title="Remove">×</button>` : ''}
@@ -175,9 +249,25 @@ function renderProfileBar() {
   });
 }
 
+function setLevel(lv) {
+  state.level = Math.min(200, Math.max(1, parseInt(lv, 10) || 1));
+  activeProfile(state).level = state.level;
+  applyJobGuideIfFresh();
+  save();
+  render();
+}
+
 function openProfileMenu() {
   $('#profile-menu').classList.remove('hidden');
   $('#profile-trigger').classList.add('open');
+  const p = activeProfile(state);
+  if (p) {
+    $('#profile-level-edit').value = p.level;
+    $('#profile-job').value = p.job || 'any';
+  }
+  if (state.level <= 15) {
+    setTimeout(() => $('#profile-level-edit').focus(), 50);
+  }
 }
 
 function closeProfileMenu() {
@@ -208,34 +298,151 @@ function renderGrindMaps(step) {
 }
 
 function render() {
+  ensureActiveGuideValid();
   renderProfileBar();
+  $('#profile-job').value = activeProfile(state).job || 'any';
   renderSelect();
   $('#level-input').value = state.level;
   $('#btn-library').classList.toggle('active', state.view === 'library');
   document.body.classList.toggle('in-library', state.view === 'library');
+  document.body.classList.toggle('play-mode', state.view === 'steps');
   if (state.view === 'library') renderLibrary();
   else renderSteps();
 }
 
-function renderDashboard(guide) {
-  const cat = guideCategory(guide);
+function renderGuideMeta(guide) {
+  if (!guide) return;
   const p = guideProgress(guide);
   const fav = !!state.favorites[guide.id];
-  const pct = p.total ? Math.round((p.done / p.total) * 100) : 0;
-  $('#dash-title').textContent = guide.title;
-  $('#dash-job').textContent = (guide.job || 'any').toUpperCase();
-  $('#dash-cat').textContent = CATEGORIES[cat];
-  $('#dash-count').textContent = `${p.done}/${p.total}`;
-  $('#dash-fill').style.width = `${pct}%`;
-  const favBtn = $('#dash-fav');
-  favBtn.textContent = fav ? '★' : '☆';
-  favBtn.classList.toggle('on', fav);
+  $('#progress-label').textContent = `${p.done}/${p.total}`;
+  const favBtn = $('#btn-fav');
+  if (favBtn) {
+    favBtn.textContent = fav ? '★' : '☆';
+    favBtn.classList.toggle('on', fav);
+  }
+}
+
+function stepMetaHtml(step) {
+  const meta = [];
+  const npcName = refName(step.npcRef, step.npc);
+  if (npcName) meta.push(`NPC: ${npcName}`);
+  const mapName = refName(step.mapRef, step.map);
+  if (mapName) meta.push(mapName);
+  if (step.req && step.req.level) meta.push(`Lv ${step.req.level}+`);
+  if (step.itemRefs && step.itemRefs.length) {
+    meta.push(step.itemRefs.map((r) => refName(r, r)).join(', '));
+  } else if (step.items) meta.push(step.items.join(', '));
+  return meta.length ? `<div class="step-meta">${meta.join(' · ')}</div>` : '';
+}
+
+function bindStepClick(el, step) {
+  el.addEventListener('click', (e) => {
+    if (e.target.classList && e.target.classList.contains('db-link')) {
+      openDbPanel(e.target.dataset.ref);
+      return;
+    }
+    state.done[step.id] = !state.done[step.id];
+    save();
+    render();
+  });
+}
+
+function createStepEl(step, status, { variant = 'default' } = {}) {
+  const el = document.createElement('div');
+  el.className = `step ${status} step--${variant}`;
+  el.dataset.stepId = step.id;
+  const meta = variant === 'hero' ? stepMetaHtml(step) : '';
+  const maps = variant === 'hero' ? renderGrindMaps(step) : '';
+  el.innerHTML = `
+    <div class="step-check">${status === 'done' ? '✓' : ''}</div>
+    <div class="step-body">
+      <div class="step-text">${renderTextWithLinks(step.text)}</div>
+      ${meta}${maps}
+    </div>`;
+  bindStepClick(el, step);
+  return el;
+}
+
+function renderSteps() {
+  const guide = activeGuide();
+  if (!guide) return;
+  renderGuideMeta(guide);
+  const container = $('#steps');
+  container.innerHTML = '';
+  let doneCount = 0;
+  const pending = [];
+  const done = [];
+
+  guide.steps.forEach((step) => {
+    const status = stepStatus(step);
+    if (status === 'done' || status === 'skipped') doneCount++;
+    if (state.settings.hideSkipped && status === 'skipped') return;
+    if (status === 'done') done.push({ step, status });
+    else pending.push({ step, status });
+  });
+
+  const showDone = state._showCompleted === true;
+  const collapseDone = state.settings.collapseCompleted !== false;
+
+  if (pending.length) {
+    const hero = pending[0];
+    const heroEl = createStepEl(hero.step, hero.status, { variant: 'hero' });
+    heroEl.classList.add('current');
+    container.appendChild(heroEl);
+
+    const rest = pending.slice(1);
+    if (rest.length) {
+      const showUp = state._showUpNext === true;
+      const toggle = document.createElement('button');
+      toggle.type = 'button';
+      toggle.className = 'expand-btn';
+      toggle.textContent = showUp ? `Hide ${rest.length} upcoming` : `${rest.length} upcoming step${rest.length > 1 ? 's' : ''}`;
+      toggle.addEventListener('click', () => {
+        state._showUpNext = !state._showUpNext;
+        renderSteps();
+      });
+      container.appendChild(toggle);
+      if (showUp) {
+        rest.forEach(({ step, status }) => {
+          container.appendChild(createStepEl(step, status, { variant: 'compact' }));
+        });
+      }
+    }
+  } else {
+    const allDone = document.createElement('div');
+    allDone.className = 'play-complete';
+    allDone.textContent = 'Guide complete — pick another from the library (F10).';
+    container.appendChild(allDone);
+  }
+
+  if (done.length && collapseDone) {
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'expand-btn';
+    toggle.textContent = showDone ? `Hide ${done.length} done` : `${done.length} done`;
+    toggle.addEventListener('click', () => {
+      state._showCompleted = !state._showCompleted;
+      renderSteps();
+    });
+    container.appendChild(toggle);
+    if (showDone) {
+      const doneBlock = document.createElement('div');
+      doneBlock.className = 'completed-block';
+      done.forEach(({ step, status }) => doneBlock.appendChild(createStepEl(step, status, { variant: 'compact' })));
+      container.appendChild(doneBlock);
+    }
+  } else if (done.length) {
+    done.forEach(({ step, status }) => container.appendChild(createStepEl(step, status)));
+  }
+
+  applyOcrHighlight(container, ocrStatus, guide);
 }
 
 function renderSelect() {
   const sel = $('#guide-select');
+  const pool = visibleGuides();
   const byCat = {};
-  state.guides.forEach((g) => {
+  pool.forEach((g) => {
     const cat = guideCategory(g);
     (byCat[cat] = byCat[cat] || []).push(g);
   });
@@ -248,62 +455,19 @@ function renderSelect() {
       ).join('') +
       '</optgroup>')
     .join('');
-}
-
-function renderSteps() {
-  const guide = activeGuide();
-  if (!guide) return;
-  renderDashboard(guide);
-  const container = $('#steps');
-  container.innerHTML = '';
-  let currentMarked = false;
-  let doneCount = 0;
-
-  guide.steps.forEach((step) => {
-    const status = stepStatus(step);
-    if (status === 'done' || status === 'skipped') doneCount++;
-    if (state.settings.hideSkipped && status === 'skipped') return;
-
-    const el = document.createElement('div');
-    el.className = `step ${status}`;
-    el.dataset.stepId = step.id;
-    if (status === 'pending' && !currentMarked) {
-      el.classList.add('current');
-      currentMarked = true;
-    }
-    const meta = [];
-    const npcName = refName(step.npcRef, step.npc);
-    if (npcName) meta.push(`NPC: ${npcName}`);
-    const mapName = refName(step.mapRef, step.map);
-    if (mapName) meta.push(mapName);
-    if (step.req && step.req.level) meta.push(`Lv ${step.req.level}+`);
-    if (step.itemRefs && step.itemRefs.length) {
-      meta.push(step.itemRefs.map((r) => refName(r, r)).join(', '));
-    } else if (step.items) meta.push(step.items.join(', '));
-
-    el.innerHTML = `
-      <div class="step-check">${status === 'done' ? '✓' : ''}</div>
-      <div class="step-body">
-        <span class="step-tag ${step.type}">${step.type}</span>
-        <div class="step-text">${renderTextWithLinks(step.text)}</div>
-        ${meta.length ? `<div class="step-meta">${meta.join(' · ')}</div>` : ''}
-        ${renderGrindMaps(step)}
-      </div>`;
-
-    el.addEventListener('click', (e) => {
-      if (e.target.classList && e.target.classList.contains('db-link')) {
-        openDbPanel(e.target.dataset.ref);
-        return;
-      }
-      state.done[step.id] = !state.done[step.id];
-      save();
-      render();
-    });
-    container.appendChild(el);
-  });
-
-  $('#progress-label').textContent = `${doneCount}/${guide.steps.length} steps`;
-  applyOcrHighlight(container, ocrStatus, guide);
+  $('#btn-filter-job').classList.toggle('active', !!state.settings.filterMyJob);
+  const ej = effectiveJob();
+  const jobLabel = ej === 'any' ? 'All' : ej.charAt(0).toUpperCase() + ej.slice(1);
+  $('#btn-filter-job').textContent = state.settings.filterMyJob ? jobLabel : 'All';
+  $('#btn-filter-job').title = state.settings.filterMyJob
+    ? (ej === 'any'
+      ? 'Set class in profile ▾ to filter (using active guide for now)'
+      : `Showing ${ej} + universal guides (click for all)`)
+    : 'Showing all guides (click for your class only)';
+  $('#level-input').classList.toggle('level-needs-set', state.level <= 15);
+  $('#level-input').title = state.level <= 15
+    ? 'Set your real level — guides and suggestions use this number'
+    : 'Character level';
 }
 
 function renderLibrary() {
@@ -316,7 +480,10 @@ function renderLibrary() {
   input.addEventListener('input', () => { state.libQuery = input.value; renderLibList(); });
   renderLibList();
   input.focus();
-  $('#progress-label').textContent = `${state.guides.length} guides`;
+  const vis = visibleGuides();
+  $('#progress-label').textContent = state.settings.filterMyJob
+    ? `${vis.length} guides · Mine`
+    : `${state.guides.length} guides`;
 }
 
 function libCard(g) {
@@ -342,7 +509,7 @@ function libCard(g) {
 function renderLibList() {
   const list = $('#lib-list');
   const q = state.libQuery.trim().toLowerCase();
-  const matches = state.guides.filter((g) => {
+  const matches = visibleGuides().filter((g) => {
     if (!q) return true;
     const cat = guideCategory(g);
     return g.title.toLowerCase().includes(q) || CATEGORIES[cat].toLowerCase().includes(q);
@@ -351,10 +518,21 @@ function renderLibList() {
     list.innerHTML = `<div class="lib-empty">No results</div>`;
     return;
   }
+  let html = '';
+  if (!q && state.recent.length) {
+    const visIds = new Set(visibleGuides().map((g) => g.id));
+    const recentGuides = state.recent
+      .map((id) => state.guides.find((g) => g.id === id))
+      .filter((g) => g && visIds.has(g.id));
+    if (recentGuides.length) {
+      html += '<div class="lib-cat">Continue</div>' + recentGuides.map(libCard).join('');
+    }
+  }
   const byCat = {};
   matches.forEach((g) => { const cat = guideCategory(g); (byCat[cat] = byCat[cat] || []).push(g); });
-  list.innerHTML = Object.keys(CATEGORIES).filter((c) => byCat[c])
+  html += Object.keys(CATEGORIES).filter((c) => byCat[c])
     .map((c) => `<div class="lib-cat">${CATEGORIES[c]}</div>` + byCat[c].map(libCard).join('')).join('');
+  list.innerHTML = html;
   list.querySelectorAll('.lib-fav').forEach((btn) => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -392,8 +570,48 @@ async function loadSettingsUI() {
   $('#set-ocr-match-val').textContent = `${state.settings.ocrMatchThreshold ?? 75}%`;
   $('#set-ocr-fast').checked = state.settings.ocrFastTick;
   $('#set-hide-skipped').checked = state.settings.hideSkipped;
+  $('#set-collapse-done').checked = state.settings.collapseCompleted !== false;
   $('#set-on-top').value = state.settings.alwaysOnTopLevel;
   await applyOcrSettings();
+}
+
+function renderOcrMatchStatus(detected, confidence, nameEl, matchEl, hintEl, confEl) {
+  const cleaned = repairOcrText(extractMapCandidate(detected) || detected);
+  const resolvedId = resolveOcrToMapId(cleaned);
+  const canonical = resolvedId ? mapDisplayName(resolvedId) : null;
+  nameEl.textContent = canonical
+    ? (canonical.toLowerCase() !== cleaned.toLowerCase() ? `${canonical}` : canonical)
+    : cleaned;
+  if (Number.isFinite(confidence)) confEl.textContent = `Confidence: ${confidence}%`;
+  if (detected !== ocrView.mapName || ocrView.matchedGuideId !== state.activeGuideId) {
+    ocrView.mapName = cleaned;
+    runOcrMatch(activeGuide());
+    if (state.view === 'steps') applyOcrHighlight($('#steps'), ocrStatus, activeGuide());
+  }
+  const hasMatch = !!ocrView.matchedStepId;
+  if (hasMatch) {
+    matchEl.textContent = '🟢 Guide step';
+    matchEl.className = 'match';
+    hintEl.textContent = canonical ? `Matched: ${canonical}` : '';
+  } else if (resolvedId) {
+    matchEl.textContent = '📍 Known map';
+    matchEl.className = 'match';
+    hintEl.textContent = canonical
+      ? `${canonical} — not this step's train map`
+      : "Known map — not this step's train map";
+  } else {
+    matchEl.textContent = '🔴 Unrecognized';
+    matchEl.className = 'wrong';
+    const hints = getClosestMapHints(detected, 2);
+    hintEl.innerHTML = hints.length
+      ? hints.map((h) =>
+          `<span class="ocr-hint-link db-link" data-ref="${h.ref}">${h.name} (${Math.round(h.score * 100)}%)</span>`
+        ).join(' · ')
+      : 'No map match — redo CAL on map name (top-left of game)';
+    hintEl.querySelectorAll('.ocr-hint-link').forEach((el) => {
+      el.addEventListener('click', (e) => { e.stopPropagation(); openDbPanel(el.dataset.ref); });
+    });
+  }
 }
 
 function onOcrResult(r) {
@@ -410,48 +628,47 @@ function onOcrResult(r) {
     return;
   }
   if (r.reason === 'error') {
-    hint.textContent = r.message || 'Capture error';
+    name.textContent = 'OCR error';
+    name.classList.add('unknown');
+    hint.textContent = r.message || 'Capture failed — check monitor in ⚙';
     return;
   }
-  if (Number.isFinite(r.confidence)) conf.textContent = `Confidence: ${r.confidence}%`;
-  const detected = r.ok ? r.normalized : (r.lastValid && r.lastValid.name);
+  if (r.skipped && r.lastValid) {
+    name.classList.remove('unknown');
+    renderOcrMatchStatus(r.lastValid.name, r.lastValid.confidence, name, match, hint, conf);
+    return;
+  }
+  const softMin = Math.min(r.minConfidence ?? 45, 28);
+  const stale = r.lastValid && r.lastValid.name?.length >= 2 && r.lastValid.confidence >= softMin;
+  let detected = r.ok ? r.normalized : (stale ? r.lastValid.name : null);
+  if (!detected && r.normalized) {
+    const salvaged = extractMapCandidate(r.normalized);
+    if (salvaged) detected = salvaged;
+  }
+  let showConf = r.ok ? r.confidence : (stale ? r.lastValid.confidence : r.confidence);
   if (!detected) {
-    name.textContent = 'Unknown Map';
+    name.textContent = r.normalized ? `"${r.normalized.slice(0, 40)}…"` : 'No map read';
     name.classList.add('unknown');
     match.textContent = '';
-    hint.textContent = '';
+    const salvagedHint = r.normalized && extractMapCandidate(r.normalized);
+    if (salvagedHint) {
+      name.classList.remove('unknown');
+      renderOcrMatchStatus(salvagedHint, r.confidence, name, match, hint, conf);
+      return;
+    }
+    if (r.reason === 'no_text' || (Number.isFinite(r.confidence) && r.confidence < softMin)) {
+      hint.textContent = 'CAL box too big? Redo CAL — tight box on map name only (not minimap/chat)';
+    } else if (r.normalized && Number.isFinite(r.confidence)) {
+      hint.textContent = `Low confidence ${r.confidence}% (need ${r.minConfidence ?? 45}%) — lower slider in ⚙`;
+    } else {
+      hint.textContent = 'Drag CAL over the map name (top-left of game)';
+    }
+    if (Number.isFinite(showConf)) conf.textContent = `Confidence: ${showConf}%`;
+    else conf.textContent = '';
     return;
   }
   name.classList.remove('unknown');
-  const resolvedId = resolveOcrToMapId(detected);
-  const canonical = resolvedId ? mapDisplayName(resolvedId) : null;
-  name.textContent = canonical && canonical.toLowerCase() !== detected.toLowerCase()
-    ? `${detected} → ${canonical}`
-    : detected;
-  if (detected !== ocrView.mapName || ocrView.matchedGuideId !== state.activeGuideId) {
-    ocrView.mapName = detected;
-    runOcrMatch(activeGuide());
-    if (state.view === 'steps') applyOcrHighlight($('#steps'), ocrStatus, activeGuide());
-  }
-  const hasMatch = !!ocrView.matchedStepId;
-  match.textContent = hasMatch ? '🟢 Guide step' : '🔴 Wrong map';
-  match.className = hasMatch ? 'match' : 'wrong';
-  if (!hasMatch) {
-    const hints = getClosestMapHints(detected, 2);
-    hint.innerHTML = hints.length
-      ? hints.map((h) =>
-          `<span class="ocr-hint-link db-link" data-ref="${h.ref}">${h.name} (${Math.round(h.score * 100)}%)</span>`
-        ).join(' · ')
-      : '';
-    hint.querySelectorAll('.ocr-hint-link').forEach((el) => {
-      el.addEventListener('click', (e) => {
-        e.stopPropagation();
-        openDbPanel(el.dataset.ref);
-      });
-    });
-  } else {
-    hint.textContent = canonical ? `Matched: ${canonical}` : '';
-  }
+  renderOcrMatchStatus(detected, showConf, name, match, hint, conf);
 }
 
 function bindControls() {
@@ -502,8 +719,36 @@ function bindControls() {
   $('#profile-new-name').addEventListener('keydown', (e) => {
     if (e.key === 'Enter') $('#btn-add-profile').click();
   });
+  $('#profile-job').addEventListener('change', (e) => {
+    syncProfile(state);
+    activeProfile(state).job = e.target.value;
+    applyJobGuideIfFresh();
+    save();
+    render();
+  });
+  $('#profile-level-edit').addEventListener('change', (e) => setLevel(e.target.value));
+  $('#profile-level-edit').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { setLevel(e.target.value); closeProfileMenu(); }
+  });
   $('#btn-settings').addEventListener('click', () => {
     $('#settings-panel').classList.toggle('hidden');
+  });
+  $('#btn-ocr-preview').addEventListener('click', async () => {
+    const box = $('#ocr-cal-preview');
+    const img = $('#ocr-cal-preview-img');
+    const txt = $('#ocr-cal-preview-text');
+    txt.textContent = 'Capturing…';
+    box.classList.remove('hidden');
+    const r = await window.maplebot.previewOCR();
+    if (!r.ok) {
+      txt.textContent = r.reason === 'uncalibrated' ? 'CAL first — drag box over map name' : (r.message || 'Capture failed');
+      img.removeAttribute('src');
+      return;
+    }
+    img.src = r.image;
+    txt.textContent = r.text
+      ? `Read: "${r.text}" (${r.confidence}%)${r.confidence < 40 ? ' — redo CAL: box too big or wrong monitor' : ''}`
+      : `No text (${r.confidence}%) — redo CAL on map name only`;
   });
   $('#set-ocr-conf').addEventListener('input', (e) => {
     state.settings.ocrMinConfidence = parseInt(e.target.value, 10);
@@ -535,12 +780,19 @@ function bindControls() {
     save();
     render();
   });
+  $('#set-collapse-done').addEventListener('change', (e) => {
+    state.settings.collapseCompleted = e.target.checked;
+    state._showCompleted = false;
+    save();
+    render();
+  });
   $('#set-on-top').addEventListener('change', (e) => {
     state.settings.alwaysOnTopLevel = e.target.value;
     window.maplebot.setAlwaysOnTopLevel(e.target.value);
     save();
   });
   $('#btn-tray').addEventListener('click', () => window.maplebot.minimizeToTray());
+  $('#btn-close').addEventListener('click', () => window.maplebot.quit());
   window.maplebot.onHotkey((action) => {
     if (action === 'cycle-guide') stepGuide(1);
     if (action === 'toggle-library') {
@@ -561,34 +813,41 @@ function bindControls() {
     setTimeout(async () => {
       const cfg = await window.maplebot.getOCRConfig();
       $('#ocr-calibrate').classList.toggle('calibrated', !!cfg);
+      if (cfg?.displayId != null && cfg.displayId !== state.settings.ocrDisplayId) {
+        state.settings.ocrDisplayId = cfg.displayId;
+        save();
+        await loadSettingsUI();
+      }
     }, 500);
   });
   window.maplebot.onOCRStatusChanged((s) => {
     ocrStatus = s;
-    $('#ocr-toggle-state').textContent = s.toUpperCase();
+    $('#ocr-toggle-state').textContent = s === 'ready' ? 'ON' : s === 'off' ? 'OFF' : '…';
+    $('#ocr-status').textContent = s === 'ready' ? 'OCR' : '';
+    document.body.classList.toggle('ocr-on', s === 'ready');
     $('#ocr-toggle').classList.toggle('on', s === 'ready');
-    $('#ocr-map').classList.toggle('visible', s === 'ready');
   });
   window.maplebot.onOCRResult(onOcrResult);
   ['wheel', 'touchmove'].forEach((ev) =>
     $('#steps').addEventListener(ev, () => { ocrView.lastUserScrollAt = Date.now(); }, { passive: true }));
   $('#guide-select').addEventListener('change', (e) => setActiveGuide(e.target.value, { toSteps: false }));
+  $('#btn-filter-job').addEventListener('click', () => {
+    state.settings.filterMyJob = !state.settings.filterMyJob;
+    ensureActiveGuideValid();
+    save();
+    render();
+  });
   $('#btn-prev').addEventListener('click', () => stepGuide(-1));
   $('#btn-next').addEventListener('click', () => stepGuide(1));
-  $('#dash-fav').addEventListener('click', () => {
+  $('#btn-fav').addEventListener('click', () => {
     const g = activeGuide();
     if (!g) return;
     if (state.favorites[g.id]) delete state.favorites[g.id];
     else state.favorites[g.id] = true;
     save();
-    renderDashboard(g);
+    renderGuideMeta(g);
   });
-  $('#level-input').addEventListener('change', (e) => {
-    state.level = Math.min(200, Math.max(1, parseInt(e.target.value, 10) || 1));
-    activeProfile(state).level = state.level;
-    save();
-    render();
-  });
+  $('#level-input').addEventListener('change', (e) => setLevel(e.target.value));
   $('#btn-library').addEventListener('click', () => {
     state.view = state.view === 'library' ? 'steps' : 'library';
     animateSwap();
@@ -605,8 +864,8 @@ function bindControls() {
     window.maplebot.setCollapsed(collapsed, $('#titlebar').offsetHeight + 2);
   });
   window.maplebot.onLockChanged((locked) => {
-    $('#btn-lock').textContent = locked ? '🔒' : '🔓';
-    $('#lock-label').textContent = locked ? 'LOCK (F8)' : '';
+    $('#btn-lock').textContent = locked ? '●' : '○';
+    $('#lock-label').textContent = locked ? 'locked' : '';
   });
   bindUpdateHandlers();
 }
@@ -651,6 +910,8 @@ function bindUpdateHandlers() {
   await loadDatabase();
   try {
     await loadGuides();
+    syncProfileJobFromGuide();
+    applyJobGuideIfFresh();
     render();
     console.log('[Migration]', buildMigrationReport(state.guides));
   } catch (err) {

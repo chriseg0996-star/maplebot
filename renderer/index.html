@@ -8,98 +8,90 @@
 <body>
   <div id="overlay">
     <header id="titlebar">
-      <span class="logo">MAPLEBOT</span>
-      <div class="titlebar-mid">
-        <button id="profile-trigger" type="button" class="profile-trigger profile-trigger--inline" aria-haspopup="listbox">
-          <span id="profile-avatar" class="profile-avatar">A</span>
-          <span class="profile-meta">
-            <span id="profile-name" class="profile-name">Adventurer</span>
-            <span id="profile-level" class="profile-level">Lv 10</span>
-          </span>
-          <span class="profile-chevron" aria-hidden="true">▾</span>
-        </button>
-      </div>
+      <button id="profile-trigger" type="button" class="profile-pill" aria-haspopup="listbox">
+        <span id="profile-name">Adventurer</span>
+        <span id="profile-level" class="profile-lv">10</span>
+        <span class="profile-chevron">▾</span>
+      </button>
       <div class="controls">
         <button id="btn-settings" title="Settings">⚙</button>
-        <button id="btn-opacity" title="Opacity">◐</button>
-        <button id="btn-lock" title="Click-through (F8)">🔓</button>
-        <button id="btn-collapse" title="Collapse">—</button>
-        <button id="btn-tray" title="Minimize to tray">_</button>
+        <button id="btn-lock" title="Click-through (F8)">○</button>
+        <button id="btn-tray" title="Minimize">−</button>
+        <button id="btn-close" title="Quit">×</button>
       </div>
       <div id="profile-menu" class="profile-menu hidden" role="listbox">
         <div id="profile-list"></div>
-        <div class="profile-menu-footer">
-          <input id="profile-new-name" type="text" placeholder="New character…" spellcheck="false" />
-          <button id="btn-add-profile" type="button">Add</button>
+        <div class="profile-menu-row">
+          <input id="profile-level-edit" type="number" min="1" max="200" class="profile-level-edit" placeholder="Lv" title="Level" />
+          <select id="profile-job" class="ui-select profile-job-select" title="Class">
+            <option value="any">Any</option>
+            <option value="warrior">Warrior</option>
+            <option value="magician">Mage</option>
+            <option value="bowman">Bowman</option>
+            <option value="thief">Thief</option>
+            <option value="pirate">Pirate</option>
+          </select>
         </div>
-        <div class="profile-menu-actions">
+        <div class="profile-menu-row">
+          <input id="profile-new-name" type="text" placeholder="New name…" spellcheck="false" />
+          <button id="btn-add-profile" type="button">+</button>
+        </div>
+        <div class="profile-menu-mini">
           <button id="btn-export-profile" type="button">Export</button>
           <button id="btn-import-profile" type="button">Import</button>
         </div>
       </div>
     </header>
 
-    <section id="toolbar">
-      <select id="guide-select"></select>
-      <button id="btn-library" title="Guide Library (F10)">📖</button>
-      <input id="level-input" type="number" min="1" max="200" value="10" title="Character level" />
-      <div class="toolbar-gap"></div>
-      <button id="ocr-toggle" title="Read-only map name OCR">
-        <span>OCR</span><span id="ocr-toggle-state">OFF</span>
-      </button>
-      <button id="ocr-calibrate" title="Calibrate map name region">CAL</button>
+    <section id="nav">
+      <button id="btn-prev" type="button" title="Prev guide (F9)">‹</button>
+      <select id="guide-select" title="Guide"></select>
+      <button id="btn-next" type="button" title="Next guide (F9)">›</button>
+      <input id="level-input" type="number" min="1" max="200" value="10" title="Level" />
+      <button id="btn-fav" type="button" title="Favorite">☆</button>
+      <button id="btn-filter-job" type="button" class="nav-chip active" title="Class filter">Mine</button>
+      <button id="btn-library" type="button" title="Library (F10)">☰</button>
     </section>
 
     <section id="settings-panel" class="hidden">
-      <label>OCR confidence <input id="set-ocr-conf" type="range" min="40" max="95" value="60" /></label>
-      <label>Map match <input id="set-ocr-match" type="range" min="50" max="95" value="75" /> <span id="set-ocr-match-val">75%</span></label>
-      <label><input id="set-ocr-fast" type="checkbox" /> Fast OCR (2s tick)</label>
+      <label>OCR <input id="set-ocr-conf" type="range" min="40" max="95" value="45" /></label>
+      <label>Match <input id="set-ocr-match" type="range" min="50" max="95" value="75" /> <span id="set-ocr-match-val">75%</span></label>
+      <label><input id="set-ocr-fast" type="checkbox" /> Fast OCR</label>
       <label>Monitor <select id="set-display" class="ui-select"></select></label>
-      <label><input id="set-hide-skipped" type="checkbox" /> Collapse skipped steps</label>
-      <label>On-top level
+      <button id="ocr-calibrate" type="button" class="settings-btn">Calibrate map (CAL)</button>
+      <button id="btn-ocr-preview" type="button" class="settings-btn">Preview CAL region</button>
+      <div id="ocr-cal-preview" class="ocr-cal-preview hidden">
+        <img id="ocr-cal-preview-img" alt="OCR crop" />
+        <span id="ocr-cal-preview-text"></span>
+      </div>
+      <label><input id="set-hide-skipped" type="checkbox" /> Hide skipped</label>
+      <label><input id="set-collapse-done" type="checkbox" checked /> Collapse done</label>
+      <label>Opacity <button id="btn-opacity" type="button" class="inline-btn">◐</button></label>
+      <label>Collapse bar <button id="btn-collapse" type="button" class="inline-btn">—</button></label>
+      <label>On-top
         <select id="set-on-top" class="ui-select">
-          <option value="screen-saver">High (screen-saver)</option>
+          <option value="screen-saver">High</option>
           <option value="normal">Normal</option>
         </select>
       </label>
     </section>
 
-    <section id="dashboard">
-      <button id="btn-prev" title="Previous Guide (F9)">‹</button>
-      <div class="dash-main">
-        <div class="dash-top">
-          <span id="dash-title"></span>
-          <button id="dash-fav" title="Favorite">☆</button>
-        </div>
-        <div class="dash-meta">
-          <span id="dash-job" class="lib-badge"></span>
-          <span id="dash-cat"></span>
-          <span id="dash-count"></span>
-        </div>
-        <div class="dash-bar"><div id="dash-fill"></div></div>
-      </div>
-      <button id="btn-next" title="Next Guide (F9)">›</button>
-    </section>
-
-    <section id="ocr-map">
-      <span class="ocr-map-pin">📍</span>
-      <div class="ocr-map-body">
-        <span class="ocr-map-label">Map</span>
-        <span id="ocr-map-name">—</span>
-        <span id="ocr-map-hint" class="ocr-hint"></span>
-      </div>
-      <div class="ocr-map-right">
-        <span id="ocr-map-match"></span>
-        <span id="ocr-map-conf"></span>
-      </div>
-    </section>
+    <div id="ocr-strip">
+      <button id="ocr-toggle" type="button" title="Map OCR">
+        <span id="ocr-toggle-state">OCR</span>
+      </button>
+      <span id="ocr-map-name">—</span>
+      <span id="ocr-map-match"></span>
+      <span id="ocr-map-hint" class="ocr-hint"></span>
+      <span id="ocr-map-conf"></span>
+    </div>
 
     <main id="steps"></main>
 
-    <footer id="statusbar">
+    <footer id="foot">
       <span id="progress-label"></span>
       <span id="update-label" class="update-label hidden"></span>
-      <span id="ocr-status">OCR OFF</span>
+      <span id="ocr-status"></span>
       <span id="lock-label"></span>
     </footer>
   </div>
@@ -109,7 +101,7 @@
     <header class="panel-header">
       <span id="db-panel-type" class="panel-type"></span>
       <h2 id="db-panel-title"></h2>
-      <button id="db-panel-close" type="button">✕</button>
+      <button id="db-panel-close" type="button">×</button>
     </header>
     <div id="db-panel-body" class="panel-body"></div>
   </aside>

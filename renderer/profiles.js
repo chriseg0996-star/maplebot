@@ -33,15 +33,20 @@
     });
     if (!state.settings) {
       state.settings = {
-        ocrMinConfidence: 60,
+        ocrMinConfidence: 45,
         ocrFastTick: false,
         ocrDisplayId: null,
         hideSkipped: false,
+        collapseCompleted: true,
+        filterMyJob: true,
         alwaysOnTopLevel: 'screen-saver',
         ocrMatchThreshold: 75
       };
     }
     if (state.settings.ocrMatchThreshold == null) state.settings.ocrMatchThreshold = 75;
+    if (state.settings.collapseCompleted == null) state.settings.collapseCompleted = true;
+    if (state.settings.filterMyJob == null) state.settings.filterMyJob = true;
+    if (state.settings.ocrMinConfidence == null) state.settings.ocrMinConfidence = 45;
     return state;
   }
 

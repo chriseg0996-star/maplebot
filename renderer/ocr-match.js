@@ -27,6 +27,9 @@
       .replace(/O(\d)/g, '0$1')
       .replace(/\brn\b/g, 'm')
       .replace(/\bcl\b/g, 'd')
+      .replace(/\bfete\b/gi, ' ')
+      .replace(/\b(?:a|an)\s+(?=Singapore)/gi, '')
+      .replace(/Singapore\s*[:\-–—]?\s*/gi, 'Singapore ')
       .replace(/\s+/g, ' ')
       .trim();
   }
@@ -68,8 +71,54 @@
     const id = findMapId(normalized);
     if (id) return id;
     const threshold = getMatchThreshold();
+    let bestId = null;
+    let bestScore = threshold;
     for (const [alias, mapId] of global.MaplebotDb.db.mapAliases) {
-      if (mapSimilarity(alias, normalized) >= threshold) return mapId;
+      if (alias.length < 4) continue;
+      if (normalized.includes(alias)) {
+        const score = 0.85 + Math.min(0.14, alias.length / Math.max(normalized.length, 1));
+        if (score >= bestScore) {
+          bestId = mapId;
+          bestScore = score;
+        }
+        continue;
+      }
+      const sim = mapSimilarity(alias, normalized);
+      if (sim >= threshold && sim >= bestScore) {
+        bestId = mapId;
+        bestScore = sim;
+      }
+    }
+    return bestId;
+  }
+
+  /** Pull a map name out of very noisy OCR (e.g. chat bleeding into CAL box). */
+  function extractMapCandidate(raw) {
+    if (!raw || !global.MaplebotDb.db) return null;
+    const repaired = repairOcrText(raw);
+    if (resolveOcrToMapId(repaired)) return repaired;
+
+    const lower = normalizeMapName(repaired);
+    let bestAlias = null;
+    let bestMapId = null;
+    for (const [alias, mapId] of global.MaplebotDb.db.mapAliases) {
+      if (alias.length < 5) continue;
+      if (lower.includes(alias) && (!bestAlias || alias.length > bestAlias.length)) {
+        bestAlias = alias;
+        bestMapId = mapId;
+      }
+    }
+    if (bestMapId) return mapDisplayName(bestMapId) || bestAlias;
+
+    if (/singapore/i.test(repaired)) {
+      const ulu = repaired.match(/ulu\s*estate\s*(iii|ii|i|3|2|1|il)?/i);
+      if (ulu) {
+        let suffix = (ulu[1] || 'i').toUpperCase().replace(/1/g, 'I').replace(/2/g, 'II').replace(/3/g, 'III').replace(/IL/g, 'II');
+        if (suffix === 'I' || suffix === 'II' || suffix === 'III') {
+          const id = findMapId(normalizeMapName(`Singapore Ulu Estate ${suffix}`));
+          if (id) return mapDisplayName(id);
+        }
+      }
     }
     return null;
   }
@@ -191,6 +240,7 @@
     ocrView,
     repairOcrText,
     normalizeOcrMap,
+    extractMapCandidate,
     findStepForMap,
     runOcrMatch,
     applyOcrHighlight,
