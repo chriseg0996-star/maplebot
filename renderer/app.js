@@ -299,6 +299,10 @@ function renderGrindMaps(step) {
 
 function render() {
   ensureActiveGuideValid();
+  syncProfile(state);
+  const p = activeProfile(state);
+  const lvFocused = document.activeElement === $('#level-input') || document.activeElement === $('#profile-level-edit');
+  if (p && !lvFocused && p.level !== state.level) state.level = p.level;
   renderProfileBar();
   $('#profile-job').value = activeProfile(state).job || 'any';
   renderSelect();

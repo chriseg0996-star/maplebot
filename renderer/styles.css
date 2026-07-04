@@ -52,7 +52,9 @@ body {
   display: flex;
   align-items: center;
   gap: 6px;
-  max-width: 160px;
+  flex: 1;
+  min-width: 0;
+  max-width: none;
   height: 22px;
   padding: 0 8px;
   background: transparent;
@@ -182,13 +184,34 @@ body {
 
 #nav {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 4px;
-  padding: 4px 6px;
+  padding: 5px 6px;
   background: var(--surface);
   border-bottom: 1px solid var(--line);
 }
 body.in-library #nav { display: none; }
+
+.nav-guide-row,
+.nav-tools-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  min-width: 0;
+}
+
+.nav-tools-spacer { flex: 1; min-width: 4px; }
+
+.nav-lv {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--muted);
+  flex-shrink: 0;
+}
 
 #btn-prev, #btn-next {
   flex-shrink: 0;
@@ -206,18 +229,20 @@ body.in-library #nav { display: none; }
 #guide-select {
   flex: 1;
   min-width: 0;
+  width: 100%;
   height: var(--h);
-  padding: 0 6px;
+  padding: 0 8px;
   font-size: 11px;
   background: var(--bg);
   border: 1px solid var(--line);
   border-radius: var(--r);
   color: var(--text);
+  text-overflow: ellipsis;
 }
 
 #level-input {
-  width: 38px;
-  height: var(--h);
+  width: 44px;
+  height: 22px;
   padding: 0 4px;
   font-size: 11px;
   text-align: center;
@@ -225,6 +250,7 @@ body.in-library #nav { display: none; }
   border: 1px solid var(--line);
   border-radius: var(--r);
   color: var(--text);
+  font-variant-numeric: tabular-nums;
 }
 #level-input.level-needs-set { border-color: var(--warn); }
 
@@ -377,12 +403,14 @@ body.ocr-on #ocr-toggle { border-color: var(--ok); color: var(--ok); }
 }
 .step.done .step-check { border-color: var(--ok); }
 
-.step-text { color: var(--soft); font-size: 12px; }
+.step-text { color: var(--soft); font-size: 12px; line-height: 1.5; word-wrap: break-word; overflow-wrap: anywhere; }
 .step--hero .step-text { color: var(--text); font-size: 13px; }
 .step-meta, .step-maps {
   margin-top: 4px;
   font-size: 10px;
   color: var(--muted);
+  line-height: 1.4;
+  word-wrap: break-word;
 }
 .step-maps li { margin-left: 12px; }
 

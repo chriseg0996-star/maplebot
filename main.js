@@ -12,7 +12,8 @@ let clickThrough = false;
 let expandedHeight = null;
 let isQuitting = false;
 
-const DEFAULT_BOUNDS = { width: 300, height: 340 };
+const DEFAULT_BOUNDS = { width: 340, height: 380 };
+const MIN_BOUNDS = { width: 300, height: 280 };
 const stateFile = () => path.join(app.getPath('userData'), 'window-state.json');
 const ocrConfigFile = () => path.join(app.getPath('userData'), 'ocr-config.json');
 const ocrSettingsFile = () => path.join(app.getPath('userData'), 'ocr-settings.json');
@@ -27,6 +28,8 @@ function loadWindowState() {
   try {
     const saved = loadJson(stateFile(), DEFAULT_BOUNDS);
     if (typeof saved.width !== 'number') return DEFAULT_BOUNDS;
+    saved.width = Math.max(saved.width, MIN_BOUNDS.width);
+    saved.height = Math.max(saved.height, MIN_BOUNDS.height);
     const display = screen.getDisplayMatching(saved).workArea;
     const visible =
       saved.x >= display.x - saved.width + 40 &&
@@ -113,6 +116,7 @@ function createWindow() {
   });
 
   win.setAlwaysOnTop(true, 'screen-saver');
+  win.setMinimumSize(MIN_BOUNDS.width, MIN_BOUNDS.height);
   win.loadFile(path.join(__dirname, 'renderer', 'index.html'));
 
   win.on('moved', saveWindowStateDebounced);

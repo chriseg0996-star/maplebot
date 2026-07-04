@@ -44,13 +44,18 @@
     </header>
 
     <section id="nav">
-      <button id="btn-prev" type="button" title="Prev guide (F9)">‹</button>
-      <select id="guide-select" title="Guide"></select>
-      <button id="btn-next" type="button" title="Next guide (F9)">›</button>
-      <input id="level-input" type="number" min="1" max="200" value="10" title="Level" />
-      <button id="btn-fav" type="button" title="Favorite">☆</button>
-      <button id="btn-filter-job" type="button" class="nav-chip active" title="Class filter">Mine</button>
-      <button id="btn-library" type="button" title="Library (F10)">☰</button>
+      <div class="nav-guide-row">
+        <button id="btn-prev" type="button" title="Prev guide (F9)">‹</button>
+        <select id="guide-select" title="Guide"></select>
+        <button id="btn-next" type="button" title="Next guide (F9)">›</button>
+      </div>
+      <div class="nav-tools-row">
+        <label class="nav-lv">Lv<input id="level-input" type="number" min="1" max="200" value="10" title="Level" /></label>
+        <button id="btn-fav" type="button" title="Favorite">☆</button>
+        <span class="nav-tools-spacer"></span>
+        <button id="btn-filter-job" type="button" class="nav-chip active" title="Class filter">Mine</button>
+        <button id="btn-library" type="button" title="Library (F10)">☰</button>
+      </div>
     </section>
 
     <section id="settings-panel" class="hidden">
