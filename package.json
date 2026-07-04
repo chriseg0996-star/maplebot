@@ -1,6 +1,6 @@
 {
   "name": "maplebot",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Quest helper overlay (display-only) for MapleRoyals v83",
   "main": "main.js",
   "author": "Maplebot",

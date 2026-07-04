@@ -14,7 +14,11 @@
         "kern1ng c1ty",
         "keming city",
         "kern1ng",
-        "keming"
+        "keming",
+        "kern1ngc1ty",
+        "kemingcity",
+        "kem1ng c1ty",
+        "kem1ng"
       ],
       "region": "victoria_island",
       "connections": [
@@ -42,7 +46,22 @@
         "keming construction site",
         "ConstructionSite",
         "c0nstructi0n site",
-        "construct1on s1te"
+        "construct1on s1te",
+        "kerningcityc0nstructi0nsite",
+        "kern1ngc1tyconstruct1ons1te",
+        "kemingcityconstructionsite",
+        "kern1ng c1ty c0nstruct10n s1te",
+        "keming city c0nstructi0n site",
+        "kem1ng c1ty construct1on s1te",
+        "kerningc0nstructi0nsite",
+        "kern1ngconstruct1ons1te",
+        "kemingconstructionsite",
+        "kern1ng c0nstruct10n s1te",
+        "keming c0nstructi0n site",
+        "kem1ng construct1on s1te",
+        "c0nstructi0nsite",
+        "construct1ons1te",
+        "c0nstruct10n s1te"
       ],
       "region": "victoria_island",
       "connections": [
@@ -67,7 +86,14 @@
         "subway hne 1 area 2",
         "KerningSubwayB1",
         "kern1ng subway b1",
-        "keming subway b1"
+        "keming subway b1",
+        "subway1ine1area2",
+        "subwayl1ne1area2",
+        "subwayhne1area2",
+        "subway 11ne 1 area 2",
+        "kern1ngsubwayb1",
+        "kemingsubwayb1",
+        "kem1ng subway b1"
       ],
       "region": "victoria_island",
       "connections": [
@@ -93,7 +119,17 @@
         "VictoriaRoadSwamp",
         "vict0ria r0ad swamp",
         "v1ctor1a road swamp",
-        "victoria rd swamp"
+        "victoria rd swamp",
+        "swampregi0n",
+        "swampreg1on",
+        "swamp reg10n",
+        "swampy1and",
+        "vict0riar0adswamp",
+        "v1ctor1aroadswamp",
+        "victoriardswamp",
+        "v1ct0r1a r0ad swamp",
+        "v1ctor1a rd swamp",
+        "vict0ria rd swamp"
       ],
       "region": "victoria_island",
       "connections": [
@@ -117,7 +153,13 @@
         "AntTunnelII",
         "ant tunne1 ii",
         "ant tunnel 11",
-        "AntTunnel2"
+        "AntTunnel2",
+        "anttunne1",
+        "anttunne1ii",
+        "anttunnel11",
+        "anttunnehi",
+        "ant tunne1 11",
+        "anttunne12"
       ],
       "region": "victoria_island",
       "connections": [
@@ -138,7 +180,10 @@
         "AT1",
         "AntTunnelI",
         "ant tunne1 i",
-        "AntTunnel1"
+        "AntTunnel1",
+        "anttunne1i",
+        "anttunneh",
+        "anttunne11"
       ],
       "region": "victoria_island",
       "connections": [
@@ -160,7 +205,11 @@
         "per1on",
         "PerionTown",
         "peri0n t0wn",
-        "per1on town"
+        "per1on town",
+        "per10n",
+        "peri0nt0wn",
+        "per1ontown",
+        "per10n t0wn"
       ],
       "region": "victoria_island",
       "connections": [
@@ -180,7 +229,11 @@
         "undergr0und pass",
         "PerionUndergroundPass",
         "peri0n undergr0und pass",
-        "per1on underground pass"
+        "per1on underground pass",
+        "undergr0undpass",
+        "peri0nundergr0undpass",
+        "per1onundergroundpass",
+        "per10n undergr0und pass"
       ],
       "region": "victoria_island",
       "connections": [
@@ -203,7 +256,16 @@
         "perion waming street",
         "WarningStreet",
         "warn1ng street",
-        "waming street"
+        "waming street",
+        "peri0nwarningstreet",
+        "per1onwarn1ngstreet",
+        "perionwamingstreet",
+        "per10n warn1ng street",
+        "peri0n waming street",
+        "per1on wam1ng street",
+        "warn1ngstreet",
+        "wamingstreet",
+        "wam1ng street"
       ],
       "region": "victoria_island",
       "connections": [
@@ -225,7 +287,13 @@
         "per1on dungeon",
         "PerionExcavationSite",
         "peri0n excavati0n site",
-        "per1on excavat1on s1te"
+        "per1on excavat1on s1te",
+        "peri0ndunge0n",
+        "per1ondungeon",
+        "per10n dunge0n",
+        "peri0nexcavati0nsite",
+        "per1onexcavat1ons1te",
+        "per10n excavat10n s1te"
       ],
       "region": "victoria_island",
       "connections": [
@@ -249,7 +317,20 @@
         "ellinia t0wn",
         "e11inia town",
         "ell1n1a town",
-        "elhnia town"
+        "elhnia town",
+        "e111n1a",
+        "e1hnia",
+        "elhn1a",
+        "elliniat0wn",
+        "e11iniatown",
+        "ell1n1atown",
+        "elhniatown",
+        "e11inia t0wn",
+        "ell1n1a t0wn",
+        "elhnia t0wn",
+        "e111n1a town",
+        "e1hnia town",
+        "elhn1a town"
       ],
       "region": "victoria_island",
       "connections": [
@@ -273,7 +354,20 @@
         "vict0ria r0ad g0lem temple",
         "victoria road go1em temp1e",
         "v1ctor1a road golem temple",
-        "victoria rd golem temple"
+        "victoria rd golem temple",
+        "g0lemtemple",
+        "go1emtemp1e",
+        "g01em temp1e",
+        "vict0riar0adg0lemtemple",
+        "victoriaroadgo1emtemp1e",
+        "v1ctor1aroadgolemtemple",
+        "victoriardgolemtemple",
+        "vict0ria r0ad g01em temp1e",
+        "v1ct0r1a r0ad g0lem temple",
+        "v1ctor1a road go1em temp1e",
+        "victoria rd go1em temp1e",
+        "v1ctor1a rd golem temple",
+        "vict0ria rd g0lem temple"
       ],
       "region": "victoria_island",
       "connections": [
@@ -307,7 +401,48 @@
         "e11inia forest i",
         "ell1n1a forest 1",
         "elhnia forest i",
-        "ellinia frst i"
+        "ellinia frst i",
+        "ellinias0uthernf0rest",
+        "e11iniasouthernforest",
+        "ell1n1asouthernforest",
+        "elliniasouthemforest",
+        "elhniasouthernforest",
+        "elliniasouthernfrst",
+        "e11inia s0uthern f0rest",
+        "ell1n1a s0uthern f0rest",
+        "ellinia s0uthem f0rest",
+        "elhnia s0uthern f0rest",
+        "e111n1a southern forest",
+        "e11inia southem forest",
+        "e11inia southern frst",
+        "ell1n1a southem forest",
+        "ell1n1a southern frst",
+        "elhnia southem forest",
+        "ellinia southem frst",
+        "e1hnia southern forest",
+        "elhn1a southern forest",
+        "elhnia southern frst",
+        "ellinia s0uthern frst",
+        "s0uthernf0rest",
+        "southemforest",
+        "southernfrst",
+        "s0uthem f0rest",
+        "southem frst",
+        "s0uthern frst",
+        "elliniaf0resti",
+        "e11iniaforesti",
+        "ell1n1aforest1",
+        "elhniaforesti",
+        "elliniafrsti",
+        "e11inia f0rest i",
+        "ell1n1a f0rest 1",
+        "elhnia f0rest i",
+        "e111n1a forest 1",
+        "e11inia frst i",
+        "ell1n1a frst 1",
+        "e1hnia forest i",
+        "elhn1a forest 1",
+        "elhnia frst i"
       ],
       "region": "victoria_island",
       "connections": [
@@ -336,7 +471,34 @@
         "ForestIII",
         "f0rest iii",
         "forest 111",
-        "frst iii"
+        "frst iii",
+        "elliniaf0restiii",
+        "e11iniaforestiii",
+        "ell1n1aforest111",
+        "elhniaforestiii",
+        "elliniafrstiii",
+        "e11inia f0rest iii",
+        "ell1n1a f0rest 111",
+        "elhnia f0rest iii",
+        "e111n1a forest 111",
+        "e11inia frst iii",
+        "ell1n1a frst 111",
+        "e1hnia forest iii",
+        "elhn1a forest 111",
+        "elhnia frst iii",
+        "elliniaf0rest3",
+        "e11iniaforest3",
+        "ell1n1aforest3",
+        "elhniaforest3",
+        "elliniafrst3",
+        "ell1n1a f0rest 3",
+        "e111n1a forest 3",
+        "ell1n1a frst 3",
+        "f0restiii",
+        "forest111",
+        "frstiii",
+        "f0rest 111",
+        "frst 111"
       ],
       "region": "victoria_island",
       "connections": [
@@ -354,7 +516,8 @@
         "Henesys Town",
         "Henesys",
         "HenesysTown",
-        "henesys t0wn"
+        "henesys t0wn",
+        "henesyst0wn"
       ],
       "region": "victoria_island",
       "connections": [
@@ -375,7 +538,9 @@
         "HenesysDungeon",
         "henesys dunge0n",
         "HenesysPartyQuestDungeon",
-        "henesys party quest dunge0n"
+        "henesys party quest dunge0n",
+        "henesysdunge0n",
+        "henesyspartyquestdunge0n"
       ],
       "region": "victoria_island",
       "connections": [
@@ -396,7 +561,11 @@
         "HenesysHuntingGroundI",
         "henesys hunting gr0und i",
         "henesys hunt1ng ground 1",
-        "HenesysHuntingGround1"
+        "HenesysHuntingGround1",
+        "henesyshuntinggr0undi",
+        "henesyshunt1ngground1",
+        "henesys hunt1ng gr0und 1",
+        "henesyshuntinggr0und1"
       ],
       "region": "victoria_island",
       "connections": [
@@ -418,7 +587,13 @@
         "henesys hunting gr0und ii",
         "henesys hunt1ng ground 11",
         "HenesysHuntingGround2",
-        "henesys hunt1ng ground 2"
+        "henesys hunt1ng ground 2",
+        "henesyshuntinggr0undii",
+        "henesyshunt1ngground11",
+        "henesys hunt1ng gr0und 11",
+        "henesyshuntinggr0und2",
+        "henesyshunt1ngground2",
+        "henesys hunt1ng gr0und 2"
       ],
       "region": "victoria_island",
       "connections": [
@@ -445,7 +620,20 @@
         "NautilusPort",
         "nautilus p0rt",
         "nauti1us port",
-        "naut1lus port"
+        "naut1lus port",
+        "nautilusharb0r",
+        "nauti1usharbor",
+        "naut1lusharbor",
+        "nauti1us harb0r",
+        "naut1lus harb0r",
+        "naut11us harbor",
+        "naut11us",
+        "nautilusp0rt",
+        "nauti1usport",
+        "naut1lusport",
+        "nauti1us p0rt",
+        "naut1lus p0rt",
+        "naut11us port"
       ],
       "region": "victoria_island",
       "connections": [
@@ -463,7 +651,10 @@
         "Keru",
         "KeruIsland",
         "keru is1and",
-        "keru 1sland"
+        "keru 1sland",
+        "keruis1and",
+        "keru1sland",
+        "keru 1s1and"
       ],
       "region": "victoria_island",
       "connections": [
@@ -486,7 +677,16 @@
         "flor1na beach",
         "fl0rina",
         "f1orina",
-        "flor1na"
+        "flor1na",
+        "fl0rinabeach",
+        "f1orinabeach",
+        "flor1nabeach",
+        "f10rina beach",
+        "fl0r1na beach",
+        "f1or1na beach",
+        "f10rina",
+        "fl0r1na",
+        "f1or1na"
       ],
       "region": "victoria_island",
       "connections": [
@@ -509,7 +709,16 @@
         "naut1lus tra1n1ng room",
         "TrainingRoom",
         "training r00m",
-        "tra1n1ng room"
+        "tra1n1ng room",
+        "nautilustrainingr00m",
+        "nauti1ustrainingroom",
+        "naut1lustra1n1ngroom",
+        "nauti1us training r00m",
+        "naut1lus tra1n1ng r00m",
+        "naut11us tra1n1ng room",
+        "trainingr00m",
+        "tra1n1ngroom",
+        "tra1n1ng r00m"
       ],
       "region": "victoria_island",
       "connections": [
@@ -535,7 +744,16 @@
         "keming pq",
         "KerningPartyQuest",
         "kern1ng party quest",
-        "keming party quest"
+        "keming party quest",
+        "kern1ngc1typartyquest",
+        "kemingcitypartyquest",
+        "kem1ng c1ty party quest",
+        "kern1ngpq",
+        "kemingpq",
+        "kem1ng pq",
+        "kern1ngpartyquest",
+        "kemingpartyquest",
+        "kem1ng party quest"
       ],
       "region": "victoria_island",
       "connections": [
@@ -562,7 +780,16 @@
         "LudibriumPQ",
         "1udibrium pq",
         "lud1br1um pq",
-        "1pq"
+        "1pq",
+        "1udibriumpartyquest",
+        "lud1br1umpartyquest",
+        "1ud1br1um party quest",
+        "1udipq",
+        "lud1pq",
+        "1ud1 pq",
+        "1udibriumpq",
+        "lud1br1umpq",
+        "1ud1br1um pq"
       ],
       "region": "ludus_lake",
       "connections": [
@@ -585,7 +812,13 @@
         "mysteri0us path 3",
         "myster1ous path 3",
         "MysteriousPathIII",
-        "myster1ous path 111"
+        "myster1ous path 111",
+        "mysteri0uspath3",
+        "myster1ouspath3",
+        "myster10us path 3",
+        "mysteri0uspathiii",
+        "myster1ouspath111",
+        "myster10us path 111"
       ],
       "region": "ludus_lake",
       "connections": [
@@ -616,7 +849,22 @@
         "w1ld kargo",
         "MysteriousPath2",
         "mysteri0us path 2",
-        "myster1ous path 2"
+        "myster1ous path 2",
+        "wildkarg0area",
+        "wi1dkargoarea",
+        "w1ldkargoarea",
+        "wi1d karg0 area",
+        "w1ld karg0 area",
+        "w11d kargo area",
+        "wildkarg0",
+        "wi1dkargo",
+        "w1ldkargo",
+        "wi1d karg0",
+        "w1ld karg0",
+        "w11d kargo",
+        "mysteri0uspath2",
+        "myster1ouspath2",
+        "myster10us path 2"
       ],
       "region": "ludus_lake",
       "connections": [
@@ -637,7 +885,11 @@
         "e1 nath",
         "ElNathTown",
         "el nath t0wn",
-        "e1 nath town"
+        "e1 nath town",
+        "e1nath",
+        "elnatht0wn",
+        "e1nathtown",
+        "e1 nath t0wn"
       ],
       "region": "el_nath_mts",
       "connections": [
@@ -659,7 +911,9 @@
         "TheDeadMine",
         "the dead m1ne",
         "DeadMine",
-        "dead m1ne"
+        "dead m1ne",
+        "thedeadm1ne",
+        "deadm1ne"
       ],
       "region": "el_nath_mts",
       "connections": [
@@ -681,7 +935,9 @@
         "DeadMineJQ",
         "dead m1ne jq",
         "DeadMineJumpQuest",
-        "dead m1ne jump quest"
+        "dead m1ne jump quest",
+        "deadm1nejq",
+        "deadm1nejumpquest"
       ],
       "region": "el_nath_mts",
       "connections": [
@@ -699,7 +955,11 @@
         "Zakum'sAltar",
         "zakum's a1tar",
         "ZakumAltar",
-        "zakum a1tar"
+        "zakum a1tar",
+        "ZakumsAltar",
+        "zakums a1tar",
+        "zakum'sa1tar",
+        "zakuma1tar"
       ],
       "region": "el_nath_mts",
       "connections": [
@@ -721,7 +981,10 @@
         "DrakesCave",
         "DoorofDimensionDrake",
         "d00r 0f dimensi0n drake",
-        "door of d1mens1on drake"
+        "door of d1mens1on drake",
+        "d00r0fdimensi0ndrake",
+        "doorofd1mens1ondrake",
+        "d00r 0f d1mens10n drake"
       ],
       "region": "el_nath_mts",
       "connections": [
@@ -743,7 +1006,13 @@
         "mushroom cast1e",
         "DoorofDimensionMushroom",
         "d00r 0f dimensi0n mushr00m",
-        "door of d1mens1on mushroom"
+        "door of d1mens1on mushroom",
+        "mushr00mcastle",
+        "mushroomcast1e",
+        "mushr00m cast1e",
+        "d00r0fdimensi0nmushr00m",
+        "doorofd1mens1onmushroom",
+        "d00r 0f d1mens10n mushr00m"
       ],
       "region": "el_nath_mts",
       "connections": [
@@ -769,7 +1038,16 @@
         "p1rates door",
         "DoorofDimensionPirate",
         "d00r 0f dimensi0n pirate",
-        "door of d1mens1on p1rate"
+        "door of d1mens1on p1rate",
+        "pirate'sd00r",
+        "p1rate'sdoor",
+        "p1rate's d00r",
+        "piratesd00r",
+        "p1ratesdoor",
+        "p1rates d00r",
+        "d00r0fdimensi0npirate",
+        "doorofd1mens1onp1rate",
+        "d00r 0f d1mens10n p1rate"
       ],
       "region": "el_nath_mts",
       "connections": [
@@ -802,7 +1080,37 @@
         "leafre cave 0f life",
         "1eafre cave of 1ife",
         "leafre cave of l1fe",
-        "leafre cave of hfe"
+        "leafre cave of hfe",
+        "cave0flife",
+        "caveof1ife",
+        "caveofl1fe",
+        "caveofhfe",
+        "cave 0f 1ife",
+        "cave 0f l1fe",
+        "cave 0f hfe",
+        "cave of 11fe",
+        "cave0flifeentrance",
+        "caveof1ifeentrance",
+        "caveofl1feentrance",
+        "caveofhfeentrance",
+        "caveoflifeentr",
+        "cave 0f 1ife entrance",
+        "cave 0f l1fe entrance",
+        "cave 0f hfe entrance",
+        "cave 0f life entr",
+        "cave of 11fe entrance",
+        "cave of 1ife entr",
+        "cave of l1fe entr",
+        "cave of hfe entr",
+        "leafrecave0flife",
+        "1eafrecaveof1ife",
+        "leafrecaveofl1fe",
+        "leafrecaveofhfe",
+        "1eafre cave 0f 1ife",
+        "leafre cave 0f l1fe",
+        "leafre cave 0f hfe",
+        "1eafre cave of 11fe",
+        "1eafre cave of hfe"
       ],
       "region": "minar_forest",
       "connections": [
@@ -829,7 +1137,13 @@
         "1eafre town",
         "LeafreTownSquare",
         "leafre t0wn square",
-        "1eafre town square"
+        "1eafre town square",
+        "leafret0wn",
+        "1eafretown",
+        "1eafre t0wn",
+        "leafret0wnsquare",
+        "1eafretownsquare",
+        "1eafre t0wn square"
       ],
       "region": "minar_forest",
       "connections": [
@@ -850,7 +1164,13 @@
         "va11ey of the ante1ope",
         "ValleyofAntelope",
         "valley 0f antel0pe",
-        "va11ey of ante1ope"
+        "va11ey of ante1ope",
+        "valley0ftheantel0pe",
+        "va11eyoftheante1ope",
+        "va11ey 0f the ante10pe",
+        "valley0fantel0pe",
+        "va11eyofante1ope",
+        "va11ey 0f ante10pe"
       ],
       "region": "minar_forest",
       "connections": [
@@ -880,7 +1200,24 @@
         "leafre minar f0rest",
         "1eafre minar forest",
         "leafre m1nar forest",
-        "leafre minar frst"
+        "leafre minar frst",
+        "minarf0rest",
+        "m1narforest",
+        "minarfrst",
+        "m1nar f0rest",
+        "m1nar frst",
+        "drag0nf0rest",
+        "dragonfrst",
+        "drag0n frst",
+        "leafreminarf0rest",
+        "1eafreminarforest",
+        "leafrem1narforest",
+        "leafreminarfrst",
+        "1eafre minar f0rest",
+        "leafre m1nar f0rest",
+        "1eafre m1nar forest",
+        "1eafre minar frst",
+        "leafre m1nar frst"
       ],
       "region": "minar_forest",
       "connections": [
@@ -905,7 +1242,11 @@
         "drag0n cany0n",
         "WyvernCanyon",
         "wyvern cany0n",
-        "wyvem canyon"
+        "wyvem canyon",
+        "drag0ncany0n",
+        "wyverncany0n",
+        "wyvemcanyon",
+        "wyvem cany0n"
       ],
       "region": "minar_forest",
       "connections": [
@@ -928,7 +1269,16 @@
         "manon's frst",
         "ManonForest",
         "man0n f0rest",
-        "manon frst"
+        "manon frst",
+        "ManonsForest",
+        "man0ns f0rest",
+        "manons frst",
+        "man0n'sf0rest",
+        "manon'sfrst",
+        "man0n's frst",
+        "man0nf0rest",
+        "manonfrst",
+        "man0n frst"
       ],
       "region": "minar_forest",
       "connections": [
@@ -949,7 +1299,13 @@
         "temple 0f time",
         "temp1e of time",
         "temple of t1me",
-        "t0t"
+        "t0t",
+        "temple0ftime",
+        "temp1eoftime",
+        "templeoft1me",
+        "temp1e 0f time",
+        "temple 0f t1me",
+        "temp1e of t1me"
       ],
       "region": "minar_forest",
       "connections": [
@@ -971,7 +1327,11 @@
         "drag0n nest",
         "Dragons Nest",
         "Dragon'sNest",
-        "drag0n's nest"
+        "drag0n's nest",
+        "drag0nnest",
+        "DragonsNest",
+        "drag0ns nest",
+        "drag0n'snest"
       ],
       "region": "minar_forest",
       "connections": [
@@ -1005,7 +1365,42 @@
         "cave of 1ife horntai1",
         "cave of l1fe hornta1l",
         "cave of life homtail",
-        "cave of hfe horntail"
+        "cave of hfe horntail",
+        "h0rntail'scave",
+        "horntai1'scave",
+        "hornta1l'scave",
+        "homtail'scave",
+        "h0rntai1's cave",
+        "h0rnta1l's cave",
+        "h0mtail's cave",
+        "hornta11's cave",
+        "homtai1's cave",
+        "homta1l's cave",
+        "h0rntailscave",
+        "horntai1scave",
+        "hornta1lscave",
+        "homtailscave",
+        "h0rntai1s cave",
+        "h0rnta1ls cave",
+        "h0mtails cave",
+        "hornta11s cave",
+        "homtai1s cave",
+        "homta1ls cave",
+        "cave0flifeh0rntail",
+        "caveof1ifehorntai1",
+        "caveofl1fehornta1l",
+        "caveoflifehomtail",
+        "caveofhfehorntail",
+        "cave 0f 1ife h0rntai1",
+        "cave 0f l1fe h0rnta1l",
+        "cave 0f life h0mtail",
+        "cave 0f hfe h0rntail",
+        "cave of 11fe hornta11",
+        "cave of 1ife homtai1",
+        "cave of l1fe homta1l",
+        "cave of hfe homtail",
+        "cave of hfe horntai1",
+        "cave of hfe hornta1l"
       ],
       "region": "minar_forest",
       "connections": [
@@ -1028,7 +1423,16 @@
         "WolfSpiderMap",
         "w0lf spider map",
         "wo1f spider map",
-        "wolf sp1der map"
+        "wolf sp1der map",
+        "si1entswamp",
+        "s1lentswamp",
+        "s11ent swamp",
+        "w0lfspidermap",
+        "wo1fspidermap",
+        "wolfsp1dermap",
+        "w01f spider map",
+        "w0lf sp1der map",
+        "wo1f sp1der map"
       ],
       "region": "orbis",
       "connections": [],
@@ -1048,7 +1452,10 @@
         "mushr00m shrine",
         "mushroom shr1ne",
         "z1pangu",
-        "h1mes"
+        "h1mes",
+        "mushr00mshrine",
+        "mushroomshr1ne",
+        "mushr00m shr1ne"
       ],
       "region": "zipangu",
       "connections": [
@@ -1068,7 +1475,9 @@
         "gall0s",
         "ga11os",
         "gall0pera",
-        "ga11opera"
+        "ga11opera",
+        "ga110s",
+        "ga110pera"
       ],
       "region": "leafre_area",
       "connections": [
@@ -1092,7 +1501,20 @@
         "vict0ria r0ad f0rest east 0f henesys",
         "v1ctor1a road forest east of henesys",
         "victoria rd forest east of henesys",
-        "victoria road frst east of henesys"
+        "victoria road frst east of henesys",
+        "f0resteast0fhenesys",
+        "frsteastofhenesys",
+        "frst east 0f henesys",
+        "vict0riar0adf0resteast0fhenesys",
+        "v1ctor1aroadforesteastofhenesys",
+        "victoriardforesteastofhenesys",
+        "victoriaroadfrsteastofhenesys",
+        "v1ct0r1a r0ad f0rest east 0f henesys",
+        "v1ctor1a rd forest east of henesys",
+        "v1ctor1a road frst east of henesys",
+        "vict0ria rd f0rest east 0f henesys",
+        "victoria rd frst east of henesys",
+        "vict0ria r0ad frst east 0f henesys"
       ],
       "region": "victoria_island",
       "connections": [
@@ -1119,7 +1541,20 @@
         "TheForestofPatience",
         "the f0rest 0f patience",
         "the forest of pat1ence",
-        "the frst of patience"
+        "the frst of patience",
+        "sleepyw00df0rest",
+        "s1eepywoodforest",
+        "sleepywoodfrst",
+        "s1eepyw00d f0rest",
+        "s1eepywood frst",
+        "sleepyw00d frst",
+        "s1eepyw00d",
+        "thef0rest0fpatience",
+        "theforestofpat1ence",
+        "thefrstofpatience",
+        "the f0rest 0f pat1ence",
+        "the frst of pat1ence",
+        "the frst 0f patience"
       ],
       "region": "victoria_island",
       "connections": [
@@ -1147,7 +1582,18 @@
         "lud1br1um town",
         "LudibriumCity",
         "1udibrium city",
-        "lud1br1um c1ty"
+        "lud1br1um c1ty",
+        "1ud1br1um",
+        "1ud1",
+        "ludibriumt0wn",
+        "1udibriumtown",
+        "lud1br1umtown",
+        "1udibrium t0wn",
+        "lud1br1um t0wn",
+        "1ud1br1um town",
+        "1udibriumcity",
+        "lud1br1umc1ty",
+        "1ud1br1um c1ty"
       ],
       "region": "ludus_lake",
       "connections": [
@@ -1171,7 +1617,14 @@
         "labyr1nth",
         "LudiLabyrinth",
         "1udi 1abyrinth",
-        "lud1 labyr1nth"
+        "lud1 labyr1nth",
+        "1udibrium1abyrinth",
+        "lud1br1umlabyr1nth",
+        "1ud1br1um 1abyr1nth",
+        "1abyr1nth",
+        "1udi1abyrinth",
+        "lud1labyr1nth",
+        "1ud1 1abyr1nth"
       ],
       "region": "ludus_lake",
       "connections": [
@@ -1194,7 +1647,13 @@
         "ClockTowerTop",
         "cl0ck t0wer t0p",
         "c1ock tower top",
-        "dock tower top"
+        "dock tower top",
+        "papu1atusa1tar",
+        "cl0ckt0wert0p",
+        "c1ocktowertop",
+        "docktowertop",
+        "c10ck t0wer t0p",
+        "d0ck t0wer t0p"
       ],
       "region": "ludus_lake",
       "connections": [
@@ -1220,7 +1679,17 @@
         "pink bean a1tar",
         "p1nk bean altar",
         "PBAltar",
-        "pb a1tar"
+        "pb a1tar",
+        "PinkBeansAltar",
+        "pink beans a1tar",
+        "p1nk beans altar",
+        "pinkbean'sa1tar",
+        "p1nkbean'saltar",
+        "p1nk bean's a1tar",
+        "pinkbeana1tar",
+        "p1nkbeanaltar",
+        "p1nk bean a1tar",
+        "pba1tar"
       ],
       "region": "zipangu",
       "connections": [
@@ -1244,10 +1713,18 @@
         "n1c",
         "MasteriaNLC",
         "masteria n1c",
-        "master1a nlc"
+        "master1a nlc",
+        "new1eafcity",
+        "newleafc1ty",
+        "new 1eaf c1ty",
+        "masterian1c",
+        "master1anlc",
+        "master1a n1c"
       ],
       "region": "masteria",
-      "connections": [],
+      "connections": [
+        "map:showa_town"
+      ],
       "recommendedLevel": null,
       "notes": "Ciudad de Masteria — acceso vía [[npc:spinel]] desde cualquier hub mayor."
     },
@@ -1273,7 +1750,33 @@
         "mysteri0us path fire turtles",
         "mysterious path fire turt1es",
         "myster1ous path f1re turtles",
-        "mysterious path flre turtles"
+        "mysterious path flre turtles",
+        "fireturt1earea",
+        "f1returtlearea",
+        "flreturtlearea",
+        "f1re turt1e area",
+        "flre turt1e area",
+        "fireturt1es",
+        "f1returtles",
+        "flreturtles",
+        "f1re turt1es",
+        "flre turt1es",
+        "fireturt1emap",
+        "f1returtlemap",
+        "flreturtlemap",
+        "f1re turt1e map",
+        "flre turt1e map",
+        "mysteri0uspathfireturtles",
+        "mysteriouspathfireturt1es",
+        "myster1ouspathf1returtles",
+        "mysteriouspathflreturtles",
+        "mysteri0us path fire turt1es",
+        "myster10us path f1re turtles",
+        "mysteri0us path flre turtles",
+        "myster1ous path f1re turt1es",
+        "mysterious path flre turt1es",
+        "mysterious path f1re turt1es",
+        "myster1ous path flre turtles"
       ],
       "region": "ludus_lake",
       "connections": [
@@ -1284,6 +1787,83 @@
         70
       ],
       "notes": "Alternativa 55-70 para magos IL — [[mob:fire_turtle]]."
+    },
+    "ice_valley": {
+      "name": "Ice Valley",
+      "aliases": [
+        "Ice Valley Field",
+        "El Nath Ice Valley",
+        "Ice Valley I",
+        "IceValley",
+        "ice va11ey",
+        "1ce valley",
+        "IceValleyField",
+        "ice va11ey fie1d",
+        "1ce valley f1eld",
+        "ice valley fleld",
+        "ElNathIceValley",
+        "e1 nath ice va11ey",
+        "el nath 1ce valley",
+        "IceValleyI",
+        "ice va11ey i",
+        "1ce valley 1"
+      ],
+      "region": "el_nath_mts",
+      "connections": [
+        "map:el_nath"
+      ],
+      "recommendedLevel": [
+        70,
+        80
+      ],
+      "notes": "Door of Dimension del 3rd job Spearman ([[quest:dragon_knight_third_job]])."
+    },
+    "showa_town": {
+      "name": "Showa Town",
+      "aliases": [
+        "Showa",
+        "Zipangu Showa Town",
+        "ShowaTown",
+        "sh0wa t0wn",
+        "sh0wa",
+        "ZipanguShowaTown",
+        "zipangu sh0wa t0wn",
+        "z1pangu showa town",
+        "sh0wat0wn"
+      ],
+      "region": "zipangu",
+      "connections": [
+        "map:new_leaf_city"
+      ],
+      "recommendedLevel": null,
+      "notes": "Zipangu hub — travel from [[map:new_leaf_city]] via [[npc:spinel]] (Masteria routes)."
+    },
+    "showa_bathhouse": {
+      "name": "Showa Bathhouse",
+      "aliases": [
+        "Showa PQ",
+        "Showa Bathhouse PQ",
+        "Ninja Castle Bathhouse",
+        "ShowaBathhouse",
+        "sh0wa bathh0use",
+        "ShowaPQ",
+        "sh0wa pq",
+        "ShowaBathhousePQ",
+        "sh0wa bathh0use pq",
+        "NinjaCastleBathhouse",
+        "ninja castle bathh0use",
+        "ninja cast1e bathhouse",
+        "n1nja castle bathhouse"
+      ],
+      "region": "zipangu",
+      "connections": [
+        "map:showa_town"
+      ],
+      "recommendedLevel": [
+        50,
+        70
+      ],
+      "notes": "Showa Party Quest interior ([[quest:showa_pq]]). Party 2–6, levels 50–70."
     }
   }
 }

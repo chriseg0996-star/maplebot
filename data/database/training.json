@@ -303,6 +303,20 @@
         "warrior"
       ],
       "notes": "Page 2nd job test area — [[mob:dark_axe_stump]]."
+    },
+    "showa_pq_grind": {
+      "name": "Showa Bathhouse PQ",
+      "maps": [
+        "map:showa_bathhouse"
+      ],
+      "levelRange": [
+        50,
+        70
+      ],
+      "jobs": [
+        "any"
+      ],
+      "notes": "Party PQ — good meso/EXP at 50–70 if you can find a party."
     }
   }
 }

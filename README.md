@@ -6,7 +6,7 @@ Quest helper overlay for **MapleRoyals v83**. Step-by-step guides (job advanceme
 
 ## Install (Windows)
 
-1. Open **[GitHub Releases](https://github.com/chriseg0996-star/maplebot/releases)** and download **Maplebot Setup 2.1.0.exe** (or the portable `.exe`).
+1. Open **[GitHub Releases](https://github.com/chriseg0996-star/maplebot/releases)** and download **Maplebot Setup 2.3.0.exe** (or the portable `.exe`).
 2. Run the installer. If SmartScreen warns, choose **More info → Run anyway** (builds are not code-signed yet).
 3. Launch **Maplebot** from Start or the desktop shortcut.
 
@@ -46,9 +46,9 @@ npm run dist       # local installer in dist/ (no upload)
 
 See [RELEASING.md](RELEASING.md) for publishing a tagged release to GitHub.
 
-## Guides included (v2.1)
+## Guides included (v2.3)
 
-18 guides — job paths (Hero, FP/IL/Bishop, Bowmaster, Marksman, NL, Shadower, Buccaneer, Corsair, Paladin), Zakum, Horntail, Pink Bean, Papulatus, Kerning/Ludi PQ, NLC travel, and more.
+21 guides — all base class 4th jobs covered, boss prequests (Zakum, HT, Pink Bean, Pap), Kerning/Ludi/Showa PQs, NLC travel, and more.
 
 ## License
 

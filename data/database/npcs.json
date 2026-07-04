@@ -184,6 +184,16 @@
       "roles": [
         "transport"
       ]
+    },
+    "ichiro": {
+      "name": "Ichiro",
+      "map": "map:showa_town",
+      "position": "Showa Town (Bathhouse entrance)",
+      "shop": null,
+      "roles": [
+        "quest",
+        "pq"
+      ]
     }
   }
 }

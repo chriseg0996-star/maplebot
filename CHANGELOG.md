@@ -2,6 +2,19 @@
 
 All notable changes to Maplebot are documented in this file.
 
+## [2.3.0] - 2026-07-04
+
+### Added
+- **Dark Knight** job path guide (Spearman → Dragon Knight → Dark Knight)
+- **Thunder Breaker** job path guide (Brawler → Marauder → Thunder Breaker)
+- **Showa Bathhouse PQ** guide (Zipangu, levels 50–70)
+- DB: `ice_valley`, `showa_town`, `showa_bathhouse`, NPC Ichiro, 5 new quests
+- `scripts/add-v23-content.js` for reproducible content seeding
+
+### Changed
+- Guide count: **21 guides**, **190 steps** (0 broken refs)
+- Expanded OCR aliases for new maps
+
 ## [2.2.0] - 2026-07-04
 
 ### Added

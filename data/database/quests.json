@@ -1453,6 +1453,172 @@
         ],
         "other": "Acceso a [[boss:pink_bean]] en [[map:pink_bean_altar]]"
       }
+    },
+    "spearman_second_job": {
+      "name": "2nd Job — Spearman",
+      "requirements": {
+        "level": 30,
+        "job": "warrior",
+        "quests": [
+          "quest:fighter_first_job"
+        ]
+      },
+      "startNpc": "npc:dances_with_balrog",
+      "endNpc": "npc:dances_with_balrog",
+      "steps": [
+        "Habla con [[npc:dances_with_balrog]] en [[map:perion]] y recibe la test quest.",
+        "Entra a [[map:underground_pass]] — portal en Perion.",
+        "Junta 30 [[item:black_crystal|Black Crystals]] de los monstruos del test.",
+        "Regresa con [[npc:dances_with_balrog]] y elige Spearman. Raise Pole Arm Mastery and Iron Body first."
+      ],
+      "maps": [
+        "map:perion",
+        "map:underground_pass"
+      ],
+      "items": [
+        {
+          "item": "item:black_crystal",
+          "qty": 30
+        }
+      ],
+      "rewards": {
+        "exp": null,
+        "mesos": null,
+        "items": [],
+        "other": "Job: Spearman"
+      }
+    },
+    "dragon_knight_third_job": {
+      "name": "3rd Job — Dragon Knight",
+      "requirements": {
+        "level": 70,
+        "job": "spearman",
+        "quests": [
+          "quest:spearman_second_job"
+        ]
+      },
+      "startNpc": "npc:dances_with_balrog",
+      "endNpc": "npc:tylus",
+      "steps": [
+        "Habla con [[npc:dances_with_balrog]] en [[map:perion]], luego con [[npc:tylus]] en [[map:el_nath]].",
+        "Door of Dimension en [[map:ice_valley]] — derrota al clon y obtén el Black Charm.",
+        "Holy Stone quiz: 5 preguntas — ten mesos para respuestas falladas.",
+        "Entrega a [[npc:tylus]] → Dragon Knight. Prioritize Dragon Roar and Power Stance."
+      ],
+      "maps": [
+        "map:perion",
+        "map:el_nath",
+        "map:ice_valley"
+      ],
+      "items": [],
+      "rewards": {
+        "exp": null,
+        "mesos": null,
+        "items": [],
+        "other": "Job: Dragon Knight"
+      }
+    },
+    "dark_knight_fourth_job": {
+      "name": "4th Job — Dark Knight",
+      "requirements": {
+        "level": 120,
+        "job": "dragon_knight",
+        "quests": [
+          "quest:dragon_knight_third_job"
+        ]
+      },
+      "startNpc": "npc:hellin",
+      "endNpc": "npc:hellin",
+      "steps": [
+        "Habla con [[npc:hellin]] en [[map:valley_of_the_antelope]] ([[map:leafre]]).",
+        "Consigue [[item:heroic_star]] y [[item:heroic_pentagon]] — tradeables en Royals.",
+        "Entrega a [[npc:hellin]] → Dark Knight."
+      ],
+      "maps": [
+        "map:leafre",
+        "map:valley_of_the_antelope"
+      ],
+      "items": [
+        {
+          "item": "item:heroic_star",
+          "qty": 1
+        },
+        {
+          "item": "item:heroic_pentagon",
+          "qty": 1
+        }
+      ],
+      "rewards": {
+        "exp": null,
+        "mesos": null,
+        "items": [],
+        "other": "Job: Dark Knight"
+      }
+    },
+    "thunder_breaker_fourth_job": {
+      "name": "4th Job — Thunder Breaker",
+      "requirements": {
+        "level": 120,
+        "job": "marauder",
+        "quests": [
+          "quest:marauder_third_job"
+        ]
+      },
+      "startNpc": "npc:hellin",
+      "endNpc": "npc:hellin",
+      "steps": [
+        "Habla con [[npc:hellin]] en [[map:valley_of_the_antelope]] ([[map:leafre]]).",
+        "Consigue [[item:heroic_star]] y [[item:heroic_pentagon]] — tradeables en Royals.",
+        "Entrega a [[npc:hellin]] → Thunder Breaker."
+      ],
+      "maps": [
+        "map:leafre",
+        "map:valley_of_the_antelope"
+      ],
+      "items": [
+        {
+          "item": "item:heroic_star",
+          "qty": 1
+        },
+        {
+          "item": "item:heroic_pentagon",
+          "qty": 1
+        }
+      ],
+      "rewards": {
+        "exp": null,
+        "mesos": null,
+        "items": [],
+        "other": "Job: Thunder Breaker"
+      }
+    },
+    "showa_pq": {
+      "name": "Showa Bathhouse Party Quest",
+      "requirements": {
+        "level": 50,
+        "job": "any",
+        "quests": []
+      },
+      "startNpc": "npc:ichiro",
+      "endNpc": "npc:ichiro",
+      "steps": [
+        "Viaja a [[map:showa_town]] desde [[map:new_leaf_city]] (Masteria / Zipangu route).",
+        "Forma party de 2–6 (niveles 50–70) y habla con [[npc:ichiro]] para entrar.",
+        "Stage 1: elimina monstruos y recoge los scrolls repartidos en las salas.",
+        "Stage 2: derrota a los jefes de cada piso y avanza por el bathhouse.",
+        "Stage 3: derrota al jefe final y recoge la recompensa. Habla con [[npc:ichiro]] para re-entrar."
+      ],
+      "maps": [
+        "map:showa_town",
+        "map:showa_bathhouse"
+      ],
+      "items": [],
+      "rewards": {
+        "exp": null,
+        "mesos": null,
+        "items": [],
+        "other": "EXP y drops de Showa PQ"
+      }
     }
   }
 }
