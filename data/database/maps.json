@@ -1875,7 +1875,8 @@
       ],
       "region": "singapore",
       "connections": [
-        "map:singapore_ulu_estate_1"
+        "map:singapore_ulu_estate_1",
+        "map:boat_quay_town"
       ],
       "recommendedLevel": null,
       "notes": "Singapore hub — trains to Ulu Estate maps."
@@ -1893,13 +1894,14 @@
       "region": "singapore",
       "connections": [
         "map:singapore",
-        "map:singapore_ulu_estate_2"
+        "map:singapore_ulu_estate_2",
+        "map:ulu_city_entrance"
       ],
       "recommendedLevel": [
         130,
         145
       ],
-      "notes": "High-level training — Veetron and estate mobs."
+      "notes": "Veetron — [[item:veetron_horn]] ([[quest:krexel_prequest]]). High-level training."
     },
     "singapore_ulu_estate_2": {
       "name": "Singapore: Ulu Estate II",
@@ -1922,7 +1924,7 @@
         135,
         150
       ],
-      "notes": "High-level training — Veetron ([[mob:veetron]])."
+      "notes": "Slygie — [[item:slygie_tail]] ([[quest:krexel_prequest]]). High-level training."
     },
     "singapore_ulu_estate_3": {
       "name": "Singapore: Ulu Estate III",
@@ -1942,7 +1944,166 @@
         140,
         155
       ],
-      "notes": "Highest Ulu Estate map — endgame grind."
+      "notes": "Montrecer — [[item:oil_canister]] ([[quest:krexel_prequest]]). Highest Ulu Estate map."
+    },
+    "boat_quay_town": {
+      "name": "Boat Quay Town",
+      "aliases": [
+        "Boat Quay",
+        "Singapore Boat Quay",
+        "BoatQuay Town",
+        "Boat Quay Town Singapore"
+      ],
+      "region": "singapore",
+      "connections": [
+        "map:ghost_ship_2",
+        "map:ulu_city_entrance",
+        "map:singapore"
+      ],
+      "recommendedLevel": [
+        63,
+        80
+      ],
+      "notes": "Ghost Ship prequest hub — [[npc:ralph_wanderer]] ([[quest:krexel_prequest]])."
+    },
+    "mysterious_path_2": {
+      "name": "Mysterious Path 2",
+      "aliases": [
+        "Mysterious Path II",
+        "MysteriousPath2"
+      ],
+      "region": "singapore",
+      "connections": [
+        "map:ghost_ship_2",
+        "map:mysterious_path_3"
+      ],
+      "recommendedLevel": [
+        63,
+        75
+      ],
+      "notes": "Pac Pinky kills for Ghost Ship prequest ([[quest:krexel_prequest]])."
+    },
+    "ghost_ship_2": {
+      "name": "Ghost Ship 2",
+      "aliases": [
+        "Ghost Ship II",
+        "GhostShip2"
+      ],
+      "region": "singapore",
+      "connections": [
+        "map:boat_quay_town",
+        "map:mysterious_path_2",
+        "map:ghost_ship_6"
+      ],
+      "recommendedLevel": [
+        63,
+        80
+      ],
+      "notes": "Slimy kills for Ghost Ship prequest ([[quest:krexel_prequest]])."
+    },
+    "ghost_ship_6": {
+      "name": "Ghost Ship 6",
+      "aliases": [
+        "Ghost Ship VI",
+        "GhostShip6"
+      ],
+      "region": "singapore",
+      "connections": [
+        "map:ghost_ship_2",
+        "map:engine_room"
+      ],
+      "recommendedLevel": [
+        70,
+        85
+      ],
+      "notes": "Mr. Anchor kills — [[quest:krexel_prequest]] Ghost Ship chain."
+    },
+    "engine_room": {
+      "name": "Engine Room",
+      "aliases": [
+        "Ghost Ship Engine Room",
+        "Engine Room Ghost Ship"
+      ],
+      "region": "singapore",
+      "connections": [
+        "map:ghost_ship_6"
+      ],
+      "recommendedLevel": [
+        70,
+        85
+      ],
+      "notes": "Drop [[item:white_essence]] on the door to spawn [[mob:captain_latanica]] ([[quest:krexel_prequest]])."
+    },
+    "ulu_city_entrance": {
+      "name": "Ulu City Entrance",
+      "aliases": [
+        "Ulu City Entrance Singapore",
+        "UluCity Entrance"
+      ],
+      "region": "singapore",
+      "connections": [
+        "map:boat_quay_town",
+        "map:singapore_ulu_estate_1",
+        "map:ulu_city_center",
+        "map:destroyed_park_2"
+      ],
+      "recommendedLevel": [
+        70,
+        130
+      ],
+      "notes": "[[npc:commando_jim]] — Ulu City prequest turn-ins ([[quest:krexel_prequest]]). Berserkie for [[item:sweat_bead]]."
+    },
+    "ulu_city_center": {
+      "name": "Ulu City Center",
+      "aliases": [
+        "Ulu City Centre",
+        "UluCity Center"
+      ],
+      "region": "singapore",
+      "connections": [
+        "map:ulu_city_entrance",
+        "map:singapore_ulu_estate_2"
+      ],
+      "recommendedLevel": [
+        70,
+        130
+      ],
+      "notes": "Petrifighter — [[item:moss_rock]] ([[quest:krexel_prequest]])."
+    },
+    "destroyed_park_2": {
+      "name": "Destroyed Park II",
+      "aliases": [
+        "Destroyed Park 2",
+        "Destroyed Park II",
+        "DestroyedPark2"
+      ],
+      "region": "singapore",
+      "connections": [
+        "map:ulu_city_entrance",
+        "map:krexels_lair"
+      ],
+      "recommendedLevel": [
+        70,
+        130
+      ],
+      "notes": "Duku — [[item:rafflesia]] ([[quest:krexel_prequest]])."
+    },
+    "krexels_lair": {
+      "name": "Krexel's Lair",
+      "aliases": [
+        "Krexel Lair",
+        "Krexel Map",
+        "Krexel Boss Room"
+      ],
+      "region": "singapore",
+      "connections": [
+        "map:destroyed_park_2"
+      ],
+      "recommendedLevel": [
+        120,
+        200
+      ],
+      "notes": "Boss [[boss:krexel]] — requires [[item:soul_lantern]] + [[item:mallet]] to enter and summon."
     }
   }
 }

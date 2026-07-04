@@ -235,6 +235,166 @@
           "item": "item:lost_time_piece"
         }
       ]
+    },
+    "pac_pinky": {
+      "name": "Pac Pinky",
+      "level": 63,
+      "hp": 8000,
+      "exp": 250,
+      "maps": [
+        "map:mysterious_path_2"
+      ],
+      "drops": []
+    },
+    "slimy": {
+      "name": "Slimy",
+      "level": 65,
+      "hp": 9000,
+      "exp": 280,
+      "maps": [
+        "map:ghost_ship_2"
+      ],
+      "drops": []
+    },
+    "selkie_jr": {
+      "name": "Selkie Jr.",
+      "level": 67,
+      "hp": 9500,
+      "exp": 300,
+      "maps": [
+        "map:mysterious_path_3"
+      ],
+      "drops": []
+    },
+    "mr_anchor": {
+      "name": "Mr. Anchor",
+      "level": 70,
+      "hp": 12000,
+      "exp": 350,
+      "maps": [
+        "map:ghost_ship_6"
+      ],
+      "drops": []
+    },
+    "captain_latanica": {
+      "name": "Captain Latanica",
+      "level": 75,
+      "hp": 500000,
+      "exp": 5000,
+      "maps": [
+        "map:engine_room"
+      ],
+      "drops": [
+        {
+          "item": "item:black_essence",
+          "questOnly": true
+        },
+        {
+          "item": "item:soul_lantern",
+          "questOnly": true
+        }
+      ]
+    },
+    "veetron": {
+      "name": "Veetron",
+      "level": 130,
+      "hp": 500000,
+      "exp": 8000,
+      "maps": [
+        "map:singapore_ulu_estate_1",
+        "map:singapore_ulu_estate_2"
+      ],
+      "drops": [
+        {
+          "item": "item:veetron_horn",
+          "questOnly": true
+        }
+      ]
+    },
+    "berserkie": {
+      "name": "Berserkie",
+      "level": 70,
+      "hp": 15000,
+      "exp": 400,
+      "maps": [
+        "map:ulu_city_entrance"
+      ],
+      "drops": [
+        {
+          "item": "item:sweat_bead",
+          "questOnly": true
+        }
+      ]
+    },
+    "montrecer": {
+      "name": "Montrecer",
+      "level": 140,
+      "hp": 600000,
+      "exp": 9000,
+      "maps": [
+        "map:singapore_ulu_estate_3"
+      ],
+      "drops": [
+        {
+          "item": "item:oil_canister",
+          "questOnly": true
+        }
+      ]
+    },
+    "slygie": {
+      "name": "Slygie",
+      "level": 135,
+      "hp": 550000,
+      "exp": 8500,
+      "maps": [
+        "map:singapore_ulu_estate_2"
+      ],
+      "drops": [
+        {
+          "item": "item:slygie_tail",
+          "questOnly": true
+        }
+      ]
+    },
+    "petrifighter": {
+      "name": "Petrifighter",
+      "level": 75,
+      "hp": 18000,
+      "exp": 450,
+      "maps": [
+        "map:ulu_city_center"
+      ],
+      "drops": [
+        {
+          "item": "item:moss_rock",
+          "questOnly": true
+        }
+      ]
+    },
+    "duku": {
+      "name": "Duku",
+      "level": 80,
+      "hp": 25000,
+      "exp": 500,
+      "maps": [
+        "map:destroyed_park_2"
+      ],
+      "drops": [
+        {
+          "item": "item:rafflesia",
+          "questOnly": true
+        }
+      ]
+    },
+    "krexel": {
+      "name": "Krexel",
+      "level": 120,
+      "hp": 50000000,
+      "exp": 500000,
+      "maps": [
+        "map:krexels_lair"
+      ],
+      "drops": []
     }
   }
 }

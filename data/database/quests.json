@@ -1619,6 +1619,81 @@
         "items": [],
         "other": "EXP y drops de Showa PQ"
       }
+    },
+    "krexel_prequest": {
+      "name": "Krexel Prequest (cadena completa)",
+      "requirements": {
+        "level": 70,
+        "job": "any",
+        "quests": []
+      },
+      "startNpc": "npc:ralph_wanderer",
+      "endNpc": "npc:commando_jim",
+      "steps": [
+        "Opcional: compra [[item:soul_lantern]] en FM (~6–9m, tradeable) para saltar la línea Ghost Ship.",
+        "Ghost Ship: habla con [[npc:ralph_wanderer]] en [[map:boat_quay_town]] — The Secret of Ghost Ship (100 [[mob:pac_pinky]], 100 [[mob:slimy]]).",
+        "Making the Path to the Sea: 120 [[mob:slimy]] en [[map:ghost_ship_2]], 120 [[mob:selkie_jr]] en [[map:mysterious_path_3]].",
+        "The Great Secret Reveals: 300 [[mob:mr_anchor]] en [[map:ghost_ship_6]] → recibe [[item:white_essence]].",
+        "Fight for the Future: [[map:engine_room]] — suelta [[item:white_essence]] en la puerta, mata [[mob:captain_latanica]], recoge [[item:black_essence]] + [[item:soul_lantern]].",
+        "Entering Ulu City: [[item:veetron_horn]] x50, [[item:sweat_bead]] x50, [[item:oil_canister]] x30 → entrega a [[npc:commando_jim]] en [[map:ulu_city_entrance]].",
+        "Pushing Forward: [[item:slygie_tail]] x100 ([[map:singapore_ulu_estate_2]]), [[item:moss_rock]] x100 ([[map:ulu_city_center]]).",
+        "Ulu City Energy Thieves: 100 [[mob:duku]] + [[item:rafflesia]] x100 en [[map:destroyed_park_2]] — necesitas [[item:soul_lantern]] → recibe [[item:mallet]].",
+        "Entra a [[map:krexels_lair]] con [[item:soul_lantern]] + [[item:mallet]] y derrota [[boss:krexel]].",
+        "Opcional: Savior of Ulu City — acepta con [[npc:commando_jim]] y mata [[boss:krexel]] para EXP extra."
+      ],
+      "maps": [
+        "map:boat_quay_town",
+        "map:mysterious_path_2",
+        "map:ghost_ship_2",
+        "map:mysterious_path_3",
+        "map:ghost_ship_6",
+        "map:engine_room",
+        "map:ulu_city_entrance",
+        "map:singapore_ulu_estate_1",
+        "map:singapore_ulu_estate_2",
+        "map:singapore_ulu_estate_3",
+        "map:ulu_city_center",
+        "map:destroyed_park_2",
+        "map:krexels_lair"
+      ],
+      "items": [
+        {
+          "item": "item:soul_lantern",
+          "qty": 1
+        },
+        {
+          "item": "item:veetron_horn",
+          "qty": 50
+        },
+        {
+          "item": "item:sweat_bead",
+          "qty": 50
+        },
+        {
+          "item": "item:oil_canister",
+          "qty": 30
+        },
+        {
+          "item": "item:slygie_tail",
+          "qty": 100
+        },
+        {
+          "item": "item:moss_rock",
+          "qty": 100
+        },
+        {
+          "item": "item:rafflesia",
+          "qty": 100
+        }
+      ],
+      "rewards": {
+        "exp": null,
+        "mesos": null,
+        "items": [
+          "item:mallet"
+        ],
+        "other": "Acceso a [[boss:krexel]] en [[map:krexels_lair]]"
+      }
     }
   }
 }

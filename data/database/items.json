@@ -142,6 +142,66 @@
       "type": "quest",
       "use": "Ticket de entrada a [[map:pink_bean_altar]] — recompensa de [[quest:pink_bean_prequest]].",
       "soldBy": []
+    },
+    "soul_lantern": {
+      "name": "Soul Lantern",
+      "type": "etc",
+      "use": "Requerido en [[quest:krexel_prequest]] — drop de [[mob:captain_latanica]] o comprable en FM (~6–9m, tradeable en Royals).",
+      "soldBy": []
+    },
+    "white_essence": {
+      "name": "White Essence",
+      "type": "quest",
+      "use": "Recompensa de Ghost Ship quest — usado para spawnear [[mob:captain_latanica]] en [[map:engine_room]] ([[quest:krexel_prequest]]).",
+      "soldBy": []
+    },
+    "black_essence": {
+      "name": "Black Essence",
+      "type": "quest",
+      "use": "Drop de [[mob:captain_latanica]] ([[quest:krexel_prequest]]).",
+      "soldBy": []
+    },
+    "mallet": {
+      "name": "Mallet",
+      "type": "quest",
+      "use": "Recompensa de Ulu City Energy Thieves — necesario para entrar a [[map:krexels_lair]] ([[quest:krexel_prequest]]).",
+      "soldBy": []
+    },
+    "veetron_horn": {
+      "name": "Veetron Horn",
+      "type": "etc",
+      "use": "50 requeridos en [[quest:krexel_prequest]] — drop de [[mob:veetron]] en [[map:singapore_ulu_estate_1]].",
+      "soldBy": []
+    },
+    "sweat_bead": {
+      "name": "Sweat Bead",
+      "type": "etc",
+      "use": "50 requeridos en [[quest:krexel_prequest]] — drop de [[mob:berserkie]] en [[map:ulu_city_entrance]].",
+      "soldBy": []
+    },
+    "oil_canister": {
+      "name": "Oil Canister",
+      "type": "etc",
+      "use": "30 requeridos en [[quest:krexel_prequest]] — drop de [[mob:montrecer]] en [[map:singapore_ulu_estate_3]].",
+      "soldBy": []
+    },
+    "slygie_tail": {
+      "name": "Slygie Tail",
+      "type": "etc",
+      "use": "100 requeridos en [[quest:krexel_prequest]] — drop de [[mob:slygie]] en [[map:singapore_ulu_estate_2]].",
+      "soldBy": []
+    },
+    "moss_rock": {
+      "name": "Moss Rock",
+      "type": "etc",
+      "use": "100 requeridos en [[quest:krexel_prequest]] — drop de [[mob:petrifighter]] en [[map:ulu_city_center]].",
+      "soldBy": []
+    },
+    "rafflesia": {
+      "name": "Rafflesia",
+      "type": "etc",
+      "use": "100 requeridos en [[quest:krexel_prequest]] — drop de [[mob:duku]] en [[map:destroyed_park_2]].",
+      "soldBy": []
     }
   }
 }

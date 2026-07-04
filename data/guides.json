@@ -2517,6 +2517,181 @@
       ]
     },
     {
+      "id": "krexel_prequest",
+      "title": "Krexel — Full Prequest",
+      "job": "any",
+      "category": "boss_prequest",
+      "steps": [
+        {
+          "id": "kr-01",
+          "type": "travel",
+          "text": "Go to Singapore → Boat Quay Town → Ralph the Wanderer. Level 70+ required. Tip: Soul Lantern is tradable on FM (~6–9m) — skip to step 6 if you buy one.",
+          "map": "Boat Quay Town",
+          "mapRef": "map:boat_quay_town",
+          "npc": "Ralph the Wanderer",
+          "npcRef": "npc:ralph_wanderer",
+          "questRef": "quest:krexel_prequest",
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "kr-02",
+          "type": "prequest",
+          "text": "The Secret of Ghost Ship: kill 100 Pac Pinky (Mysterious Path 2) and 100 Slimy (Ghost Ship 2). Return to Ralph.",
+          "mapRef": "map:mysterious_path_2",
+          "npcRef": "npc:ralph_wanderer",
+          "questRef": "quest:krexel_prequest",
+          "req": {
+            "level": 63
+          }
+        },
+        {
+          "id": "kr-03",
+          "type": "prequest",
+          "text": "Making the Path to the Sea: kill 120 Slimy (Ghost Ship 2) and 120 Selkie Jr. (Mysterious Path 3). Return to Ralph.",
+          "mapRef": "map:ghost_ship_2",
+          "npcRef": "npc:ralph_wanderer",
+          "questRef": "quest:krexel_prequest",
+          "req": {
+            "level": 63
+          }
+        },
+        {
+          "id": "kr-04",
+          "type": "prequest",
+          "text": "The Great Secret Reveals: kill 300 Mr. Anchor in Ghost Ship 6. Keep ETC inventory space — turn-in gives White Essence.",
+          "mapRef": "map:ghost_ship_6",
+          "npcRef": "npc:ralph_wanderer",
+          "questRef": "quest:krexel_prequest",
+          "itemRefs": [
+            "item:white_essence"
+          ],
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "kr-05",
+          "type": "prequest",
+          "text": "Accept \"Fight for the Future\" before the boss fight. Engine Room — drop White Essence on the door to spawn Captain Latanica. Kill him and loot Black Essence + Soul Lantern.",
+          "mapRef": "map:engine_room",
+          "npcRef": "npc:ralph_wanderer",
+          "questRef": "quest:krexel_prequest",
+          "itemRefs": [
+            "item:white_essence",
+            "item:black_essence",
+            "item:soul_lantern"
+          ],
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "kr-06",
+          "type": "collect",
+          "text": "Entering Ulu City: collect Veetron Horn x50 (Ulu Estate I), Sweat Bead x50 (Berserkie, Ulu City Entrance), Oil Canister x30 (Montrecer, Ulu Estate III). Turn in to Commando Jim.",
+          "mapRef": "map:ulu_city_entrance",
+          "npc": "Commando Jim",
+          "npcRef": "npc:commando_jim",
+          "questRef": "quest:krexel_prequest",
+          "items": [
+            "Veetron Horn x50",
+            "Sweat Bead x50",
+            "Oil Canister x30"
+          ],
+          "itemRefs": [
+            "item:veetron_horn",
+            "item:sweat_bead",
+            "item:oil_canister"
+          ],
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "kr-07",
+          "type": "collect",
+          "text": "Pushing Forward in Ulu City: collect Slygie Tail x100 (Ulu Estate II) and Moss Rock x100 (Petrifighter, Ulu City Center). Return to Commando Jim.",
+          "mapRef": "map:ulu_city_center",
+          "npcRef": "npc:commando_jim",
+          "questRef": "quest:krexel_prequest",
+          "items": [
+            "Slygie Tail x100",
+            "Moss Rock x100"
+          ],
+          "itemRefs": [
+            "item:slygie_tail",
+            "item:moss_rock"
+          ],
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "kr-08",
+          "type": "prequest",
+          "text": "Ulu City Energy Thieves: kill 100 Duku and collect Rafflesia x100 in Destroyed Park II. You need Soul Lantern in inventory — turn in to Commando Jim for the Mallet.",
+          "mapRef": "map:destroyed_park_2",
+          "npcRef": "npc:commando_jim",
+          "questRef": "quest:krexel_prequest",
+          "items": [
+            "Rafflesia x100"
+          ],
+          "itemRefs": [
+            "item:rafflesia",
+            "item:soul_lantern",
+            "item:mallet"
+          ],
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "kr-09",
+          "type": "complete",
+          "text": "Prequest complete — you have Soul Lantern + Mallet. Enter Krexel's Lair from Destroyed Park II and summon the boss.",
+          "mapRef": "map:krexels_lair",
+          "npcRef": "npc:commando_jim",
+          "questRef": "quest:krexel_prequest",
+          "itemRefs": [
+            "item:soul_lantern",
+            "item:mallet"
+          ],
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "kr-10",
+          "type": "travel",
+          "text": "Run day: party Krexel with Soul Lantern + Mallet. Recommended level 120+. Coordinate with The Clinic for HP phases and seduce mechanics.",
+          "map": "Krexel's Lair",
+          "mapRef": "map:krexels_lair",
+          "bossRef": "boss:krexel",
+          "itemRefs": [
+            "item:soul_lantern",
+            "item:mallet"
+          ],
+          "req": {
+            "level": 70
+          }
+        },
+        {
+          "id": "kr-11",
+          "type": "complete",
+          "text": "Bonus: accept \"Savior of Ulu City\" from Commando Jim — kill Krexel and turn in for extra quest EXP.",
+          "npc": "Commando Jim",
+          "npcRef": "npc:commando_jim",
+          "questRef": "quest:krexel_prequest",
+          "bossRef": "boss:krexel",
+          "req": {
+            "level": 70
+          }
+        }
+      ]
+    },
+    {
       "id": "nlc_travel",
       "title": "New Leaf City — Travel Guide",
       "job": "any",

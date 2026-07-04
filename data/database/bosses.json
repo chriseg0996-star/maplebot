@@ -84,6 +84,26 @@
         "consumes": "item:pink_bean_ticket"
       },
       "drops": []
+    },
+    "krexel": {
+      "name": "Krexel",
+      "map": "map:krexels_lair",
+      "requirements": {
+        "level": 70
+      },
+      "recommendedLevel": 120,
+      "prequests": [
+        "quest:krexel_prequest"
+      ],
+      "partySize": [
+        6,
+        12
+      ],
+      "entries": {
+        "perDay": null,
+        "consumes": "item:mallet"
+      },
+      "drops": []
     }
   }
 }

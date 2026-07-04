@@ -194,6 +194,24 @@
         "quest",
         "pq"
       ]
+    },
+    "ralph_wanderer": {
+      "name": "Ralph the Wanderer",
+      "map": "map:boat_quay_town",
+      "position": "Boat Quay Town (center)",
+      "shop": null,
+      "roles": [
+        "quest"
+      ]
+    },
+    "commando_jim": {
+      "name": "Commando Jim",
+      "map": "map:ulu_city_entrance",
+      "position": "Ulu City Entrance",
+      "shop": null,
+      "roles": [
+        "quest"
+      ]
     }
   }
 }
